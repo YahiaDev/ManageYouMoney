@@ -1,6 +1,6 @@
 var module = angular.module("authentication");
 
-module.controller('AuthenticationController',['$scope', '$state', function($scope, $state){
+module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 'authenticationService', function($scope, $state, $rootScope, authenticationService) {
 
     $scope.user = {login:'',password:''};
    
@@ -8,8 +8,14 @@ module.controller('AuthenticationController',['$scope', '$state', function($scop
 
     $scope.login = function (){
         console.log('login '+$scope.user.login+' password '+ $scope.user.password);
-
-        $state.go('home');
+        authenticationService.authenticate($scope.user).then(function(response){
+            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+            console.info('in controller'+response.password);
+            $state.go('home');
+        },function(){
+            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);            
+        });
+        
 
     }
 
