@@ -1,14 +1,14 @@
 var module = angular.module("authentication");
 
-module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 'authenticationService', function($scope, $state, $rootScope, authenticationService) {
+module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 'AuthService', 'AUTH_EVENTS',function($scope, $state, $rootScope, AuthService, AUTH_EVENTS) {
 
-    $scope.user = {login:'',password:''};
+    $scope.user = {sessionId:'1', id:'12', login:'',password:'', role:'admin'};
    
     $scope.message = "authentication page";
 
     $scope.login = function (){
         console.log('login '+$scope.user.login+' password '+ $scope.user.password);
-        authenticationService.authenticate($scope.user).then(function(response){
+        AuthService.authenticate($scope.user).then(function(response){
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             console.info('in controller'+response.password);
             $state.go('home');
