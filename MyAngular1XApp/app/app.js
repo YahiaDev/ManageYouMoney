@@ -128,12 +128,13 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
       templateUrl: 'modules/home/homeTemplate.html',
       data: {
         authorizedRoles: [USER_ROLES.admin]
-      },
+      }
+      /*,
       resolve: {
         auth: function resolveAuthentication(AuthResolver) { 
               return AuthResolver.resolve();
             }
-          }
+          }*/
     };
 
     //revoir l'article de debut et voir s'il manque quelque chose .....
@@ -150,7 +151,10 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
     var optionsState = {
         url: '/options',
         controller: 'optionsController',
-        templateUrl: 'modules/options/optionsTemplate.html'
+        templateUrl: 'modules/options/optionsTemplate.html',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
     }
 
     $stateProvider.state('home', homeState)
