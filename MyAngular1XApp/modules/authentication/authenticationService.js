@@ -1,9 +1,14 @@
 var module = angular.module('authentication');
-module.factory('AuthService',['$rootScope', '$q', 'Session',function($rootScope, $q, Session){
+module.factory('AuthService',['$rootScope', '$q', 'Session', '$cookieStore',function($rootScope, $q, Session, $cookieStore){
     var service = {};
     service.authenticate = function(user){
         var deffered = $q.defer();
         deffered.resolve(user);
+        $rootScope.logedUser = {};
+        $rootScope.logedUser.userId = user.id;
+        $rootScope.logedUser.userRole = user.role;
+        $rootScope.logedUser.sessionId = user.sessionId;
+        $cookieStore.put('logedUser', user);
         Session.create(user.sessionId, user.id , user.role);
         console.info(user.login + ' , ' + user.password);
         return deffered.promise;
@@ -11,7 +16,11 @@ module.factory('AuthService',['$rootScope', '$q', 'Session',function($rootScope,
     };
 
     service.isAuthenticated = function () {
-    	return !!Session.userId;
+      if (Session.userId === undefined || Session.userId === null){
+        var user = $cookieStore.get('logedUser');
+        Session.create(user.sessionId, user.id , user.role);
+    	}
+      return !!Session.userId;
   	};
 
   	service.isAuthorized = function (authorizedRoles) {

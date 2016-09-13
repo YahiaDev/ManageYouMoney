@@ -1,8 +1,8 @@
 
 
 angular.module('home',[]);
-angular.module('authentication',[]);
-angular.module('nav',[]);
+angular.module('authentication',['ngCookies']);
+angular.module('nav',['ngCookies']);
 angular.module('options',[]);
 var modules = ['ui.router', 'home', 'authentication', 'nav', 'options'];
 var app = angular.module('myApp',modules);
@@ -156,6 +156,7 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
           authorizedRoles: [USER_ROLES.all]
         }
     }
+    
 
     $stateProvider.state('home', homeState)
                    .state('authentication', authenticationState)

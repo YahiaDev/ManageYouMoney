@@ -15,6 +15,14 @@ module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 
         },function(){
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);            
         });
+
+    $scope.$on(AUTH_EVENTS.notAuthorized,function(){
+        $state.go('authentication');
+    });
+
+    $scope.$on(AUTH_EVENTS.notAuthenticated,function(){
+        $state.go('authentication');
+    });
         
 
     }
