@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageyourmoney.component.User;
 
 @RestController
-@RequestMapping("/User")
 public class UserController {
 	@RequestMapping(value="getUser", method= RequestMethod.GET,headers="Accept=application/json")
 	public User getUser() {
