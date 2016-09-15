@@ -1,5 +1,6 @@
+'use strict';
 var module = angular.module('authentication');
-module.factory('AuthService',['$rootScope', '$q', 'Session', '$cookieStore',function($rootScope, $q, Session, $cookieStore){
+module.factory('AuthService',['$rootScope', '$q', 'Session', '$cookieStore', function($rootScope, $q, Session, $cookieStore){
     var service = {};
     service.authenticate = function(user){
         var deffered = $q.defer();
@@ -18,7 +19,9 @@ module.factory('AuthService',['$rootScope', '$q', 'Session', '$cookieStore',func
     service.isAuthenticated = function () {
       if (Session.userId === undefined || Session.userId === null){
         var user = $cookieStore.get('logedUser');
-        Session.create(user.sessionId, user.id , user.role);
+        if (user !== undefined && user !== null){
+          Session.create(user.sessionId, user.id , user.role);
+        }
     	}
       return !!Session.userId;
   	};

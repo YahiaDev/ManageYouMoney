@@ -137,8 +137,6 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
           }*/
     };
 
-    //revoir l'article de debut et voir s'il manque quelque chose .....
-
     var authenticationState = {
         url: '/authentication',
         controller: 'AuthenticationController',
@@ -153,7 +151,7 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
         controller: 'optionsController',
         templateUrl: 'modules/options/optionsTemplate.html',
         data: {
-          authorizedRoles: [USER_ROLES.all]
+          authorizedRoles: [USER_ROLES.all, USER_ROLES.admin]
         }
     }
     
