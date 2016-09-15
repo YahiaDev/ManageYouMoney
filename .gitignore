@@ -86,3 +86,5 @@ local.properties
 
 .svn
 *.DS_Store
+Servers
+.recommenders
