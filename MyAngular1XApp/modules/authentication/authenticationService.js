@@ -1,30 +1,27 @@
 'use strict';
-var module = angular.module('authentication');
-module.factory('AuthService',['$rootScope', '$q', 'Session', '$cookieStore', '$http', 'AUTH_EVENTS', '$state',function($rootScope, $q, Session, $cookieStore, $http, AUTH_EVENTS){
+
+angular.module('authentication').factory('AuthService',['$rootScope', '$q', 'Session', '$cookieStore', '$http', 'AUTH_EVENTS', '$state', 'CommonService',function($rootScope, $q, Session, $cookieStore, $http, AUTH_EVENTS, $state, CommonService){
     var service = {};
     service.authenticate = function(user){
-        var deffered = $q.defer();
-        deffered.resolve(user);
+        /*var deffered = $q.defer();
+        deffered.resolve(user);*/
+        //yahia ammar 
         $rootScope.logedUser = {};
-        $rootScope.logedUser.userId = user.id;
-        $rootScope.logedUser.userRole = user.role;
-        $rootScope.logedUser.sessionId = user.sessionId;
-        $cookieStore.put('logedUser', user);
-        Session.create(user.sessionId, user.id , user.role);
-        console.info(user.login + ' , ' + user.password);
-
-        $http.get('http://localhost:8080/manageyourmoney/getUser').then(function successCallback(response){
+        var url = CommonService.getBasicUrl() + '/getUser';
+        $http.get("http://localhost:8060/manageyourmoney/#/getUser").then(function successCallback(response){
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           console.log('success callback');
+          $rootScope.logedUser.userId = user.id;
+          $rootScope.logedUser.userRole = user.role;
+          $rootScope.logedUser.sessionId = user.sessionId;
+          $cookieStore.put('logedUser', user);
+          Session.create(user.sessionId, user.id , user.role);
+          console.info(user.login + ' , ' + user.password);
           $state.go('home');
         }, function errorCallback(response){
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);  
             console.log('error callback');
-
         });
-
-        return deffered.promise;
-
     };
 
     service.isAuthenticated = function () {

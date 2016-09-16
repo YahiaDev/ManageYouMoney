@@ -6,5 +6,6 @@
   
  <mvc:annotation-driven/>  
 <context:component-scan base-package="com.manageyourmoney" />  
+ <mvc:default-servlet-handler/>
   
 </beans>  
