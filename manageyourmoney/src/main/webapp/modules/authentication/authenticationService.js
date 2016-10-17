@@ -7,7 +7,7 @@ angular.module('authentication').factory('AuthService',['$rootScope', '$q', 'Ses
         deffered.resolve(user);*/
         $rootScope.logedUser = {};
         var url = CommonService.getBasicUrl() + '/getUser';
-        $http.get("http://localhost:8060/manageyourmoney/#/getUser").then(function successCallback(response){
+        $http.get("http://localhost:8060/manageyourmoney/getUser").then(function successCallback(response){
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           console.log('success callback');
           $rootScope.logedUser.userId = user.id;
