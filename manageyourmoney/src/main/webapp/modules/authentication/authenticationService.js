@@ -6,8 +6,9 @@ angular.module('authentication').factory('AuthService',['$rootScope', '$q', 'Ses
         /*var deffered = $q.defer();
         deffered.resolve(user);*/
         $rootScope.logedUser = {};
-        var url = CommonService.getBasicUrl() + '/getUser';
-        $http.get("http://localhost:8060/manageyourmoney/getUser").then(function successCallback(response){
+        console.info(user);
+        //var url = CommonService.getBasicUrl() + '/getUser';
+        $http.post("http://localhost:8060/manageyourmoney/login/",user).then(function successCallback(response){
           $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
           console.log('success callback');
           $rootScope.logedUser.userId = user.id;
