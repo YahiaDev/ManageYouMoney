@@ -16,7 +16,7 @@ public class UserController {
 	@Autowired
 	private User user;
 
-	@RequestMapping(value = "/getUser", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
 	public User getUser(@RequestParam(value = "login") String login, @RequestParam(value = "pwd") String pwd) {
 		// User user = new User(12.0, "test", "1254", "yahia", "ammar");
 		if (login.equals(new String("yahia.ammar.info@gmail.com"))) {

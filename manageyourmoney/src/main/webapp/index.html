@@ -14,16 +14,26 @@
         <script src="bower_components/jquery/jquery.min.js"></script>
         <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/crypto-js/crypto-js.js"></script>
+        <script src="bower_components/crypto-js/hmac-sha256.js"></script>
+        <script src="bower_components/crypto-js/hmac-sha1.js"></script>
+        <script src="bower_components/crypto-js/hmac-md5.js"></script>
+        <script src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
         <!--end bower-->
         <script src = "app/app.js"></script>
+        <script src = "modules/options/optionsController.js"></script>
         <script src = "modules/nav/navController.js"></script>
         <script src = "modules/nav/navDirective.js"></script>
         <script src = "modules/common/commonService.js"></script>
+        <script src = "modules/common/http-hmac-interceptors.js"></script>
+        <script src = "modules/common/httpSecurityInterceptor.js"></script>
+        <script src = "modules/common/is-authorized.directive.js"></script>
         <script src = "modules/home/homeController.js"></script>
         <script src = "modules/home/homeService.js"></script>
         <script src = "modules/authentication/authenticationController.js"></script>
         <script src = "modules/authentication/authenticationService.js"></script>
         <script src = "modules/authentication/sessionService.js"></script>
+        <script src = "modules/authentication/loginFactory.js"></script>
         <script src = "modules/options/optionsController.js"></script>
         <div ui-view> </div>
     </body>

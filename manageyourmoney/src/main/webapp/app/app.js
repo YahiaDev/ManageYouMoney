@@ -1,5 +1,5 @@
 'user strict'
-angular.module('common',[]);
+angular.module('common',['ab-base64']);
 angular.module('home',[]);
 angular.module('authentication',['ngCookies']);
 angular.module('nav',['ngCookies']);
@@ -32,24 +32,34 @@ app.constant('AUTH_EVENTS', {
 
 app.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', router]);
 
-app.config(function ($httpProvider) {
+/*app.config(function ($httpProvider) {
   $httpProvider.interceptors.push([
     '$injector',
     function ($injector) {
       return $injector.get('AuthInterceptor');
     }
   ]);
+});*/
+
+app.config(function($httpProvider){
+  $httpProvider.interceptors.push('httpSecurityInterceptor');
+  $httpProvider.interceptors.push('hmacInterceptor');
+});
+
+app.config(function(hmacInterceptorProvider){
+//Hmac security interceptor provider configuration
+    hmacInterceptorProvider.config.rejectedApis = [{mustMatch:true,pattern:'/api'}, {mustMatch:false,pattern:'/api/authenticate'}];
 });
 
 //config for to allow CORS 
-app.config(['$httpProvider', function ($httpProvider) {
+/*app.config(['$httpProvider', function ($httpProvider) {
   'use strict';
   $httpProvider.defaults.useXDomain = true;
   $httpProvider.defaults.withCredentials = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  $httpProvider.defaults.headers.common["Accept"] = "application/json";
-  $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-}]);
+  //$httpProvider.defaults.headers.common["Accept"] = "application/json";
+  //$httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+}]);*/
 
 
 app.controller('ApplicationController', function ($scope,
@@ -117,8 +127,8 @@ app.directive('loginDialog', function (AUTH_EVENTS) {
   };
 });
 
-app.run(function ($rootScope, AUTH_EVENTS, AuthService) {
-  $rootScope.$on('$stateChangeStart', function (event, next) {
+app.run(function ($rootScope, AUTH_EVENTS, AuthService, LoginFactory,$location) {
+  /*$rootScope.$on('$stateChangeStart', function (event, next) {
     if (next.name !== "authentication"){
       var authorizedRoles = next.data.authorizedRoles;
       if (!AuthService.isAuthorized(authorizedRoles)) {
@@ -134,8 +144,28 @@ app.run(function ($rootScope, AUTH_EVENTS, AuthService) {
         }
       }
     }
-  });
+  });*/
+
+  $rootScope.authenticated = false;
+
+    $rootScope.isAuthorized = LoginFactory.isAuthorized;
+
+    $rootScope.$on('event:unauthorized',function(){
+        $location.path('/login');
+        LoginFactory.removeAccount();
+    });
+
+    $rootScope.$on('$routeChangeStart', function () {
+        if (!LoginFactory.isAuthenticated()) {
+            $location.path('/login');
+            $rootScope.authenticated = false;
+        } else {
+            $rootScope.authenticated = true;
+        }
+    });
 });
+
+
 
   
 function router($stateProvider, $urlRouterProvider, USER_ROLES){

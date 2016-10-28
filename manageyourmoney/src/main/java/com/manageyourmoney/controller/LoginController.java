@@ -14,7 +14,7 @@ import com.manageyourmoney.component.User;
 @CrossOrigin(origins = Config.CROSS_URL)
 @RestController
 public class LoginController {
-	@RequestMapping(value = "/login", method = RequestMethod.POST, headers = "Accept=application/json")
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<User> login(@RequestBody User user) {
 
 		System.out.println("hello in login controller");
