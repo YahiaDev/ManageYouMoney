@@ -32,7 +32,11 @@ import com.manageyourmoney.mock.MockUsers;
 public class AuthenticationService {
 
 	@Autowired
-	private AuthenticationManager authenticationManager;//pe etre solution ajoute une classe qui iplemente authentication manager ...
+	private AuthenticationManager authenticationManager;// pe etre solution
+														// ajoute une classe qui
+														// iplemente
+														// authentication
+														// manager ...
 
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -84,9 +88,16 @@ public class AuthenticationService {
 		}
 
 		// Set all tokens in http response headers
+		// response.addHeader("Access-Control-Allow-Origin",
+		// "http://localhost:8070");
+		// response.setHeader("Access-Control-Allow-Headers", "Origin,
+		// X-Requested-With, Content-Type, Accept");
+		// response.addHeader("Access-Control-Allow-Methods", "POST, GET,
+		// OPTIONS, DELETE");
 		response.setHeader(HmacUtils.X_TOKEN_ACCESS, hmacToken.getJwt());
-		response.setHeader(HmacUtils.X_SECRET, hmacToken.getSecret());
-		response.setHeader(HttpHeaders.WWW_AUTHENTICATE, HmacUtils.HMAC_SHA_256);
+		// response.setHeader(HmacUtils.X_SECRET, hmacToken.getSecret());
+		// response.setHeader(HttpHeaders.WWW_AUTHENTICATE,
+		// HmacUtils.HMAC_SHA_256);
 
 		UserDTO userDTO = new UserDTO();
 		userDTO.setId(securityUser.getId());

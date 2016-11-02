@@ -1,6 +1,6 @@
 angular.module("authentication").factory('LoginFactory',function($http, $cookieStore,$rootScope,hmacInterceptor){
     return {
-        authenticate: function(login,password){
+       /* authenticate: function(login,password){
             return $http.post('http://localhost:8060/manageyourmoney/api/authenticate',{login:login,password:password}).success(function(user, status, headers){
                 $cookieStore.put('hmacApp-account', JSON.stringify(user));
 
@@ -9,6 +9,19 @@ angular.module("authentication").factory('LoginFactory',function($http, $cookieS
                 $rootScope.authenticated = true;
                 return user;
             });
+        },*/
+        authenticate: function(login,password){
+            return $http.put('http://localhost:8060/manageyourmoney/api/authenticate',{login:login,password:password}).success(function(data, status, headers){
+                $cookieStore.put('hmacApp-account', JSON.stringify(data));
+
+                hmacInterceptor.readHmacRequest(headers());
+
+                $rootScope.authenticated = true;
+                return data;
+            }).error(function(data, status, headers) {
+                // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          })
         },
         isAuthenticated:function(){
             return !!$cookieStore.get('hmacApp-account') && hmacInterceptor.isSecured();

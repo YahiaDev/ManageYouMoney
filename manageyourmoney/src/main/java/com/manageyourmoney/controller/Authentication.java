@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.common.Config;
@@ -22,8 +23,11 @@ public class Authentication {
 	@Autowired
 	private AuthenticationService authenticationService;
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@RequestMapping(value = "/authenticate", method = RequestMethod.PUT)
 	public UserDTO authenticate(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
+		// LoginDTO loginDTO = new LoginDTO();
+		// loginDTO.setLogin("test@test.com");
+		// loginDTO.setPassword("yahia");
 		UserDTO userDto = authenticationService.authenticate(loginDTO, response);
 		return userDto;
 	}
