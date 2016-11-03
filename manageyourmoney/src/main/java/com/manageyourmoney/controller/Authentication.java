@@ -15,7 +15,7 @@ import com.manageyourmoney.dto.LoginDTO;
 import com.manageyourmoney.dto.UserDTO;
 import com.manageyourmoney.service.AuthenticationService;
 
-//@CrossOrigin(origins = Config.CROSS_URL)
+@CrossOrigin(origins = Config.CROSS_URL)
 @RestController
 @RequestMapping(value = "/api")
 public class Authentication {

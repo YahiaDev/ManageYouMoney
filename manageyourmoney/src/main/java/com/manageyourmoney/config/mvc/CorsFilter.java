@@ -29,12 +29,12 @@ public class CorsFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse) response;
 
 		resp.setHeader("Access-Control-Allow-Origin", "*");
-		resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
 		resp.setHeader("Access-Control-Max-Age", "3600");
 		resp.setHeader("Access-Control-Allow-Headers", "Accept, Content-Type, Origin, Authorization, X-TokenAccess");
 		resp.addHeader("Access-Control-Expose-Headers", "X-TokenAccess");
 
-		chain.doFilter(request, resp);
+		chain.doFilter(request, response);
 
 	}
 

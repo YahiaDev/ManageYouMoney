@@ -14,13 +14,19 @@ public class AppInitializer implements WebApplicationInitializer {
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
 		ctx.register(AppConfig.class);
 		ctx.setServletContext(container);
+		
 		// ctx.register(Springse);
 		// ctx.scan("my_package");
 
 		ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(ctx));
-
+		
 		servlet.setLoadOnStartup(1);
 		servlet.addMapping("/");
+		
+		
+		//Added filter dynamically
+        javax.servlet.FilterRegistration.Dynamic corsFilter = container.addFilter("corsfilter", CorsFilter.class);
+        corsFilter.addMappingForUrlPatterns(null, true, "/*");
 	}
 
 }

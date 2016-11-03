@@ -41,6 +41,13 @@ app.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', router]);
   ]);
 });*/
 
+app.config(['$httpProvider', function ($httpProvider) {
+  'use strict';
+  $httpProvider.defaults.useXDomain = true;
+  //$httpProvider.interceptors.push('httpInterceptor');
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}]);
+
 app.config(function($httpProvider){
   $httpProvider.interceptors.push('httpSecurityInterceptor');
   $httpProvider.interceptors.push('hmacInterceptor');
