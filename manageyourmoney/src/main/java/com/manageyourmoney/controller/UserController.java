@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manageyourmoney.common.Config;
 import com.manageyourmoney.component.User;
 
-@CrossOrigin(origins = Config.CROSS_URL)
+
 @RestController
 public class UserController {
 	@Autowired

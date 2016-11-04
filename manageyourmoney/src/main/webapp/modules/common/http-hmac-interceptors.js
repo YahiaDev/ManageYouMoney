@@ -73,7 +73,7 @@ angular.module('common').provider('hmacInterceptor',function () {
             },
             readHmacRequest:function(headers){
                 //Retrieve headers
-                var headerList = headers();
+                var headerList = headers;
 
                 var security = {};
                 //Secret key header

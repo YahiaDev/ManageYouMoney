@@ -10,7 +10,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+
+import com.manageyourmoney.config.security.hmac.HmacUtils;
 
 @Component
 public class CorsFilter implements Filter {
@@ -24,15 +27,25 @@ public class CorsFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-
+		String allowedHeaders = HmacUtils.X_TOKEN_ACCESS + " ," + HmacUtils.X_SECRET + " ,"
+				+ HttpHeaders.WWW_AUTHENTICATE + " ," + HmacUtils.X_DIGEST + ", " + HmacUtils.X_ONCE + ", "
+				+ HmacUtils.AUTHENTICATION;
 		HttpServletResponse resp = (HttpServletResponse) response;
-
+		// enable CORS doamin call
 		resp.setHeader("Access-Control-Allow-Origin", "*");
-		resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
-		resp.setHeader("Access-Control-Max-Age", "3600");
-		resp.setHeader("Access-Control-Allow-Headers", "Accept, Content-Type, Origin, Authorization, X-TokenAccess");
-		resp.addHeader("Access-Control-Expose-Headers", "X-TokenAccess");
+		resp.setHeader("Access-Control-Allow-Credentials", "true");
+		// enable post, get,options.. using cors domain
+		resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, HEAD");
+		// resp.setHeader("Access-Control-Max-Age", "3600");
+
+		resp.setHeader("Access-Control-Allow-Headers",
+				"Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, "
+						+ allowedHeaders);
+		// Access-Control-Allow-Headers, Origin,Accept, X-Requested-With,
+		// Content-Type, Access-Control-Request-Method,
+		// Access-Control-Request-Headers
+		// allow to add custom headers to the response
+		resp.addHeader("Access-Control-Expose-Headers", allowedHeaders);
 
 		chain.doFilter(request, response);
 

@@ -7,10 +7,11 @@ module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 
     $scope.login = function (){
         console.log('login '+$scope.user.login+' password '+ $scope.user.password);
         //AuthService.authenticate($scope.user);
-        LoginFactory.authenticate($scope.user.login,$scope.user.password).then(function(){
-            $location.path('/users');
+        AuthService.authenticate($scope.user.login,$scope.user.password).then(function(){
+            //$location.path('/users');
+            $state.go('home');
         },function(response){
-            if(response.status === 403 && response.data) {
+            if((response.status === 403 || response.status == 500) && response.data) {
                 if (response.data.exception && response.data.exception.indexOf('BadCredentialsException') !== -1) {
                     $scope.httpError = 'Username and/or password are invalid !';
                 }
@@ -19,6 +20,11 @@ module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 
 
 
     }
+
+
+    $rootScope.$on('event:unauthorized',function(rejection,data){
+        $scope.httpError = data.message;
+    });
 
     $scope.$on(AUTH_EVENTS.notAuthorized,function(){
         $state.go('authentication');
