@@ -1,8 +1,13 @@
-angular.module("nav").controller("NavController",["$scope", "$cookieStore", "$state", "Session", function($scope, $cookieStore, $state, Session){
+angular.module("nav").controller("NavController",["$scope", "NavService", function($scope, NavService){
     $scope.logOut = function (){
     	console.info('logOut');
-    	Session.destroy();
+    	NavService.logOut().then(function(){
+    		console.log("logout success");
+    	})
+    	}
+    
+    	/*Session.destroy();
         $cookieStore.remove('logedUser');
-        $state.go('authentication');
-    }
+        $state.go('authentication');*/
+    
 }]);

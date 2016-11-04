@@ -17,9 +17,9 @@ module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 
                 }
             }
         });
+    };
 
-
-    }
+    
 
 
     $rootScope.$on('event:unauthorized',function(rejection,data){

@@ -37,4 +37,9 @@ public class Authentication {
 		System.out.println("yahia ammmaraaaaaa");
 		return new String("ammar");
 	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public void logout() {
+		authenticationService.logout();
+	}
 }
