@@ -90,6 +90,15 @@ public class MockUsers {
 		return null;
 	}
 
+	public static UserDTO findByLogin(String login) {
+		for (UserDTO userDTO : users) {
+			if (userDTO.getLogin().equals(login)) {
+				return userDTO;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Update a given user
 	 * 

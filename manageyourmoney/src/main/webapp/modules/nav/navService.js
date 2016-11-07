@@ -1,5 +1,5 @@
 'uses strict';
-angular.module('nav').factory('NavService',['$http','$cookieStore', 'hmacInterceptor', function($http, $cookieStore, hmacInterceptor){
+angular.module('nav').factory('NavService',['$http','$cookieStore', 'hmacInterceptor', '$rootScope', function($http, $cookieStore, hmacInterceptor, $rootScope){
 	var service = {};
 
 	service.removeAccount = function(){

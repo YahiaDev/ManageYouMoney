@@ -134,7 +134,7 @@ app.directive('loginDialog', function (AUTH_EVENTS) {
   };
 });
 
-app.run(function ($rootScope, AUTH_EVENTS, AuthService, LoginFactory,$location) {
+app.run(function ($rootScope,LoginFactory,$location,$state) {
   /*$rootScope.$on('$stateChangeStart', function (event, next) {
     if (next.name !== "authentication"){
       var authorizedRoles = next.data.authorizedRoles;
@@ -158,13 +158,15 @@ app.run(function ($rootScope, AUTH_EVENTS, AuthService, LoginFactory,$location) 
     $rootScope.isAuthorized = LoginFactory.isAuthorized;
 
     $rootScope.$on('event:unauthorized',function(){
-        $location.path('/login');
+       $state.go('login');
         LoginFactory.removeAccount();
     });
 
-    $rootScope.$on('$routeChangeStart', function () {
-        if (!LoginFactory.isAuthenticated()) {
-            $location.path('/login');
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        if (!LoginFactory.isAuthenticated() && next.name !== "authentication") {
+             //$state.go('authentication');
+             $state.go('login');
+             //$location.path('/login');
             $rootScope.authenticated = false;
         } else {
             $rootScope.authenticated = true;
@@ -191,13 +193,13 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
           }*/
     };
 
-    var authenticationState = {
-        url: '/authentication',
+    var loginState = {
+        url: '/login',
         controller: 'AuthenticationController',
-        templateUrl: 'modules/authentication/authenticationTemplate.html',
-        data: {
+        templateUrl: 'modules/authentication/authenticationTemplate.html'
+       /* data: {
           authorizedRoles: [USER_ROLES.all]
-        }
+        }*/
     };
 
     var optionsState = {
@@ -211,7 +213,7 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
     
 
     $stateProvider.state('home', homeState)
-                   .state('authentication', authenticationState)
+                   .state('login', loginState)
                    .state('options', optionsState);
     $urlRouterProvider.otherwise('authentication'); 
 };

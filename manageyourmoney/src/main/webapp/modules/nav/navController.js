@@ -1,8 +1,9 @@
-angular.module("nav").controller("NavController",["$scope", "NavService", function($scope, NavService){
+angular.module("nav").controller("NavController",["$scope", "NavService", "$state", function($scope, NavService, $state){
     $scope.logOut = function (){
     	console.info('logOut');
     	NavService.logOut().then(function(){
     		console.log("logout success");
+    		$state.go('login');
     	})
     	}
     

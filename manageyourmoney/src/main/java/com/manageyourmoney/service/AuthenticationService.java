@@ -108,10 +108,11 @@ public class AuthenticationService {
 	public void logout() {
 		if (SecurityContextHolder.getContext().getAuthentication() != null
 				&& SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-			SecurityUser securityUser = (SecurityUser) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
+			// SecurityUser securityUser = (SecurityUser)
+			// SecurityContextHolder.getContext().getAuthentication()
+			// .getPrincipal();
 
-			UserDTO userDTO = MockUsers.findById(securityUser.getId());
+			UserDTO userDTO = MockUsers.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 			if (userDTO != null) {
 				userDTO.setSecretKey(null);
 			}
