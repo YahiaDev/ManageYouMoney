@@ -12,6 +12,7 @@ import com.manageyourmoney.component.User;
 
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private User user;
