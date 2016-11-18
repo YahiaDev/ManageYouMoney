@@ -15,6 +15,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        'bower_components/angular/angular.js',                             // angular
+        'bower_components/angular-ui-router/release/angular-ui-router.js', // ui-router
+        'bower_components/angular-utf8-base64/angular-utf8-base64.js',
+        'bower_components/angular-cookies/angular-cookies.min.js',
+        'bower_components/angular-mocks/angular-mocks.js',                 // loads our modules for tests        
+        'app/app.js',
+        'app/moules/authentication/authenticationController.js',
+        'app/moules/authentication/authenticationService.js',
         'modules/authentication/login.spec.js'
     ],
 
