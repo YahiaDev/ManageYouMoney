@@ -1,14 +1,30 @@
 describe('login factory',function(){
+
+	beforeEach(module('home')); //load module<br />
+    describe('HomeController',function(){ //describe your app name<br />
+        var myctrl;
+        beforeEach(inject(function($controller){ //instantiate controller using $controller service
+            myctrl = $controller('HomeController');
+            console.log('aaaaaaaaaaaaaaa'+myctrl);
+        }));
+        it('is very true', inject(function(){
+      
+      var output = myctrl.testHomee();
+      expect(output).toBeTruthy();
+    }));
+    });
+
+
 	/*it('has dummy spec to test  2+2',function(){
 		expect(2 + 2).toEqual(4);
 	});*/
 
-	var authService;
+	/*var authService;
 
 	beforeEach(function() {
 
-    module('home');
-
+    var x  = module('home');
+	console.log('hahahahahhahahahha'+x);
 	    inject(function(_HomeService_) {
 	    	console.log('heeelooooooooooooooooooo'+_HomeService_);
 	        authService = _HomeService_;
