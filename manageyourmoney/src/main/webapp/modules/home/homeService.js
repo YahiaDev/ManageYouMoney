@@ -1,6 +1,8 @@
 angular.module('home').factory('HomeService',['$http',function($http){
 	var service = {};
-
+    service.testHome = function(){
+        return true;
+    };
 	service.getUsers = function(){
      return   $http.get('http://localhost:8060/manageyourmoney/api/users').success(function(users, status, headers){
             return users;

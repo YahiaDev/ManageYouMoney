@@ -5,12 +5,31 @@ describe('login factory',function(){
 
 	var authService;
 
-	beforeEach(function(){
+	beforeEach(function() {
+
+    module('home');
+
+	    inject(function(_HomeService_) {
+	    	console.log('heeelooooooooooooooooooo'+_HomeService_);
+	        authService = _HomeService_;
+	    });
+	});
+
+	it('is very true', inject(function(){
+      console.log('ammaaaaaaaaaaaaaaaaaaar'+authService);
+      var output = authService.testHome();
+      expect(output).toBeTruthy();
+    }));
+
+
+	//beforeEach(module('home'));
+
+	//beforeEach(function(){
 		//angular.mock.module('ngCookies',[]);
-		angular.module('ngCookies',[]);
-		module('authentication');
+		//angular.module('ngCookies',[]);
+	//	module('home');
 		//angular.mock.module('ab-base64','myApp','ngCookies','authentication');
-		});
+	//	});
 	//beforeEach();
 
 	/*beforeEach(inject(function(_AuthenticationController_){
@@ -18,19 +37,30 @@ describe('login factory',function(){
 
 	}));*/
 
-	beforeEach(inject(function(){
-		var $injector = angular.injector(['authentication']);
+	// Setup the mock service in an anonymous module.
+	/*  beforeEach(module(function ($provide) {
+	    $provide.value('oneOfMyOtherServicesStub', {
+	        someVariable: 1
+	    });
+	  }));
+
+	   it('can get an instance of my factory', inject(function(HomeService) {
+    expect(HomeService).toBeDefined();
+  	}));*/
+
+	/*beforeEach(inject(function(){
+		var $injector = angular.injector(['home']);
 		 console.log('yahiaaaaaaaaaaaaaaaaaaaaaaaaaa');
-		authService = $injector.get('AuthService');
+		authService = $injector.get('HomeService');
 
 		console.log('bsaaaaaaaaaaaaaal'+authService);
 	}));
 
 	it('is very true', inject(function(){
       console.log('ammaaaaaaaaaaaaaaaaaaar'+authService);
-      var output = authService.test();
+      var output = authService.testHome();
       expect(output).toBeTruthy();
-    }));
+    }));*/
 
 	/*it('should exists', function(){
 		expect(authService).toBeDefined()

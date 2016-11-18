@@ -21,6 +21,7 @@ module.exports = function(config) {
         'bower_components/angular-cookies/angular-cookies.min.js',
         'bower_components/angular-mocks/angular-mocks.js',                 // loads our modules for tests        
         'app/app.js',
+        'app/moules/home/homeService.js',
         'app/moules/authentication/authenticationController.js',
         'app/moules/authentication/authenticationService.js',
         'modules/authentication/login.spec.js'
