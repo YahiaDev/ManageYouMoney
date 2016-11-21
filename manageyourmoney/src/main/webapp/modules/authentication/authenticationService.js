@@ -6,6 +6,10 @@ angular.module('authentication').factory('AuthService',['$rootScope', '$q', 'Ses
       return true;
     };
 
+    service.testService = function(){
+      return 'ammar';
+    };
+
     service.authenticate = function(login, password){
     return $http.put('http://localhost:8060/manageyourmoney/api/authenticate',{login:login,password:password}).success(function(user, status, headers){
         $cookieStore.put('hmacApp-account', JSON.stringify(user));

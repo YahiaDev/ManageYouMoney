@@ -4,7 +4,7 @@ module.controller('HomeController', ['$scope','HomeService', function($scope, Ho
     $scope.message = "home page";
     var vm = this;
     vm.testHomee = function(){
-        return false;
+        return true;
     }
     $scope.getAllUsers = function(){
     	HomeService.getUsers().then(function(response){
