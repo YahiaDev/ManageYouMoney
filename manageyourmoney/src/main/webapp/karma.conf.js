@@ -15,16 +15,34 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'bower_components/angular/angular.js',                             // angular
-        'bower_components/angular-ui-router/release/angular-ui-router.js', // ui-router
-        'bower_components/angular-utf8-base64/angular-utf8-base64.js',
+        'bower_components/angular/angular.js',
+        'bower_components/angular-ui-router/release/angular-ui-router.min.js',
         'bower_components/angular-cookies/angular-cookies.min.js',
-        'bower_components/angular-mocks/angular-mocks.js',                 // loads our modules for tests        
+        'bower_components/jquery/jquery.min.js',
+        'bower_components/jquery-ui/jquery-ui.min.js',
+        'bower_components/bootstrap/dist/js/bootstrap.min.js',
+        'bower_components/crypto-js/crypto-js.js',
+        'bower_components/crypto-js/hmac-sha256.js',
+        'bower_components/crypto-js/hmac-sha1.js',
+        'bower_components/crypto-js/hmac-md5.js',
+        'bower_components/angular-utf8-base64/angular-utf8-base64.js',
+        'bower_components/angular-mocks/angular-mocks.js',     
         'app/app.js',
-        'app/moules/home/homeController.js',
-        'app/moules/home/homeService.js',
-        'app/moules/authentication/authenticationController.js',
-        'app/moules/authentication/authenticationService.js',
+        'modules/options/optionsController.js',
+        'modules/nav/navService.js',
+        'modules/nav/navController.js',
+        'modules/nav/navDirective.js',
+        'modules/common/commonService.js',
+        'modules/common/http-hmac-interceptors.js',
+        'modules/common/httpSecurityInterceptor.js',
+        'modules/common/is-authorized.directive.js',
+        'modules/home/homeController.js',
+        'modules/home/homeService.js',
+        'modules/authentication/authenticationController.js',
+        'modules/authentication/authenticationService.js',
+        'modules/authentication/sessionService.js',
+        'modules/authentication/loginFactory.js',
+        'modules/options/optionsController.js',
         'modules/authentication/login.spec.js'
     ],
 
