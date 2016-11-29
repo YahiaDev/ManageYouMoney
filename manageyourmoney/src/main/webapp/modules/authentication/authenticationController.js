@@ -7,13 +7,16 @@ module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 
     $scope.testFunction = function(){
         return 'yahia'; 
     };
+    $scope.authenticationOk = false;
     $scope.user = {sessionId:'1', id:'12', login:'',password:'', role:'admin'};
     
     $scope.login = function (){
         console.log('login '+$scope.user.login+' password '+ $scope.user.password);
         //AuthService.authenticate($scope.user);
-        AuthService.authenticate($scope.user.login,$scope.user.password).then(function(){
+        AuthService.authenticate($scope.user.login,$scope.user.password).then(function(response){
             //$location.path('/users');
+            $scope.user = response.data;
+            $scope.authenticationOk = true;
             $state.go('home');
         },function(response){
             if((response.status === 403 || response.status == 500) && response.data) {
