@@ -36,8 +36,10 @@ describe('login factory',function(){
 	   		var returData = {login:'haha',password:'lalala'};
 	   		$httpBackend.when('GET', 'modules/authentication/authenticationTemplate.html').respond({login:'test@test.com',password:'yahia'});
 	   		$httpBackend.when('GET', 'modules/home/homeTemplate.html').respond({login:'test@test.com',password:'yahia'});
+	   		//intercept http call
 	   		$httpBackend.expect('PUT','http://localhost:8060/manageyourmoney/api/authenticate',{login:'test@test.com',password:'yahia'}).respond(200,returData);
 	   		scope.user = {login:'test@test.com',password:'yahia'};
+	   		//make a call
 	   		scope.login();
 	   		$httpBackend.flush();
 	   		expect(scope.authenticationOk).toBe(true);
