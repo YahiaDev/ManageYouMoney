@@ -36,7 +36,7 @@ public class Users {
 
 	@RequestMapping("/users/profiles")
 	public List<String> getProfiles() {
-		List<String> profiles = new ArrayList<>();
+		List<String> profiles = new ArrayList<String>();
 		for (Profile profile : Profile.values()) {
 			profiles.add(profile.name());
 		}

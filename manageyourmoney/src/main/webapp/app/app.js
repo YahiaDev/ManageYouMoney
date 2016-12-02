@@ -4,7 +4,8 @@ angular.module('home',[]);
 angular.module('authentication',['ngCookies']);
 angular.module('nav',['ngCookies']);
 angular.module('options',[]);
-var modules = ['ui.router', 'home', 'common', 'authentication', 'nav', 'options'];
+angular.module('signUp',[]);
+var modules = ['ui.router', 'home', 'common', 'authentication', 'nav', 'options', 'signUp'];
 var app = angular.module('myApp',modules);
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
