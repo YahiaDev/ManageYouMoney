@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.common.Config;
 import com.manageyourmoney.dto.LoginDTO;
-import com.manageyourmoney.dto.UserDTO;
 import com.manageyourmoney.mongodb.document.Adresse;
 import com.manageyourmoney.mongodb.document.Person;
+import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.mongodb.repository.AdressRepo;
 import com.manageyourmoney.service.AdressService;
 import com.manageyourmoney.service.AuthenticationService;
@@ -38,12 +38,12 @@ public class Authentication {
 	private AdressService adressService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.PUT)
-	public UserDTO authenticate(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
+	public UserDocument authenticate(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
 		// LoginDTO loginDTO = new LoginDTO();
 		// loginDTO.setLogin("test@test.com");
 		// loginDTO.setPassword("yahia");
 		try {
-			UserDTO userDto = authenticationService.authenticate(loginDTO, response);
+			UserDocument userDto = authenticationService.authenticate(loginDTO, response);
 
 			// Person person = new Person();
 			// person.setPersonneId(1l);

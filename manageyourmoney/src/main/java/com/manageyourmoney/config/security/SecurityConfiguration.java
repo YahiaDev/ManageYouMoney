@@ -16,8 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.manageyourmoney.config.security.hmac.HmacRequester;
 import com.manageyourmoney.config.security.hmac.HmacSecurityConfigurer;
-import com.manageyourmoney.dto.UserDTO;
 import com.manageyourmoney.mock.MockUsers;
+import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.service.AuthenticationService;
 
 @Configuration
@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		InMemoryUserDetailsManagerConfigurer configurer = auth.inMemoryAuthentication()
 				.passwordEncoder(passwordEncoder());
 
-		for (UserDTO userDTO : MockUsers.getUsers()) {
+		for (UserDocument userDTO : MockUsers.getUsers()) {
 			configurer.withUser(userDTO.getLogin()).password(passwordEncoder().encode(userDTO.getPassword()))
 					.roles(userDTO.getProfile().name());
 		}

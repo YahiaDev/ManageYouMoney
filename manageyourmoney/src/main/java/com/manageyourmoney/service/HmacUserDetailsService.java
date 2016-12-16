@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.manageyourmoney.config.security.SecurityUser;
-import com.manageyourmoney.dto.UserDTO;
 import com.manageyourmoney.mock.MockUsers;
+import com.manageyourmoney.mongodb.document.UserDocument;
 
 @Component
 public class HmacUserDetailsService implements UserDetailsService {
@@ -20,7 +20,7 @@ public class HmacUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		UserDTO userDTO = MockUsers.findByUsername(username);
+		UserDocument userDTO = MockUsers.findByUsername(username);
 		if (userDTO == null) {
 			throw new UsernameNotFoundException("User " + username + " not found");
 		}

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.dto.Profile;
-import com.manageyourmoney.dto.UserDTO;
 import com.manageyourmoney.mock.MockUsers;
+import com.manageyourmoney.mongodb.document.UserDocument;
 
 import javax.validation.Valid;
 
@@ -20,17 +20,17 @@ import javax.validation.Valid;
 public class Users {
 
 	@RequestMapping("/users")
-	public List<UserDTO> query() {
+	public List<UserDocument> query() {
 		return MockUsers.getUsers();
 	}
 
 	@RequestMapping("/users/{id}")
-	public UserDTO query(@PathVariable Integer id) {
+	public UserDocument query(@PathVariable Integer id) {
 		return MockUsers.findById(id);
 	}
 
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-	public UserDTO update(@RequestBody @Valid UserDTO userDTO) {
+	public UserDocument update(@RequestBody @Valid UserDocument userDTO) {
 		return MockUsers.update(userDTO);
 	}
 

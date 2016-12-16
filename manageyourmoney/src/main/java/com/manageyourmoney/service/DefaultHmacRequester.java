@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import com.manageyourmoney.config.security.hmac.HmacRequester;
-import com.manageyourmoney.dto.UserDTO;
 import com.manageyourmoney.mock.MockUsers;
+import com.manageyourmoney.mongodb.document.UserDocument;
 
 @Service
 public class DefaultHmacRequester implements HmacRequester{
@@ -17,7 +17,7 @@ public class DefaultHmacRequester implements HmacRequester{
 
     @Override
     public String getSecret(String iss) {
-        UserDTO userDTO = MockUsers.findById(Integer.valueOf(iss));
+        UserDocument userDTO = MockUsers.findById(Integer.valueOf(iss));
         if(userDTO != null){
             return userDTO.getSecretKey();
         }

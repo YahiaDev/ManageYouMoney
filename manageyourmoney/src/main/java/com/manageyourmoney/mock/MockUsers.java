@@ -9,12 +9,12 @@ import java.util.Map;
 import org.springframework.beans.BeanUtils;
 
 import com.manageyourmoney.dto.Profile;
-import com.manageyourmoney.dto.UserDTO;
+import com.manageyourmoney.mongodb.document.UserDocument;
 
 @SuppressWarnings("unchecked")
 public class MockUsers {
 
-	private static List<UserDTO> users = new ArrayList<>();
+	private static List<UserDocument> users = new ArrayList<>();
 
 	private static Map<Profile, List<String>> authorities = new HashMap() {
 		{
@@ -25,7 +25,7 @@ public class MockUsers {
 	};
 
 	public static void mock() {
-		UserDTO admin = new UserDTO();
+		UserDocument admin = new UserDocument();
 		admin.setId(1);
 		admin.setLogin("test@test.com");
 		admin.setProfile(Profile.ADMIN);
@@ -33,7 +33,7 @@ public class MockUsers {
 		admin.setAuthorities(authorities.get(admin.getProfile()));
 		users.add(admin);
 
-		UserDTO user = new UserDTO();
+		UserDocument user = new UserDocument();
 		user.setId(2);
 		user.setLogin("user");
 		user.setProfile(Profile.USER);
@@ -41,7 +41,7 @@ public class MockUsers {
 		user.setAuthorities(authorities.get(user.getProfile()));
 		users.add(user);
 
-		UserDTO manager = new UserDTO();
+		UserDocument manager = new UserDocument();
 		manager.setId(3);
 		manager.setLogin("manager");
 		manager.setProfile(Profile.MANAGER);
@@ -51,7 +51,7 @@ public class MockUsers {
 
 	}
 
-	public static List<UserDTO> getUsers() {
+	public static List<UserDocument> getUsers() {
 		if (users.isEmpty()) {
 			mock();
 		}
@@ -65,8 +65,8 @@ public class MockUsers {
 	 *            username
 	 * @return a UserDTO if found, null otherwise
 	 */
-	public static UserDTO findByUsername(String username) {
-		for (UserDTO userDTO : users) {
+	public static UserDocument findByUsername(String username) {
+		for (UserDocument userDTO : users) {
 			if (userDTO.getLogin().equals(username)) {
 				return userDTO;
 			}
@@ -81,8 +81,8 @@ public class MockUsers {
 	 *            user id
 	 * @return a UserDTO if found, null otherwise
 	 */
-	public static UserDTO findById(Integer id) {
-		for (UserDTO userDTO : users) {
+	public static UserDocument findById(Integer id) {
+		for (UserDocument userDTO : users) {
 			if (userDTO.getId().equals(id)) {
 				return userDTO;
 			}
@@ -90,8 +90,8 @@ public class MockUsers {
 		return null;
 	}
 
-	public static UserDTO findByLogin(String login) {
-		for (UserDTO userDTO : users) {
+	public static UserDocument findByLogin(String login) {
+		for (UserDocument userDTO : users) {
 			if (userDTO.getLogin().equals(login)) {
 				return userDTO;
 			}
@@ -106,8 +106,8 @@ public class MockUsers {
 	 *            new user
 	 * @return updated user
 	 */
-	public static UserDTO update(UserDTO newUserDTO) {
-		UserDTO existingUser = findById(newUserDTO.getId());
+	public static UserDocument update(UserDocument newUserDTO) {
+		UserDocument existingUser = findById(newUserDTO.getId());
 		if (existingUser != null) {
 			BeanUtils.copyProperties(newUserDTO, existingUser, "password");
 			existingUser.setAuthorities(authorities.get(existingUser.getProfile()));

@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.common.Config;
 import com.manageyourmoney.component.User;
-
+import com.manageyourmoney.mongodb.document.UserDocument;
+import com.manageyourmoney.service.UserService;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private User user;
+
+	@Autowired
+	UserService userService;
 
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
 	public User getUser(@RequestParam(value = "login") String login, @RequestParam(value = "pwd") String pwd) {
@@ -29,5 +33,10 @@ public class UserController {
 		user.setName("yahia");
 		user.setLogin("yahia.ammar.info@gmail.com");
 		return user;
+	}
+
+	@RequestMapping(value = "addUser", method = RequestMethod.PUT)
+	public void addNewUser(UserDocument newUser) {
+		userService.addNewUser(newUser);
 	}
 }

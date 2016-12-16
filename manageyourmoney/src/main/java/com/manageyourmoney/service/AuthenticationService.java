@@ -25,8 +25,8 @@ import com.manageyourmoney.config.security.hmac.HmacSigner;
 import com.manageyourmoney.config.security.hmac.HmacToken;
 import com.manageyourmoney.config.security.hmac.HmacUtils;
 import com.manageyourmoney.dto.LoginDTO;
-import com.manageyourmoney.dto.UserDTO;
 import com.manageyourmoney.mock.MockUsers;
+import com.manageyourmoney.mongodb.document.UserDocument;
 
 @Service
 public class AuthenticationService {
@@ -56,7 +56,7 @@ public class AuthenticationService {
 	 * @return UserDTO instance
 	 * @throws HmacException
 	 */
-	public UserDTO authenticate(LoginDTO loginDTO, HttpServletResponse response) throws HmacException {
+	public UserDocument authenticate(LoginDTO loginDTO, HttpServletResponse response) throws HmacException {
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 				loginDTO.getLogin(), loginDTO.getPassword());
 		Authentication authentication = authenticationManager.authenticate(authenticationToken);
@@ -81,7 +81,7 @@ public class AuthenticationService {
 		HmacToken hmacToken = HmacSigner.getSignedToken(secret, String.valueOf(securityUser.getId()),
 				HmacSecurityFilter.JWT_TTL, customClaims);
 
-		for (UserDTO userDTO : MockUsers.getUsers()) {
+		for (UserDocument userDTO : MockUsers.getUsers()) {
 			if (userDTO.getId().equals(securityUser.getId())) {
 				userDTO.setSecretKey(secret);
 			}
@@ -93,7 +93,7 @@ public class AuthenticationService {
 		response.setHeader(HmacUtils.X_SECRET, hmacToken.getSecret());
 		response.setHeader(HttpHeaders.WWW_AUTHENTICATE, HmacUtils.HMAC_SHA_256);
 
-		UserDTO userDTO = new UserDTO();
+		UserDocument userDTO = new UserDocument();
 		userDTO.setId(securityUser.getId());
 		userDTO.setLogin(securityUser.getUsername());
 		userDTO.setAuthorities(authorities);
@@ -112,7 +112,7 @@ public class AuthenticationService {
 			// SecurityContextHolder.getContext().getAuthentication()
 			// .getPrincipal();
 
-			UserDTO userDTO = MockUsers.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+			UserDocument userDTO = MockUsers.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 			if (userDTO != null) {
 				userDTO.setSecretKey(null);
 			}
