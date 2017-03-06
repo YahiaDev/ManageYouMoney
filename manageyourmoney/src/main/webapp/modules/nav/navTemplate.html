@@ -1,18 +1,24 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Manage Money</a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li ng-class="{'active':home==1}"><a ui-sref="home">Home</a></li>
-        <li ng-class="{'active':options==1}"><a ui-sref="options">Options</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" ng-click="logOut()">Deconnexion</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" ui-sref="home">Manage Your Money</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+
+      <li ng-class="home=1? 'active nav-item' : 'nav-item'">
+        <a class="nav-link" ui-sref="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li ng-class="purcat=1? 'active nav-item' : 'nav-item'">
+        <a class="nav-link" ui-sref="purcat">Manage purchase</a>
+      </li>
+      <li ng-class="option=1? 'active nav-item' : 'nav-item'">
+        <a class="nav-link" ui-sref="options">Options</a>
+      </li>
+
+
+    </ul>
+  </div>
 </nav>

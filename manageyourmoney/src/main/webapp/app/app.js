@@ -5,7 +5,8 @@ angular.module('authentication',['ngCookies']);
 angular.module('nav',['ngCookies']);
 angular.module('options',[]);
 angular.module('signUp',[]);
-var modules = ['ui.router', 'home', 'common', 'authentication', 'nav', 'options', 'signUp'];
+angular.module('PurchaseCat',[]);
+var modules = ['ui.router', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat'];
 var app = angular.module('myApp',modules);
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -16,19 +17,21 @@ app.constant('AUTH_EVENTS', {
     notAuthorized: 'auth-not-authorized'
   });
 
-  app.constant('USER_ROLES', {
-    all: '*',
-    admin: 'admin',
-    editor: 'editor',
-    guest: 'guest'
-  });
 
-  app.constant('SERVER_URL', {
-    protocol: 'http',
-    port: '8060',
-    serverName: 'localhost',
-    context:'manageyourmoney'
-  });
+
+app.constant('USER_ROLES', {
+  all: '*',
+  admin: 'admin',
+  editor: 'editor',
+  guest: 'guest'
+});
+
+app.constant('SERVER_URL', {
+  protocol: 'http',
+  port: '8060',
+  serverName: 'localhost',
+  context:'manageyourmoney'
+});
 
 
 app.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', router]);
@@ -210,12 +213,22 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
         data: {
           authorizedRoles: [USER_ROLES.all, USER_ROLES.admin]
         }
-    }
+    };
+
+    var puchaseCatState = {
+        url: '/purcat',
+        controller: 'PurchaseCategoriesCtrl',
+        templateUrl: 'modules/purchase/purchaseCategoriesTemplate.html'
+       /* data: {
+          authorizedRoles: [USER_ROLES.all]
+        }*/
+    };
     
 
     $stateProvider.state('home', homeState)
                    .state('login', loginState)
-                   .state('options', optionsState);
+                   .state('options', optionsState)
+                   .state('purcat', puchaseCatState);
     $urlRouterProvider.otherwise('authentication'); 
 };
 

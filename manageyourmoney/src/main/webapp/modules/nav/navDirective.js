@@ -5,7 +5,7 @@ module.directive('navDirective', function(){
         restrict: 'A',
         templateUrl: 'modules/nav/navTemplate.html',
         controller: 'NavController',
-        scope: {home: '@', options:'@'}
+        scope: {home: '@', options:'@', purcat:'@'}
     }
 
 });
