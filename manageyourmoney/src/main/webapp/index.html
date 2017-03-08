@@ -42,7 +42,22 @@
         <script src = "modules/signUp/signUpService.js"></script>
         <script src = "modules/purchase/purchaseCategoriesCtrl.js"></script>
         <script src = "modules/purchase/purchaseService.js"></script>
+        <script>
+            // Initialize tooltip component
+            $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+            })
+
+            // Initialize popover component
+            $(function () {
+              $('[data-toggle="popover"]').popover()
+            })
+         </script>  
         <!--<script src = "modules/purchase/purchaseCategoriesCtrl.js"></script>-->
         <div ui-view> </div>
+
+
+          
+
     </body>
 </html>

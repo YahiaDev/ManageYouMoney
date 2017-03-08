@@ -1,14 +1,14 @@
 'use strict';
 angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', 'purchaseService',function($scope, purchaseService){
-
-	//$scope.text = "hello";
-
 	$scope.purchaseCat = {catName:'', description:''};
-
+	$scope.purchaseCatAdded = false;
 	$scope.addPurchase = function(){
-		console.info('purchase cat '+$scope.purchaseCat.catName+' description' + $scope.purchaseCat.description);
-		purchaseService.addPurCat($scope.purchaseCat).then(function(response){
-			console.info("purchase added successfully");
-		});
+		if ($scope.purchaseCat.catName !== ''){
+			purchaseService.addPurCat($scope.purchaseCat).then(function(response){
+				$scope.purchaseCatAdded = true;
+				$scope.purchaseCat.catName = '';
+				$scope.purchaseCat.description = '';
+			});
+		}
 	};
 }]);

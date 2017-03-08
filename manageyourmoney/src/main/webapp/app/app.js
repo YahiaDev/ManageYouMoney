@@ -229,7 +229,7 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
                    .state('login', loginState)
                    .state('options', optionsState)
                    .state('purcat', puchaseCatState);
-    $urlRouterProvider.otherwise('authentication'); 
+    $urlRouterProvider.otherwise('login'); 
 };
 
 
