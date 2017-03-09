@@ -7,6 +7,10 @@ angular.module('PurchaseCat').factory('purchaseService',['$http', 'SERVER_URL', 
 		return $http.put(url+'/api/purchase/addPurchaseCategories?catName=' + purCat.catName + '&&catDesc=' + purCat.description);
 	};
 
+	service.getAllPurchaseCat = function(){
+		return $http.get(url+'/api/purchase/getAllPurchaseCategories');
+	};
+
 	return service;
 
 }]);

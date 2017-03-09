@@ -6,7 +6,7 @@ angular.module('nav',['ngCookies']);
 angular.module('options',[]);
 angular.module('signUp',[]);
 angular.module('PurchaseCat',[]);
-var modules = ['ui.router', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat'];
+var modules = ['ui.router', 'ui.grid', 'ui.grid.pagination', 'ui.bootstrap', 'ui.grid.selection', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat'];
 var app = angular.module('myApp',modules);
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',

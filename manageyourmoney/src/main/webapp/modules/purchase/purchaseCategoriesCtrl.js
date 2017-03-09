@@ -1,7 +1,9 @@
 'use strict';
-angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', 'purchaseService',function($scope, purchaseService){
+angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$modal', 'purchaseService', function($scope, $modal, purchaseService){
 	$scope.purchaseCat = {catName:'', description:''};
 	$scope.purchaseCatAdded = false;
+	$scope.purchaseCatData = [];
+	$scope.dataLoaded =  false;
 	$scope.addPurchase = function(){
 		if ($scope.purchaseCat.catName !== ''){
 			purchaseService.addPurCat($scope.purchaseCat).then(function(response){
@@ -11,4 +13,41 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', 'pu
 			});
 		}
 	};
+
+	$scope.getAllPurchaseCat = function(){
+		purchaseService.getAllPurchaseCat().then(function(response){
+		$scope.purchaseCatData = response.data;
+		$scope.dataLoaded = true;
+		//console.info(response);
+		});
+	};
+
+	$scope.columnDefs = [
+		{field: 'labelCat', displayName : 'Category Label', cellTemplate: 'modules/purchase/edit-button.html', width: '40%'},
+		{field: 'description', displayName : 'Description', width: '60%'}
+	];
+
+    $scope.gridOptions = {
+    	enableFiltering: true,
+	    enableColumnResize: true,
+	    enableRowSelection:true,
+	    paginationPageSizes: [25, 50, 75],
+		paginationPageSize: 5,
+		data: "purchaseCatData",
+		columnDefs: $scope.columnDefs
+    };
+
+    $scope.editRow =  function(grid, row) {
+    $modal.open({
+      templateUrl: 'modules/purchase/edit-modal.html',
+      controller: ['$modalInstance', 'grid', 'row', RowEditCtrl],
+      controllerAs: 'vm',
+      resolve: {
+        grid: function () { return grid; },
+        row: function () { return row; }
+      }
+    });
+  };
+
+	$scope.getAllPurchaseCat();
 }]);
