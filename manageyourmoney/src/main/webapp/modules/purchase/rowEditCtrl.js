@@ -1,4 +1,4 @@
 'use strict';
-angular.module('RowEditCtrl',['$scope',function($scope){
+angular.module('RowEditCtrl',['$modalInstance', 'grid', 'row',function($modalInstance, grid, row){
 
 }]);

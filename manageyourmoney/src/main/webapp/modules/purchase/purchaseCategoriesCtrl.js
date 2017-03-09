@@ -1,5 +1,5 @@
 'use strict';
-angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$modal', 'purchaseService', function($scope, $modal, purchaseService){
+angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$uibModal', 'purchaseService', function($scope, $uibModal, purchaseService){
 	$scope.purchaseCat = {catName:'', description:''};
 	$scope.purchaseCatAdded = false;
 	$scope.purchaseCatData = [];
@@ -38,10 +38,10 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$m
     };
 
     $scope.editRow =  function(grid, row) {
-    $modal.open({
+    $uibModal.open({
       templateUrl: 'modules/purchase/edit-modal.html',
-      controller: ['$modalInstance', 'grid', 'row', RowEditCtrl],
-      controllerAs: 'vm',
+      controller: 'RowEditCtrl',
+      //controllerAs: 'vm',
       resolve: {
         grid: function () { return grid; },
         row: function () { return row; }
