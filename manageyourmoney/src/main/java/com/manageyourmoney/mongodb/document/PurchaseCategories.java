@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PurchaseCategories {
 
 	@Id
-	private ObjectId categoryId;
+	private String categoryId;
 
 	private String labelCat;
 
@@ -18,18 +18,18 @@ public class PurchaseCategories {
 		super();
 	}
 
-	public PurchaseCategories(ObjectId categoryId, String labelCat, String description) {
+	public PurchaseCategories(String categoryId, String labelCat, String description) {
 		super();
 		this.categoryId = categoryId;
 		this.labelCat = labelCat;
 		this.description = description;
 	}
 
-	public ObjectId getCategoryId() {
+	public String getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(ObjectId categoryId) {
+	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
 	}
 

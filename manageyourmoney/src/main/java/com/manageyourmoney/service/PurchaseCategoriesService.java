@@ -17,8 +17,16 @@ public class PurchaseCategoriesService {
 		puchaseCatRepo.save(purCat);
 	}
 
+	public void updatePurchageCat(PurchaseCategories purCat) {
+		puchaseCatRepo.save(purCat);
+	}
+
 	public List<PurchaseCategories> getAllPurchaseCat() {
 		return (List<PurchaseCategories>) puchaseCatRepo.findAll();
+	}
+
+	public void deletePurchaseCat(PurchaseCategories purCat) {
+		puchaseCatRepo.delete(purCat);
 	}
 
 }

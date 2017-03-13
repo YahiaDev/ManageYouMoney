@@ -5,8 +5,8 @@ angular.module('authentication',['ngCookies']);
 angular.module('nav',['ngCookies']);
 angular.module('options',[]);
 angular.module('signUp',[]);
-angular.module('PurchaseCat',[]);
-var modules = ['ui.router', 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.bootstrap', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat'];
+angular.module('PurchaseCat',['schemaForm']);
+var modules = ['ui.router', 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.edit', 'ui.bootstrap', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat'];
 var app = angular.module('myApp',modules);
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -61,6 +61,10 @@ app.config(function(hmacInterceptorProvider){
 //Hmac security interceptor provider configuration
     hmacInterceptorProvider.config.rejectedApis = [{mustMatch:true,pattern:'/api'}, {mustMatch:false,pattern:'/api/authenticate'}];
 });
+
+app.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
 
 //config for to allow CORS 
 /*app.config(['$httpProvider', function ($httpProvider) {
@@ -137,6 +141,7 @@ app.directive('loginDialog', function (AUTH_EVENTS) {
     }
   };
 });
+
 
 app.run(function ($rootScope,LoginFactory,$location,$state) {
   /*$rootScope.$on('$stateChangeStart', function (event, next) {

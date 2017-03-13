@@ -1,20 +1,21 @@
 'use strict';
-angular.module('PurchaseCat').controller('RowEditCtrl',['$modalInstance', 'PurchaseCat', 'grid', 'row',function($modalInstance, PurchaseCat, grid, row){
-	var vm = this;
-  
-  vm.schema = PurchaseCat;
-  vm.entity = angular.copy(row.entity);
-  vm.form = [
+angular.module('PurchaseCat').controller('RowEditCtrl',['$scope', 'purchaseService', '$uibModalInstance', 'PurchaseCatSchema', 'grid', 'row', function($scope, purchaseService, $uibModalInstance, PurchaseCatSchema, grid, row){
+	$scope.schema = PurchaseCatSchema;
+  $scope.entity = angular.copy(row.entity);
+  $scope.form = [
     'labelCat',
     'description'
   ];
   
-  vm.save = save;
-  
-  function save() {
+  $scope.save =  function () {
     // Copy row values over
-    row.entity = angular.extend(row.entity, vm.entity);
-    $modalInstance.close(row.entity);
-  }
+    angular.extend(row.entity, $scope.entity);
+    purchaseService.updatePurchaseCat($scope.entity).then(function(response){
+      $uibModalInstance.close(row.entity);
+    });
+    
+  };
+  
+ 
 
 }]);

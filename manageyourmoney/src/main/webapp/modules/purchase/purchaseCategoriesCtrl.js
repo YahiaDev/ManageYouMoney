@@ -1,39 +1,37 @@
 'use strict';
-angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$uibModal', 'purchaseService', 'RowEditor', function($scope, $uibModal, purchaseService, RowEditor){
-	var vm = this;
-  
-  	vm.editRow = RowEditor.editRow;
-
-
-	vm.purchaseCat = {catName:'', description:''};
-	vm.purchaseCatAdded = false;
-	vm.purchaseCatData = [];
+angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$uibModal', 'purchaseService', 'RowEditor', 'RowRemove', function($scope, $uibModal, purchaseService, RowEditor, RowRemove){
+	
+  	$scope.purchaseCat = {catName:'', description:''};
+	$scope.purchaseCatAdded = false;
+	
 	$scope.dataLoaded =  false;
-	vm.addPurchase = function(){
-		if (vm.purchaseCat.catName !== ''){
-			purchaseService.addPurCat(vm.purchaseCat).then(function(response){
-				vm.purchaseCatAdded = true;
-				vm.purchaseCat.catName = '';
-				vm.purchaseCat.description = '';
+	$scope.addPurchase = function(){
+		if ($scope.purchaseCat.catName !== ''){
+			purchaseService.addPurCat($scope.purchaseCat).then(function(response){
+				$scope.purchaseCatAdded = true;
+				$scope.purchaseCat.catName = '';
+				$scope.purchaseCat.description = '';
+				$scope.gridOptions.data = response.data;
 			});
 		}
 	};
 
+	$scope.openModal = function(){
+		RowEditor.editRow({},{});
+	};
+
 	$scope.getAllPurchaseCat = function(){
 		purchaseService.getAllPurchaseCat().then(function(response){
-		$scope.purchaseCatData = response.data;
 		$scope.gridOptions.data = response.data;
-		//vm.gridOptions.data = response.data;
 		$scope.dataLoaded = true;
-
-		//console.info(response);
 		});
 	};
 
-	vm.columnDefs = [
-		{field: 'id', name: '', cellTemplate: 'modules/purchase/edit-button.html', width: '4%'},
-		{field: 'labelCat', displayName : 'Category Label', width: '40%'},
-		{field: 'description', displayName : 'Description', width: '56%'}
+	$scope.columnDefs = [
+		{field: 'remove', name: 'D', cellTemplate: 'modules/purchase/delete-button.html', enableFiltering: false, enableSorting: false, width: 34},
+		{field: 'edit', name: 'E', cellTemplate: 'modules/purchase/edit-button.html', enableFiltering: false, enableSorting: false, width: 34},
+		{field: 'labelCat', displayName : 'Category Label'},
+		{field: 'description', displayName : 'Description'}
 	];
 
     $scope.gridOptions = {
@@ -42,12 +40,15 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
 	    enableRowSelection:true,
 	    paginationPageSizes: [25, 50, 75],
 		paginationPageSize: 5,
-		//data: $scope.purchaseCatData,
-		columnDefs: vm.columnDefs
+		columnDefs: $scope.columnDefs
     };
 
-    $scope.clickOnEditButton = function(grid,row){
-    	console.info('hahahahahahha');
+    $scope.clickOnEditButton = function(grid, row){
+    	RowEditor.editRow(grid,row);
+    };
+
+    $scope.clickOnRemoveButton = function(grid, row){
+    	RowRemove.removeRow(grid, row, $scope.gridOptions.data);
     };
 
 	$scope.getAllPurchaseCat();

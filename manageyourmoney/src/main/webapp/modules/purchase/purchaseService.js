@@ -11,6 +11,16 @@ angular.module('PurchaseCat').factory('purchaseService',['$http', 'SERVER_URL', 
 		return $http.get(url+'/api/purchase/getAllPurchaseCategories');
 	};
 
+	service.updatePurchaseCat = function(purCat){
+		return $http.post(url+'/api/purchase/updatePurchaseCategories', purCat);
+	};
+
+	service.deletePurchaseCat = function(purCat){
+		return $http.post(url+'/api/purchase/deletePurchaseCategories', purCat);
+	};
+
+	
+
 	return service;
 
 }]);

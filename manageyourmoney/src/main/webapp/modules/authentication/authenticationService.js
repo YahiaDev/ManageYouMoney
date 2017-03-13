@@ -11,18 +11,20 @@ angular.module('authentication').factory('AuthService',['$rootScope', '$q', 'Ses
     };
 
     service.authenticate = function(login, password){
-    return $http.put('http://localhost:8060/manageyourmoney/api/authenticate',{login:login,password:password}).success(function(user, status, headers){
-        $cookieStore.put('hmacApp-account', JSON.stringify(user));
-        hmacInterceptor.readHmacRequest(headers());
-        $rootScope.authenticated = true;
-        return user;
-      }, function errorCallback(response){
+    return $http.put('http://localhost:8060/manageyourmoney/api/authenticate',{login:login,password:password})
+    .then(function(response){
         if(response.status === 403 && response.data) {
           if (response.data.exception && response.data.exception.indexOf('BadCredentialsException') !== -1) {
             $scope.httpError = 'Username and/or password are invalid !';
           }
         }
-      });
+        else {
+          $cookieStore.put('hmacApp-account', JSON.stringify(response));
+          hmacInterceptor.readHmacRequest(response.headers());
+          $rootScope.authenticated = true;
+          return response;
+        }
+      })
     };
 
    /* service.isAuthenticated = function () {

@@ -26,10 +26,9 @@
 				      </div>
 				      <div class="offset-sm-4 col-sm-8 form-control-feedback" ng-if="!add_purchase_cat_from.description_text.$valid">Description max length is 100 characters</div>
 				    </div>
-				    
 				    <div class="form-group row">
 				      <div class="offset-sm-4 col-sm-8">
-				        <button type="submit" class="btn btn-primary" type="submit">Add purchase caterogy</button>
+				        <button type="submit" class="btn btn-primary">Add purchase caterogy</button>
 				      </div>
 				    </div>
 				  </form>
@@ -37,7 +36,7 @@
 			</div>
 		</div>
 		<div class="col-sm-8">
-			<div ui-grid-pagination ui-grid-selection ui-grid="gridOptions" ng-if="dataLoaded"></div>
+			<div style = "width: 100%;height: 450px" ui-grid-pagination ui-grid-selection ui-grid="gridOptions" ng-if="dataLoaded"></div>
 		</div>
 	</div>
 </div>

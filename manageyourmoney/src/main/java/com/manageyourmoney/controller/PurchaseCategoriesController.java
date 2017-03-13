@@ -2,8 +2,8 @@ package com.manageyourmoney.controller;
 
 import java.util.List;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,14 +25,24 @@ public class PurchaseCategoriesController {
 	}
 
 	@RequestMapping(value = "/addPurchaseCategories", method = RequestMethod.PUT)
-	public void addNewPurchaseCategories(@RequestParam(value = "catName") String catName,
+	public List<PurchaseCategories> addNewPurchaseCategories(@RequestParam(value = "catName") String catName,
 			@RequestParam(value = "catDesc") String catDesc) {
 		PurchaseCategories pc = new PurchaseCategories();
-		ObjectId id = new ObjectId();
-		pc.setCategoryId(id);
 		pc.setDescription(catDesc);
 		pc.setLabelCat(catName);
 		purCatService.addPurchageCat(pc);
+		return purCatService.getAllPurchaseCat();
+	}
+
+	@RequestMapping(value = "/updatePurchaseCategories", method = RequestMethod.POST)
+	public void updatePurchaseCategories(@RequestBody PurchaseCategories purCat) {
+		purCatService.updatePurchageCat(purCat);
+	}
+
+	@RequestMapping(value = "/deletePurchaseCategories", method = RequestMethod.POST)
+	public List<PurchaseCategories> deletePurchaseCategories(@RequestBody PurchaseCategories purCat) {
+		purCatService.deletePurchaseCat(purCat);
+		return purCatService.getAllPurchaseCat();
 	}
 
 }
