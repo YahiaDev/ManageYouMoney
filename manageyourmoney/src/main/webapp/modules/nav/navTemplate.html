@@ -8,25 +8,21 @@
       <li ng-class="home==1? 'active nav-item' : 'nav-item'">
         <a class="nav-link" ui-sref="home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li ng-class="purcat==1? 'active nav-item' : 'nav-item'">
-        <a class="nav-link" ui-sref="purcat">Manage purchase</a>
+      <li ng-class="purcat==1? 'active nav-item dropdown' : 'nav-item dropdown'">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Purchase
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Manage Purchase</a>
+          <a class="dropdown-item" ui-sref="purcat">Manage Purchage Category</a>
+        </div>
       </li>
+      <!--li ng-class="purcat==1? 'active nav-item' : 'nav-item'">
+        <a class="nav-link" ui-sref="purcat">Manage purchase</a>
+      </li-->
       <li ng-class="options==1? 'active nav-item' : 'nav-item'">
         <a class="nav-link" ui-sref="options">Options</a>
       </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" ui-sref="purcat" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage Purchase
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" ui-sref="purcat">Manage Purchage Category</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-
-
     </ul>
   </div>
 </nav>
