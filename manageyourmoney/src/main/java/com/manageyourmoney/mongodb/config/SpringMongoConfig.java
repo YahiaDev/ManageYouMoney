@@ -14,7 +14,7 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
 
 	@Override
 	public String getDatabaseName() {
-		return "yourdb";
+		return "manageYourMoneyApp";
 	}
 
 	@Override

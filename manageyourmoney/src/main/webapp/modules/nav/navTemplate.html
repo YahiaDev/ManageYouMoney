@@ -8,12 +8,12 @@
       <li ng-class="home==1? 'active nav-item' : 'nav-item'">
         <a class="nav-link" ui-sref="home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li ng-class="purcat==1? 'active nav-item dropdown' : 'nav-item dropdown'">
+      <li ng-class="purcat == 1 || purchase == 1? 'active nav-item dropdown' : 'nav-item dropdown'">
         <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Purchase
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Manage Purchase</a>
+          <a class="dropdown-item" ui-sref="purchase">Manage Purchase</a>
           <a class="dropdown-item" ui-sref="purcat">Manage Purchage Category</a>
         </div>
       </li>

@@ -6,7 +6,8 @@ angular.module('nav',['ngCookies']);
 angular.module('options',[]);
 angular.module('signUp',[]);
 angular.module('PurchaseCat',['schemaForm']);
-var modules = ['ui.router', 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.edit', 'ui.bootstrap', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat'];
+angular.module('Purchase',['schemaForm']);
+var modules = ['ui.router', 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.edit', 'ui.bootstrap', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat', 'Purchase'];
 var app = angular.module('myApp',modules);
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -228,12 +229,19 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES){
           authorizedRoles: [USER_ROLES.all]
         }*/
     };
+
+    var puchaseState = {
+        url: '/purchase',
+        controller: 'PurchaseCtrl',
+        templateUrl: 'modules/purchase/purchaseTemplate.html'
+    };
     
 
     $stateProvider.state('home', homeState)
                    .state('login', loginState)
                    .state('options', optionsState)
-                   .state('purcat', puchaseCatState);
+                   .state('purcat', puchaseCatState)
+                   .state('purchase', puchaseState);
     $urlRouterProvider.otherwise('login'); 
 };
 

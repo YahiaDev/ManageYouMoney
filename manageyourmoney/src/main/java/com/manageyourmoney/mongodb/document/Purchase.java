@@ -8,36 +8,37 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "purchase")
 public class Purchase {
-	
+
 	@Id
-	private long idPurchase;
+	private String idPurchase;
 	private Date date;
-	private double price;
+	private double amount;
 	private String label;
 	private String comment;
-	
+
 	@DBRef(db = "purchaseCategorie")
 	private PurchaseCategories categorie;
-	
+
 	public Purchase() {
 		super();
 	}
 
-	public Purchase(long idPurchase, Date date, double price, String label, String comment, PurchaseCategories categorie) {
+	public Purchase(String idPurchase, Date date, double amount, String label, String comment,
+			PurchaseCategories categorie) {
 		super();
 		this.idPurchase = idPurchase;
 		this.date = date;
-		this.price = price;
+		this.amount = amount;
 		this.label = label;
 		this.comment = comment;
 		this.categorie = categorie;
 	}
 
-	public long getIdPurchase() {
+	public String getIdPurchase() {
 		return idPurchase;
 	}
 
-	public void setIdPurchase(long idPurchase) {
+	public void setIdPurchase(String idPurchase) {
 		this.idPurchase = idPurchase;
 	}
 
@@ -49,11 +50,9 @@ public class Purchase {
 		this.date = date;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getAmount() {
+		return amount;
 	}
-	
-	
 
 	public PurchaseCategories getCategorie() {
 		return categorie;
@@ -63,8 +62,8 @@ public class Purchase {
 		this.categorie = categorie;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 
 	public String getLabel() {
@@ -83,6 +82,8 @@ public class Purchase {
 		this.comment = comment;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,10 +91,10 @@ public class Purchase {
 		result = prime * result + ((categorie == null) ? 0 : categorie.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + (int) (idPurchase ^ (idPurchase >>> 32));
+		result = prime * result + ((idPurchase == null) ? 0 : idPurchase.hashCode());
 		result = prime * result + ((label == null) ? 0 : label.hashCode());
 		long temp;
-		temp = Double.doubleToLongBits(price);
+		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -122,27 +123,25 @@ public class Purchase {
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (idPurchase != other.idPurchase)
+		if (idPurchase == null) {
+			if (other.idPurchase != null)
+				return false;
+		} else if (!idPurchase.equals(other.idPurchase))
 			return false;
 		if (label == null) {
 			if (other.label != null)
 				return false;
 		} else if (!label.equals(other.label))
 			return false;
-		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Purchase [idPurchase=" + idPurchase + ", date=" + date + ", price=" + price + ", label=" + label
+		return "Purchase [idPurchase=" + idPurchase + ", date=" + date + ", price=" + amount + ", label=" + label
 				+ ", comment=" + comment + "]";
 	}
-	
-	
-	
-	
-	
 
 }

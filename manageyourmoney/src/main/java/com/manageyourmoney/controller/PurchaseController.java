@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.manageyourmoney.mongodb.document.Purchase;
 import com.manageyourmoney.mongodb.document.PurchaseCategories;
-import com.manageyourmoney.service.PurchaseCategoriesService;
+import com.manageyourmoney.service.PurchaseService;
 
 @RestController
 @RequestMapping(value = "/api/purchase")
-public class PurchaseCategoriesController {
+public class PurchaseController {
 
 	@Autowired
-	PurchaseCategoriesService purCatService;
+	PurchaseService purchaseService;
 
 	@RequestMapping(value = "/getAllPurchaseCategories", method = RequestMethod.GET)
 	public List<PurchaseCategories> getAllPurchaseCategories() {
-		return purCatService.getAllPurchaseCat();
+		return purchaseService.getAllPurchaseCat();
 	}
 
 	@RequestMapping(value = "/addPurchaseCategories", method = RequestMethod.PUT)
@@ -30,19 +31,41 @@ public class PurchaseCategoriesController {
 		PurchaseCategories pc = new PurchaseCategories();
 		pc.setDescription(catDesc);
 		pc.setLabelCat(catName);
-		purCatService.addPurchageCat(pc);
-		return purCatService.getAllPurchaseCat();
+		purchaseService.addPurchageCat(pc);
+		return purchaseService.getAllPurchaseCat();
 	}
 
 	@RequestMapping(value = "/updatePurchaseCategories", method = RequestMethod.POST)
 	public void updatePurchaseCategories(@RequestBody PurchaseCategories purCat) {
-		purCatService.updatePurchageCat(purCat);
+		purchaseService.updatePurchageCat(purCat);
 	}
 
 	@RequestMapping(value = "/deletePurchaseCategories", method = RequestMethod.POST)
 	public List<PurchaseCategories> deletePurchaseCategories(@RequestBody PurchaseCategories purCat) {
-		purCatService.deletePurchaseCat(purCat);
-		return purCatService.getAllPurchaseCat();
+		purchaseService.deletePurchaseCat(purCat);
+		return purchaseService.getAllPurchaseCat();
+	}
+
+	@RequestMapping(value = "/getAllPurchase", method = RequestMethod.GET)
+	public List<Purchase> getAllPurchase() {
+		return purchaseService.getAllPurchase();
+	}
+
+	@RequestMapping(value = "/addPurchase", method = RequestMethod.PUT)
+	public List<PurchaseCategories> addNewPurchaseCategories(@RequestBody Purchase purchase) {
+		purchaseService.addPurchase(purchase);
+		return purchaseService.getAllPurchaseCat();
+	}
+
+	@RequestMapping(value = "/updatePurchase", method = RequestMethod.POST)
+	public void updatePurchases(@RequestBody Purchase purchase) {
+		purchaseService.updatePurchase(purchase);
+	}
+
+	@RequestMapping(value = "/deletePurchase", method = RequestMethod.POST)
+	public List<Purchase> deletePurchaseCategories(@RequestBody Purchase purchase) {
+		purchaseService.deletePurchase(purchase);
+		return purchaseService.getAllPurchase();
 	}
 
 }
