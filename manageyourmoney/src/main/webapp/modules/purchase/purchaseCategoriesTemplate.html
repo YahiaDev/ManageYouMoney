@@ -8,7 +8,7 @@
 			    Add Purchase category
 			  </div>
 			  <div class="card-block" >
-			    <form name="add_purchase_cat_from" ng-submit="addPurchase()">
+			    <form name="add_purchase_cat_form" ng-submit="addPurchase()">
 			    	<div class="alert alert-success" role="alert" ng-if="purchaseCatAdded">
 	  					<strong>Well done!</strong> Purchase category
 	  					successfully added
@@ -19,12 +19,12 @@
 				        <input  class="form-control" id="purchase_cat" name="purchase_cat" placeholder="Purchase category" ng-model="purchaseCat.catName" oninvalid="this.setCustomValidity('Purchase category is a mandatory field')" oninput="setCustomValidity('')" required>
 				      </div>
 				    </div>
-				    <div ng-class="add_purchase_cat_from.description_text.$valid?'form-group row':'form-group row has-danger'" name="description_div">
+				    <div ng-class="add_purchase_cat_form.description_text.$valid?'form-group row':'form-group row has-danger'" name="description_div">
 				      <label for="description_text" class="col-sm-4  col-form-label">Description</label>
 				      <div class="col-sm-8" name="textarea_div">
-				        <textarea  ng-class="add_purchase_cat_from.description_text.$valid?'form-control':'form-control-danger form-control'" id="description_text" name="description_text" row="5" placeholder="Description" ng-model="purchaseCat.description" ng-maxlength="50"></textarea>
+				        <textarea  ng-class="add_purchase_cat_form.description_text.$valid?'form-control':'form-control-danger form-control'" id="description_text" name="description_text" row="5" placeholder="Description" ng-model="purchaseCat.description" ng-maxlength="50"></textarea>
 				      </div>
-				      <div class="offset-sm-4 col-sm-8 form-control-feedback" ng-if="!add_purchase_cat_from.description_text.$valid">Description max length is 100 characters</div>
+				      <div class="offset-sm-4 col-sm-8 form-control-feedback" ng-if="!add_purchase_cat_form.description_text.$valid">Description max length is 100 characters</div>
 				    </div>
 				    <div class="form-group row">
 				      <div class="offset-sm-4 col-sm-8">
