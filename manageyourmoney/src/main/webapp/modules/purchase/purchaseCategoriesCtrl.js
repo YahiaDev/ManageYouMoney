@@ -5,7 +5,7 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
 	$scope.purchaseCatAdded = false;
 	
 	$scope.dataLoaded =  false;
-	$scope.addPurchase = function(){
+	$scope.addPurchaseCat = function(){
 		if ($scope.purchaseCat.catName !== ''){
 			purchaseService.addPurCat($scope.purchaseCat).then(function(response){
 				$scope.purchaseCatAdded = true;

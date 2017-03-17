@@ -2,53 +2,62 @@
 </br>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-5">
 			<div class="card" style="width: 100%">
 			  <div class="card-header">
 			    Add Purchase
 			  </div>
 			  <div class="card-block">
-			  	<form name="add_purchase_form">
-				  	<div layout-gt-sm="row">
+			  	<form name="add_purchase_form" ng-submit="addPurchase()">
+			  		<div class="row" style="width: 100%">
+					    <md-autocomplete style="width: 100%"
+					      ng-disabled="false"
+					      md-no-cache="false"
+					      md-selected-item="selectedPurchaseCat"
+					      md-search-text-change="searchTextChange(searchPurchaseCat)"
+					      md-search-text="searchPurchaseCat"
+					      md-selected-item-change="selectedItemChange(item)"
+					      md-items="item in querySearch(searchPurchaseCat)"
+					      md-item-text="item.labelCat"
+					      md-min-length="0"
+					      placeholder="Purchase Category">
+				        <md-item-template>
+				          <span md-highlight-text="searchPurchaseCat" md-highlight-flags="^i">{{item.labelCat}}</span>
+				        </md-item-template>
+				        <md-not-found>
+				          No Purchase Category matching "{{searchPurchaseCat}}" were found.
+				          <a ng-click="createNewPurchaseCat(searchPurchaseCat)">Create a new one!</a>
+				        </md-not-found>
+				       
+	      				</md-autocomplete>
+      				</div>
+      				</br>
+				  	<div class="row" style="width: 100%">
 			          <md-input-container class="md-block" flex-gt-sm>
-			            <label>Purchase Category</label>
-			            <input ng-model="purchase.category">
+			            <label>Purchase Label</label>
+			            <input ng-model="purchase.label">
 			          </md-input-container>
 			        </div>
-			        <div layout-gt-sm="row">
+			        
+
+			        <div class="row" style="width: 100%">
 			          <md-input-container class="md-block" flex-gt-sm>
 			            <label>Purchase Date</label>
 			            <md-datepicker ng-model="purchase.date"></md-datepicker>
 			          </md-input-container>
 			        </div>
-			        <div layout-gt-sm="row">
+			        <div class="row" style="width: 100%">
 				        <md-input-container class="md-icon-float md-icon-right md-block" flex-gt-sm>
 						    <label>Purchase Amount</label>
 					      	<input ng-model="purchase.amount" type="number" step="0.01">
 					    </md-input-container>
 				    </div>
-				    <div layout-gt-sm="row">
-					    <md-autocomplete
-				          ng-disabled="ctrl.isDisabled"
-				          md-no-cache="ctrl.noCache"
-				          md-selected-item="ctrl.selectedItem"
-				          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-				          md-search-text="ctrl.searchText"
-				          md-selected-item-change="ctrl.selectedItemChange(item)"
-				          md-items="item in ctrl.querySearch(ctrl.searchText)"
-				          md-item-text="item.display"
-				          md-min-length="0"
-				          placeholder="What is your favorite US state?">
-				        <md-item-template>
-				          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-				        </md-item-template>
-				        <md-not-found>
-				          No states matching "{{ctrl.searchText}}" were found.
-				          <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
-				        </md-not-found>
-	      				</md-autocomplete>
-      				</div>
-
+				    <div class="form-group row">
+				      <div class="offset-sm-5 col-sm-7">
+				        <button type="submit" class="btn btn-primary">Add purchase</button>
+				      </div>
+				    </div>
+				    
 
 			  	</form>
 			    <!--form name="add_purchase_form" ng-submit="addPurchase()">
@@ -95,7 +104,7 @@
 			  </div>
 			</div>
 		</div>
-		<div class="col-sm-9">
+		<div class="col-sm-7">
 			<!--div style = "width: 100%;height: 450px" ui-grid-pagination ui-grid-selection ui-grid="gridOptions" ng-if="dataLoaded"></div-->
 		</div>
 	</div>
