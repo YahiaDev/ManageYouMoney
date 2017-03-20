@@ -17,21 +17,21 @@ public class Purchase {
 	private String comment;
 
 	@DBRef(db = "purchaseCategorie")
-	private PurchaseCategories categorie;
+	private PurchaseCategories category;
 
 	public Purchase() {
 		super();
 	}
 
 	public Purchase(String idPurchase, Date date, double amount, String label, String comment,
-			PurchaseCategories categorie) {
+			PurchaseCategories category) {
 		super();
 		this.idPurchase = idPurchase;
 		this.date = date;
 		this.amount = amount;
 		this.label = label;
 		this.comment = comment;
-		this.categorie = categorie;
+		this.category = category;
 	}
 
 	public String getIdPurchase() {
@@ -54,12 +54,12 @@ public class Purchase {
 		return amount;
 	}
 
-	public PurchaseCategories getCategorie() {
-		return categorie;
+	public PurchaseCategories getCategory() {
+		return category;
 	}
 
-	public void setCategorie(PurchaseCategories categorie) {
-		this.categorie = categorie;
+	public void setCategory(PurchaseCategories categorie) {
+		this.category = categorie;
 	}
 
 	public void setAmount(double amount) {
@@ -82,13 +82,11 @@ public class Purchase {
 		this.comment = comment;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categorie == null) ? 0 : categorie.hashCode());
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((idPurchase == null) ? 0 : idPurchase.hashCode());
@@ -108,10 +106,10 @@ public class Purchase {
 		if (getClass() != obj.getClass())
 			return false;
 		Purchase other = (Purchase) obj;
-		if (categorie == null) {
-			if (other.categorie != null)
+		if (category == null) {
+			if (other.category != null)
 				return false;
-		} else if (!categorie.equals(other.categorie))
+		} else if (!category.equals(other.category))
 			return false;
 		if (comment == null) {
 			if (other.comment != null)

@@ -52,9 +52,9 @@ public class PurchaseController {
 	}
 
 	@RequestMapping(value = "/addPurchase", method = RequestMethod.PUT)
-	public List<PurchaseCategories> addNewPurchaseCategories(@RequestBody Purchase purchase) {
+	public List<Purchase> addNewPurchaseCategories(@RequestBody Purchase purchase) {
 		purchaseService.addPurchase(purchase);
-		return purchaseService.getAllPurchaseCat();
+		return purchaseService.getAllPurchase();
 	}
 
 	@RequestMapping(value = "/updatePurchase", method = RequestMethod.POST)

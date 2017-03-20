@@ -20,9 +20,12 @@ angular.module('PurchaseCat').factory('purchaseService',['$http', 'SERVER_URL', 
 	};
 
 	service.addPurchase = function(purchase){
-		return $http.put(url+'/api/purchase/addPurchase');
+		return $http.put(url+'/api/purchase/addPurchase', purchase);
 	};
 
+	service.getAllPurchase = function(){
+		return $http.get(url+'/api/purchase/getAllPurchase');
+	};
 	
 
 	return service;
