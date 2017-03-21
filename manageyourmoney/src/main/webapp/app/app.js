@@ -33,7 +33,12 @@ app.constant('SERVER_URL', {
   serverName: 'localhost',
   context:'manageyourmoney'
 });
-
+//format date
+app.config(function($mdDateLocaleProvider) {
+    $mdDateLocaleProvider.formatDate = function(date) {
+       return moment(date).format('DD-MM-YYYY');
+    };
+});
 
 app.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES', router]);
 

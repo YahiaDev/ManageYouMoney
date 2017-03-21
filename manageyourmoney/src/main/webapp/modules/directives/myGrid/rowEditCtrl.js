@@ -1,9 +1,22 @@
 'use strict';
-angular.module('myApp').controller('RowEditCtrl',['$scope', '$rootScope', 'purchaseService', '$uibModalInstance', 'PurchaseCatSchema', 'grid', 'row', 'schema', 'form', function($scope, $rootScope, purchaseService, $uibModalInstance, PurchaseCatSchema, grid, row, schema, form){
-	$scope.schema = schema;
+angular.module('myApp').controller('RowEditCtrl',['$scope', '$rootScope', 'purchaseService', '$uibModalInstance', 'PurchaseCatSchema', 'grid', 'row', 'schema', 'form', 'modalEditTitle', function($scope, $rootScope, purchaseService, $uibModalInstance, PurchaseCatSchema, grid, row, schema, form, modalEditTitle){
+  
+ 
+  $scope.init = function(){
+  $scope.schema = schema;
   $scope.entity = angular.copy(row.entity);
   $scope.form = form;
-  $scope.city = 'Rades';
+  $scope.modalEditTitle = modalEditTitle;
+  $scope.testDate = null;
+  angular.forEach($scope.schema, function(el){
+    if (el.type === 'Date'){
+      $scope.entity[el.id] = new Date($scope.entity[el.id]);
+      //moment($scope.entity[el.id]).format('DD-MM-YYYY');
+    }
+    });
+  };
+
+   $scope.init();
   
   $scope.save =  function () {
     // Copy row values over
@@ -17,7 +30,7 @@ angular.module('myApp').controller('RowEditCtrl',['$scope', '$rootScope', 'purch
     }
     if (!$scope.requiredData){
       angular.extend(row.entity, $scope.entity);
-      $rootScope.$broadcast('gridDataEdited', {data:row.entity});
+      $rootScope.$broadcast('gridDataEdited', {data:$scope.entity});
       $uibModalInstance.close(row.entity);
       /*purchaseService.updatePurchaseCat($scope.entity).then(function(response){
         $uibModalInstance.close(row.entity);

@@ -19,6 +19,7 @@ angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService
 	$scope.getAllPurchaseCat = function (){
 		purchaseService.getAllPurchaseCat().then(function(response){
 			$scope.purhaseCat = response.data;
+			//$scope.gridData = response.data;
 		})
 	};
 
@@ -26,6 +27,7 @@ angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService
 	$scope.getAllPurchase = function (){
 		purchaseService.getAllPurchase().then(function(response){
 			$scope.gridOptions.data = response.data;
+			$scope.gridData = response.data
 			$scope.dataLoaded = true;
 		})
 	};
@@ -78,13 +80,23 @@ angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService
 
 
     $scope.columnDefs = [
-		{field: 'remove', name: ' ', cellTemplate: 'modules/purchase/delete-button.html', enableFiltering: false, enableSorting: false, width: 34},
-		//{field: 'edit', name: 'E', cellTemplate: 'modules/purchase/edit-button.html', enableFiltering: false, enableSorting: false, width: 34},
 		{field: 'category.labelCat', displayName : 'Category'},
 		{field: 'label', displayName : 'Label'},
 		{field: 'date', displayName : 'Purchase Date' , type: 'date', cellFilter: 'date:\'dd-MM-yyyy\'' },
 		{field: 'amount', displayName : 'Purchase amount'},
 	];
+
+	$scope.modalEditSchema = {Category: { type: 'autocomplete', id:'category', title: 'Category', required:'true', data:$scope.purhaseCat},
+    						  label: { type: 'string', id:'label', title: 'Label', required:'true' },
+    						  date: { type: 'Date', id:'date', title: 'Purchase Date', required:'true' },
+    						  amount: { type: 'number', id:'amount', title: 'Purchase Amoutn', required:'true' },
+    						};
+    $scope.modalEditForm = [
+	    'category',
+	    'label',
+	    'date',
+	    'amount'
+  	];
 
     $scope.gridOptions = {
     	enableFiltering: true,

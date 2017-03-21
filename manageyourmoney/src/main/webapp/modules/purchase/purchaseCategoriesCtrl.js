@@ -4,8 +4,8 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
   	$scope.purchaseCat = {catName:'', description:''};
 	$scope.purchaseCatAdded = false;
 	//$scope.modalEditSchema = PurchaseCatSchema;
-	$scope.modalEditSchema = {labelCat: { type: 'string', title: 'Category Label', required:'true' },
-    						  description: { type: 'string', title: 'Description', required:'false' }};
+	$scope.modalEditSchema = {labelCat: { type: 'string', id:'labelCat', title: 'Category Label', required:'true' },
+    						  description: { type: 'string', id:'description', title: 'Description', required:'false' }};
   
 	$scope.modalEditForm = [
     'labelCat',
@@ -38,8 +38,6 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
 	};
 
 	$scope.columnDefs = [
-		/*{field: 'remove', name: '  ', cellTemplate: 'modules/purchase/delete-button.html', enableFiltering: false, enableSorting: false, width: 34},
-		{field: 'edit', name: ' ', cellTemplate: 'modules/purchase/edit-button.html', enableFiltering: false, enableSorting: false, width: 34},*/
 		{field: 'labelCat', displayName : 'Category Label'},
 		{field: 'description', displayName : 'Description'}
 	];
@@ -70,6 +68,13 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
 				//$scope.gridOptions.data = response.data;
 				//$scope.gridData = response.data;
 			});
+    });
+
+    $scope.$on('gridDataRowDeleted',function(event, args){
+    	purchaseService.deletePurchaseCat(args.data).then(function(response){
+	      	//data.splice(data.indexOf(row.entity),1);
+	      	//$uibModalInstance.close(row.entity);
+    	});
     });
 
 	$scope.getAllPurchaseCat();

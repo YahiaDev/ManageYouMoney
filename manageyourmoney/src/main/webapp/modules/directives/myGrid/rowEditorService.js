@@ -1,7 +1,7 @@
 angular.module('myApp').factory('RowEditor',['$rootScope', '$uibModal', function($rootScope, $uibModal){
   var service = {};
 
-  service.editRow = function(grid, row, schema, form) {
+  service.editRow = function(grid, row, schema, form, modalEditTitle) {
    $uibModal.open({
       templateUrl: './modules/directives/myGrid/views/edit-modal.html',
       controller: 'RowEditCtrl',
@@ -9,7 +9,8 @@ angular.module('myApp').factory('RowEditor',['$rootScope', '$uibModal', function
         grid: function () { return grid; },
         row: function () { return row; },
         schema: function() { return schema; },
-        form: function() { return form; }
+        form: function() { return form; },
+        modalEditTitle: function() { return modalEditTitle; }
       }
     });
   };

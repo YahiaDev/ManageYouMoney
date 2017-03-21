@@ -105,7 +105,8 @@
 			</div>
 		</div>
 		<div class="col-sm-8">
-			<div style = "width: 100%;height: 450px" ui-grid-pagination ui-grid-selection ui-grid="gridOptions" ng-if="dataLoaded"></div>
+			<!--div style = "width: 100%;height: 450px" ui-grid-pagination ui-grid-selection ui-grid="gridOptions" ng-if="dataLoaded"></div-->
+			<div my-grid grid-data="gridData" column-defs="columnDefs" schema="modalEditSchema" form="modalEditForm" modal-edit-title="'Edit purchase'" confirm-remove-modal-message="'Delete purchase'" ng-if="dataLoaded"></div>
 		</div>
 	</div>
 </div>

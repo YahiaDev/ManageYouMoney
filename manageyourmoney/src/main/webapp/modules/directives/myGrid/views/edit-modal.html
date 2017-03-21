@@ -1,20 +1,47 @@
 <div class="modal-content">
   <div class="modal-header">
-      <h3 class="modal-title">Edit Purchase Category</h3>
+      <h3 class="modal-title">{{modalEditTitle}}</h3>
   </div>
-  <div class="modal-body">
-    <!--form sf-schema="schema" sf-form="form" sf-model="entity"></form-->
+  <form ng-submit="save()">
+    <div class="modal-body">
+        <md-input-container ng-repeat="field in schema" class="md-block" flex-gt-sm>
+          <label ng-if="field.type == 'string' || field.type == 'Date' || field.type == 'number'">{{field.title}}</label>
+          continue here....
+          <!--md-autocomplete style="width: 100%"
+                ng-disabled="false"
+                md-no-cache="false"
+                md-selected-item="selectedPurchaseCat"
+                md-search-text-change="searchTextChange(searchPurchaseCat)"
+                md-search-text="searchPurchaseCat"
+                md-selected-item-change="selectedItemChange(item)"
+                md-items="item in querySearch(searchPurchaseCat)"
+                md-item-text="item.labelCat"
+                md-min-length="0"
+                placeholder="Purchase Category">
+                <md-item-template>
+                  <span md-highlight-text="searchPurchaseCat" md-highlight-flags="^i">{{item.labelCat}}</span>
+                </md-item-template>
+                <md-not-found>
+                  No Purchase Category matching "{{searchPurchaseCat}}" were found.
+                  <a ng-click="createNewPurchaseCat(searchPurchaseCat)">Create a new one!</a>
+                </md-not-found>
+               
+          </md-autocomplete-->
 
-    <form>
-      <md-input-container ng-repeat="field in schema" class="md-block" flex-gt-sm>
-        <label>{{field.title}}</label>
-        <input ng-model="field.title">
-      </md-input-container>
-    </form>
-  </div>
-  <div class="modal-footer">
-      <button class="btn btn-success" ng-click="save()">Save</button>
-      <button class="btn btn-warning" ng-click="$close()">Cancel</button>
-  </div>
-  
+
+
+
+          <input ng-model="entity[field.id]" ng-if="field.type == 'string' && field.required" required>
+          <input ng-model="entity[field.id]" ng-if="field.type == 'string' && (field.required == undefined || field.required == false)">
+          <md-datepicker ng-model="entity[field.id]" ng-if="field.type == 'Date' && field.required" required></md-datepicker>
+          <md-datepicker ng-model="entity[field.id]" ng-if="field.type == 'Date' && (field.required == undefined || field.required == false)"></md-datepicker>
+          <input ng-model="entity[field.id]" type="number" step="0.01" ng-if="field.type == 'number' && field.required" required>
+          <input ng-model="entity[field.id]" type="number" step="0.01" ng-if="field.type == 'number' && (field.required == undefined || field.required == false)">
+        </md-input-container>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="submit">Save</button>
+        <button class="btn btn-warning" type="button" ng-click="$close()">Cancel</button>
+    </div>
+  </form>
 </div>
