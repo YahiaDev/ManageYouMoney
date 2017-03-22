@@ -46,7 +46,14 @@
 				  	<div layout-gt-sm="row">
 			          <md-input-container class="md-block" flex-gt-sm>
 			            <label>Purchase Label</label>
-			            <input ng-model="purchase.label" required>
+			            <input name="purlab" ng-model="purchase.label" ng-minlength="5" required>
+			            <div ng-messages="add_purchase_form.purlab.$error" role="alert">
+			            	<div ng-message="md-require-match">
+			            		manadatory field
+			            	</div>
+			            	<div ng-message="minlength">Your field is too short</div>
+			            </div>
+			            {{add_purchase_form.purlab.$error}}
 			          </md-input-container>
 			       </div>
 			        
