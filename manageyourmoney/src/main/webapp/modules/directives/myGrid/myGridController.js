@@ -22,7 +22,7 @@ angular.module('myApp').controller('myGridController',['$scope', 'RowEditor', 'R
     };
 
     $scope.clickOnRemoveButton = function(grid, row){
-    	$scope.gridData.splice($scope.gridData.indexOf(row.entity),1);
+    	//$scope.gridData.splice($scope.gridData.indexOf(row.entity),1);
     	RemoveRowService.removeRow(grid, row, $scope.confirmRemoveModalMessage);
     };
 

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$uibModal', 'purchaseService', 'RowEditor', 'RowRemove', 'PurchaseCatSchema', function($scope, $uibModal, purchaseService, RowEditor, RowRemove, PurchaseCatSchema){
+angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$uibModal', '$state', 'purchaseService', 'PurchaseCatSchema', function($scope, $uibModal, $state, purchaseService, PurchaseCatSchema){
 	
   	$scope.purchaseCat = {catName:'', description:''};
 	$scope.purchaseCatAdded = false;
@@ -51,14 +51,6 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
 		columnDefs: $scope.columnDefs
     };
 
-    $scope.clickOnEditButton = function(grid, row){
-    	RowEditor.editRow(grid,row);
-    };
-
-    $scope.clickOnRemoveButton = function(grid, row){
-    	RowRemove.removeRow(grid, row, $scope.gridOptions.data);
-    };
-
     $scope.$on('gridDataEdited',function(event, args){
     	purchaseService.updatePurchaseCat(args.data).then(function(response){
     		console.info(response.data);
@@ -72,6 +64,8 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
 
     $scope.$on('gridDataRowDeleted',function(event, args){
     	purchaseService.deletePurchaseCat(args.data).then(function(response){
+    		$scope.gridData = response.data;
+    		$state.reload();
 	      	//data.splice(data.indexOf(row.entity),1);
 	      	//$uibModalInstance.close(row.entity);
     	});

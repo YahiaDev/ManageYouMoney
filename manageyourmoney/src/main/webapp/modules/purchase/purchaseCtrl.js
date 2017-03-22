@@ -1,5 +1,5 @@
 'use strict';
-angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService', function($scope, purchaseService){
+angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService', '$state', function($scope, purchaseService, $state){
 	$scope.purchase = { label:'', 
 					    date:'', 
 					    amount:'', 
@@ -9,26 +9,32 @@ angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService
 
 	$scope.selectedPurchaseCat = '';
 	$scope.searchPurchaseCat = '';
+	$scope.purchaseDataLoaded = false;
 	$scope.addPurchase = function(){
 		$scope.purchase.category = $scope.selectedPurchaseCat;
 		purchaseService.addPurchase($scope.purchase).then(function(response){
 			$scope.gridOptions.data = response.data;
+			
 		});
 	};
 
+	$scope.purchaseCatDataLoaded = false;
 	$scope.getAllPurchaseCat = function (){
 		purchaseService.getAllPurchaseCat().then(function(response){
-			$scope.purhaseCat = response.data;
+			//$scope.modalEditSchema['category']['data'] = response.data;
+			//$scope.modalEditSchema['category']['data'] = $scope.formatDataForAutoComplet($scope.modalEditSchema['category']['data']);
+			$scope.modalEditSchema['category']['data'] = response.data;
+			$scope.purchaseCatDataLoaded = true;
 			//$scope.gridData = response.data;
 		})
 	};
 
-	$scope.dataLoaded = false;
+	$scope.purchaseDataLoaded = false;
 	$scope.getAllPurchase = function (){
 		purchaseService.getAllPurchase().then(function(response){
 			$scope.gridOptions.data = response.data;
-			$scope.gridData = response.data
-			$scope.dataLoaded = true;
+			$scope.gridData = response.data;
+			$scope.purchaseDataLoaded = true;
 		})
 	};
 
@@ -67,7 +73,7 @@ angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService
      * remote dataservice call.
      */
      $scope.querySearch = function(query) {
-      var results = query ? $scope.purhaseCat.filter( $scope.createFilterFor(query) ) : $scope.purhaseCat;
+      var results = query ? $scope.modalEditSchema['category']['data'].filter( $scope.createFilterFor(query) ) : $scope.modalEditSchema['category']['data'];
           
       /*if (self.simulateQuery) {
         deferred = $q.defer();
@@ -80,13 +86,28 @@ angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService
 
 
     $scope.columnDefs = [
-		{field: 'category.labelCat', displayName : 'Category'},
+		{field: 'category.labelCat', displayName : 'category'},
 		{field: 'label', displayName : 'Label'},
 		{field: 'date', displayName : 'Purchase Date' , type: 'date', cellFilter: 'date:\'dd-MM-yyyy\'' },
 		{field: 'amount', displayName : 'Purchase amount'},
 	];
 
-	$scope.modalEditSchema = {Category: { type: 'autocomplete', id:'category', title: 'Category', required:'true', data:$scope.purhaseCat},
+	$scope.formatDataForAutoComplet = function(dataToFormat){
+		var formatedList = [];
+		var formatedObject = {};
+		angular.forEach(dataToFormat, function(el){
+			formatedObject = {};
+			formatedObject['dataToDisplay'] = el.labelCat;
+			formatedObject['id'] = el.categoryId;
+			formatedObject['description'] = el.description;
+			formatedList.push(formatedObject);
+		});
+		return formatedList;
+	};
+
+
+
+	$scope.modalEditSchema = {category: { type: 'autocomplete', id:'category', title: 'category', required:'true', idForAutoComplete: 'categoryId', dataToDisplay: 'labelCat', data:[]},
     						  label: { type: 'string', id:'label', title: 'Label', required:'true' },
     						  date: { type: 'Date', id:'date', title: 'Purchase Date', required:'true' },
     						  amount: { type: 'number', id:'amount', title: 'Purchase Amoutn', required:'true' },
@@ -110,6 +131,23 @@ angular.module('Purchase').controller('PurchaseCtrl',['$scope', 'purchaseService
     $scope.clickOnRemoveButton = function(grid, row){
     	RowRemove.removeRow(grid, row, $scope.gridOptions.data);
     };
+
+
+    $scope.$on('gridDataRowDeleted',function(event, args){
+    	purchaseService.deletePurchase(args.data).then(function(response){
+    		$scope.gridData = response.data;
+    		$state.reload();
+    	});
+    });
+
+    $scope.$on('gridDataEdited',function(event, args){
+    	purchaseService.updatePurchase(args.data).then(function(response){
+    		$scope.gridData = response.data;
+    		$state.reload();
+    	});
+    });
+
+    
 
 	$scope.init();
 

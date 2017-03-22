@@ -26,6 +26,15 @@ angular.module('PurchaseCat').factory('purchaseService',['$http', 'SERVER_URL', 
 	service.getAllPurchase = function(){
 		return $http.get(url+'/api/purchase/getAllPurchase');
 	};
+
+	service.deletePurchase = function(purchase){
+		return $http.post(url+'/api/purchase/deletePurchase', purchase);
+	};
+
+	service.updatePurchase = function(purchase){
+		return $http.post(url+'/api/purchase/updatePurchase', purchase);
+	};
+
 	
 
 	return service;

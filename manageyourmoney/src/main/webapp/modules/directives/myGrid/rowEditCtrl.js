@@ -3,11 +3,26 @@ angular.module('myApp').controller('RowEditCtrl',['$scope', '$rootScope', 'purch
   
  
   $scope.init = function(){
+  
+  $scope.selectedItem = '';
+  $scope.searchItem = '';
   $scope.schema = schema;
-  $scope.entity = angular.copy(row.entity);
   $scope.form = form;
   $scope.modalEditTitle = modalEditTitle;
-  $scope.testDate = null;
+  $scope.entity = angular.copy(row.entity);
+  $scope.dataToFilterOn = {};
+  for (var key in $scope.schema){
+    if ($scope.schema[key].type === 'autocomplete'){
+      $scope.dataToFilterOn['data'] = $scope.schema[key].data;
+      $scope.dataToFilterOn['idForAutoComplete'] = $scope.schema[key].idForAutoComplete;
+      $scope.dataToFilterOn['dataToDisplay'] = $scope.schema[key].dataToDisplay;
+      $scope.selectedItem = $scope.schema[key].data.filter(function(el){
+        return el[$scope.dataToFilterOn['idForAutoComplete']] === $scope.entity[key.toLowerCase()][$scope.dataToFilterOn['idForAutoComplete']];
+      })[0].labelCat;
+      break;
+    }
+  }
+
   angular.forEach($scope.schema, function(el){
     if (el.type === 'Date'){
       $scope.entity[el.id] = new Date($scope.entity[el.id]);
@@ -38,7 +53,46 @@ angular.module('myApp').controller('RowEditCtrl',['$scope', '$rootScope', 'purch
     }
     
   };
-  
- 
 
-}]);
+  //autocomplete field functions
+  $scope.searchTextChange = function(item){
+    console.log('search text changed to '+item);
+  };
+
+  $scope.selectedItemChange = function(item){
+    if (item !== undefined){
+      console.info('select item changed to '+item[$scope.dataToFilterOn['dataToDisplay']]);
+    }
+  };
+
+  $scope.querySearch = function(query) {
+      /*var dataToFilterOn = [];
+      for (var item in $scope.schema){
+        if ($scope.schema[item].type === 'autocomplete'){
+          dataToFilterOn = $scope.schema[item].data;
+          break;
+        }
+      }*/
+      var results = query ? $scope.dataToFilterOn['data'].filter( $scope.createFilterFor(query) ) : $scope.dataToFilterOn['data'];
+          
+      /*if (self.simulateQuery) {
+        deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
+      } else {*/
+        return results;
+      //}
+    };
+
+    $scope.createFilterFor = function(query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(state) {
+        return (state[$scope.dataToFilterOn['dataToDisplay']].indexOf(lowercaseQuery) === 0);
+      };
+
+    };
+
+    //end autocomplete field functions
+  
+ }]);

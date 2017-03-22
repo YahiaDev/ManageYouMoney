@@ -58,8 +58,9 @@ public class PurchaseController {
 	}
 
 	@RequestMapping(value = "/updatePurchase", method = RequestMethod.POST)
-	public void updatePurchases(@RequestBody Purchase purchase) {
+	public List<Purchase> updatePurchases(@RequestBody Purchase purchase) {
 		purchaseService.updatePurchase(purchase);
+		return purchaseService.getAllPurchase();
 	}
 
 	@RequestMapping(value = "/deletePurchase", method = RequestMethod.POST)
