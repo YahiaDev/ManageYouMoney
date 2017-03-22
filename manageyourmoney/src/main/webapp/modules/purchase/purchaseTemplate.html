@@ -36,7 +36,6 @@
 	            			<div class="md-input-message-animation" ng-message="md-require-match">Please select an existing state.</div>
 	            			<div class="md-input-message-animation" ng-message="minlength">Your entry is not long enough.</div>
 	            			<div class="md-input-message-animation" ng-message="maxlength">Your entry is too long.</div>
-	            			{{add_purchase_form.autocompleteField.$error}}
           				</div>
 
 				       
@@ -46,14 +45,12 @@
 				  	<div layout-gt-sm="row">
 			          <md-input-container class="md-block" flex-gt-sm>
 			            <label>Purchase Label</label>
-			            <input name="purlab" ng-model="purchase.label" ng-minlength="5" required>
-			            <div ng-messages="add_purchase_form.purlab.$error" role="alert">
+			            <input name="purlab" ng-model="purchase.label" required>
+			            <div ng-messages="add_purchase_form.purlab.$error">
 			            	<div ng-message="md-require-match">
-			            		manadatory field
+			            		Purchase Label is mandatory
 			            	</div>
-			            	<div ng-message="minlength">Your field is too short</div>
 			            </div>
-			            {{add_purchase_form.purlab.$error}}
 			          </md-input-container>
 			       </div>
 			        

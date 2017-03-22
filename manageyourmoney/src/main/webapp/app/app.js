@@ -7,7 +7,7 @@ angular.module('options',[]);
 angular.module('signUp',[]);
 angular.module('PurchaseCat',['schemaForm']);
 angular.module('Purchase',['schemaForm']);
-var modules = ['ui.router', 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.edit', 'ngMaterial', 'ui.bootstrap', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat', 'Purchase'];
+var modules = ['ui.router', 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.edit', 'ngMaterial', 'ui.bootstrap', 'ngMessages', 'gettext', 'home', 'common', 'authentication', 'nav', 'options', 'signUp', 'PurchaseCat', 'Purchase'];
 var app = angular.module('myApp',modules);
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
