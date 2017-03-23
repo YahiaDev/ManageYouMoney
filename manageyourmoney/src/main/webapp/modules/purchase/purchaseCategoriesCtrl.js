@@ -1,5 +1,6 @@
 'use strict';
-angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$uibModal', '$state', 'purchaseService', 'PurchaseCatSchema', function($scope, $uibModal, $state, purchaseService, PurchaseCatSchema){
+angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', 
+	'$state', 'purchaseService', 'PurchaseCatSchema', function($scope, $state, purchaseService, PurchaseCatSchema){
 	
   	$scope.purchaseCat = {catName:'', description:''};
 	$scope.purchaseCatAdded = false;
@@ -21,12 +22,9 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
 				$scope.purchaseCat.description = '';
 				//$scope.gridOptions.data = response.data;
 				$scope.gridData = response.data;
+				$state.reload();
 			});
 		}
-	};
-
-	$scope.openModal = function(){
-		RowEditor.editRow({},{});
 	};
 
 	$scope.getAllPurchaseCat = function(){
@@ -42,16 +40,8 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', '$u
 		{field: 'description', displayName : 'Description'}
 	];
 
-    $scope.gridOptions = {
-    	enableFiltering: true,
-	    enableColumnResize: true,
-	    enableRowSelection:true,
-	    paginationPageSizes: [25, 50, 75],
-		paginationPageSize: 5,
-		columnDefs: $scope.columnDefs
-    };
-
-    $scope.$on('gridDataEdited',function(event, args){
+    
+	$scope.$on('gridDataEdited',function(event, args){
     	purchaseService.updatePurchaseCat(args.data).then(function(response){
     		console.info(response.data);
 				//$scope.purchaseCatAdded = true;

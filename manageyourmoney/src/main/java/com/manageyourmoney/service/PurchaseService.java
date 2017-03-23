@@ -49,5 +49,10 @@ public class PurchaseService {
 	public void deletePurchase(Purchase purchase) {
 		purchaseRepo.delete(purchase);
 	}
+	
+	
+	public void getPurchaseGroupedByCategory(){
+		purchaseRepo.getPurchaseGroupedByCategory();
+	}
 
 }

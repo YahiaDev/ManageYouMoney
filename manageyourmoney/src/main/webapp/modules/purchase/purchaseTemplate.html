@@ -2,28 +2,27 @@
 </br>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			<div class="card" style="width: 100%">
 			  <div class="card-header">
 			    Add Purchase
 			  </div>
 			  <div class="card-block">
-			  	<form name="add_purchase_form" ng-submit="addPurchase()">
+			  	<form name="add_purchase_form" ng-submit="add_purchase_form.$valid && addPurchase()">
 			  		<!--div class="row md-block" style="width: 100%"-->
+			  		<div class="alert alert-success" role="alert" ng-if="purchaseAdded">
+	  					<strong>Well done!</strong> Purchase successfully added
+					</div>
 			  		<div layout-gt-sm="row">
-
 					    <md-autocomplete flex required style="width: 100%" 
 					      md-input-name="autocompleteField"
-            			  md-input-minlength="2"
-            			  md-input-maxlength="18"	
 					      md-no-cache="false"
 					      md-selected-item="selectedPurchaseCat"
 					      md-search-text="searchPurchaseCat"
 					      md-items="item in querySearch(searchPurchaseCat)"
 					      md-item-text="item.labelCat"
 					      md-require-match
-					      md-floating-label="Purchase Category"
-					      >
+					      md-floating-label="Purchase Category">
 				        <md-item-template>
 				          <span md-highlight-text="searchPurchaseCat">{{item.labelCat}}</span>
 				        </md-item-template>
@@ -32,96 +31,50 @@
 				          <a ng-click="createNewPurchaseCat(searchPurchaseCat)">Create a new one!</a>
 				        </md-not-found-->
 				        <div ng-messages="add_purchase_form.autocompleteField.$error" ng-if="add_purchase_form.autocompleteField.$touched">
-	            			<div class="md-input-message-animation" ng-message="required">You <b>must</b> have a favorite state.</div>
-	            			<div class="md-input-message-animation" ng-message="md-require-match">Please select an existing state.</div>
-	            			<div class="md-input-message-animation" ng-message="minlength">Your entry is not long enough.</div>
-	            			<div class="md-input-message-animation" ng-message="maxlength">Your entry is too long.</div>
+	            			<div class="md-input-message-animation" ng-message="required">You <b>must</b> have a purchase category.</div>
+	            			<div class="md-input-message-animation" ng-message="md-require-match">Please select an existing purchase categoty.</div>
+	            			<!--div class="md-input-message-animation" ng-message="minlength">Your entry is not long enough.</div-->
+	            			<!--div class="md-input-message-animation" ng-message="maxlength">Your entry is too long.</div-->
           				</div>
-
-				       
 	      				</md-autocomplete>
       				</div>
-      				
 				  	<div layout-gt-sm="row">
 			          <md-input-container class="md-block" flex-gt-sm>
 			            <label>Purchase Label</label>
 			            <input name="purlab" ng-model="purchase.label" required>
-			            <div ng-messages="add_purchase_form.purlab.$error">
-			            	<div ng-message="md-require-match">
-			            		Purchase Label is mandatory
-			            	</div>
-			            </div>
+			            <div ng-messages="add_purchase_form.purlab.$error" ng-if="add_purchase_form.purlab.$touched">
+	            			<div class="md-input-message-animation" ng-message="required">You <b>must</b> have a purchase label.</div>
+          				</div>
 			          </md-input-container>
 			       </div>
-			        
 			       <div layout-gt-sm="row">
-			        
 			          <md-input-container class="md-block" flex-gt-sm>
 			            <label>Purchase Date</label>
-			            <md-datepicker ng-model="purchase.date" required></md-datepicker>
+			            <md-datepicker name="purchase_date" ng-model="purchase.date" required></md-datepicker>
+			            <div ng-messages="add_purchase_form.purchase_date.$error" ng-if="add_purchase_form.purchase_date.$touched">
+	            			<div class="md-input-message-animation" ng-message="required">You <b>must</b> have a purchase date.</div>
+          				</div>
 			          </md-input-container>
-			        
 			        </div>
 			        <div layout-gt-sm="row">
 				        <md-input-container class="md-icon-float md-icon-right md-block" flex-gt-sm>
 						    <label>Purchase Amount</label>
-					      	<input ng-model="purchase.amount" type="number" step="0.01" required>
+					      	<input name="purchase_amount" ng-model="purchase.amount" type="number" step="0.01" required>
+					      	<div ng-messages="add_purchase_form.purchase_amount.$error" ng-if="add_purchase_form.purchase_amount.$touched">
+	            			<div class="md-input-message-animation" ng-message="required">You <b>must</b> have a purchase date.</div>
+          				</div>
 					    </md-input-container>
 				    </div>
-				    <div class="form-group row">
-				      <div class="offset-sm-5 col-sm-7">
+				    <div layout-gt-sm="row">
+				      <div class="offset-sm-7 col-sm-5">
 				        <button type="submit" class="btn btn-primary">Add purchase</button>
 				      </div>
 				    </div>
-				    
-
 			  	</form>
-			    <!--form name="add_purchase_form" ng-submit="addPurchase()">
-			    	<div class="alert alert-success" role="alert" ng-if="purchaseAdded">
-	  					<strong>Well done!</strong> Purchase
-	  					successfully added
-					</div>
-					<md-input-container class="md-block" flex-gt-sm>
-			        	<label>First name</label>
-			        	<input ng-model="purchase.category">
-			         </md-input-container>
-				    <div class="form-group row">
-				      <label for="purchase_cat" class="col-sm-4 col-form-label"><p translate> Purchase category </p></label>
-				      <div class="col-sm-8">
-				        <input  class="form-control" id="purchase_cat" name="purchase_cat" placeholder="Purchase category" ng-model="purchase.category" oninvalid="this.setCustomValidity('Purchase category is a mandatory field')" oninput="setCustomValidity('')" required>
-				      </div>
-				    </div>
-				    <div class="form-group row" name="purchase_amount_div">
-				      <label for="purchase_amount" class="col-sm-4  col-form-label">Purchase Amount</label>
-				      <div class="col-sm-8" name="purchase_amount">
-				        <input type="text" class="form-control" name="purchase_amount" numbers-only ng-model="purchase.amount" placeholder="Purchase Amount" oninvalid="this.setCustomValidity('Purchase Amount is a mandatory field')" oninput="setCustomValidity('')" required>
-				      </div>
-				    </div>
-				    <div class="form-group row" name="purchase_date_div">
-				      <label for="purchase_date" class="col-sm-4  col-form-label">Date</label>
-				      <div class="col-sm-8" name="purchase_date">
-				        <input  type ="date" class="form-control" id="purchase_date" name="purchase_date" placeholder="Purchase Date" ng-model="purchase.date" oninvalid="this.setCustomValidity('Purchase date is a mandatory field')" oninput="setCustomValidity('')" required>
-				      </div>
-				    </div>
-
-				    <div ng-class="add_purchase_form.puchase_comment.$valid?'form-group row':'form-group row has-danger'">
-				      <label for="puchase_comment" class="col-sm-4  col-form-label">Comment</label>
-				      <div class="col-sm-8" name="comment_div">
-				        <textarea  ng-class="add_purchase_form.puchase_comment.$valid?'form-control':'form-control-danger form-control'" id="puchase_comment" name="puchase_comment" row="5" placeholder="Comment" ng-model="purchas.comment" ng-maxlength="50"></textarea>
-				      </div>
-				      <div class="offset-sm-4 col-sm-8 form-control-feedback" ng-if="!add_purchase_form.puchase_comment.$valid">Comment max length is 100 characters</div>
-				    </div>
-				    <div class="form-group row">
-				      <div class="offset-sm-4 col-sm-8">
-				        <button type="submit" class="btn btn-primary">Add purchase</button>
-				      </div>
-				    </div>
-				  </form-->
 			  </div>
 			</div>
 		</div>
-		<div class="col-sm-8">
-			<!--div style = "width: 100%;height: 450px" ui-grid-pagination ui-grid-selection ui-grid="gridOptions" ng-if="dataLoaded"></div-->
+		<div class="col-sm-9">
 			<div my-grid grid-data="gridData" column-defs="columnDefs" schema="modalEditSchema" form="modalEditForm" modal-edit-title="'Edit purchase'" confirm-remove-modal-message="'Delete purchase'" ng-if="purchaseCatDataLoaded && purchaseDataLoaded"></div>
 		</div>
 	</div>
