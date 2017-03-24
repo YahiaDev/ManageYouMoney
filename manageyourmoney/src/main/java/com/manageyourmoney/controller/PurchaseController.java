@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.mongodb.document.Purchase;
-import com.manageyourmoney.mongodb.document.PurchaseCategories;
+import com.manageyourmoney.mongodb.document.PurchaseByCateg;
+import com.manageyourmoney.mongodb.document.PurchaseCategory;
 import com.manageyourmoney.service.PurchaseService;
 
 @RestController
@@ -21,14 +22,14 @@ public class PurchaseController {
 	PurchaseService purchaseService;
 
 	@RequestMapping(value = "/getAllPurchaseCategories", method = RequestMethod.GET)
-	public List<PurchaseCategories> getAllPurchaseCategories() {
+	public List<PurchaseCategory> getAllPurchaseCategories() {
 		return purchaseService.getAllPurchaseCat();
 	}
 
 	@RequestMapping(value = "/addPurchaseCategories", method = RequestMethod.PUT)
-	public List<PurchaseCategories> addNewPurchaseCategories(@RequestParam(value = "catName") String catName,
+	public List<PurchaseCategory> addNewPurchaseCategories(@RequestParam(value = "catName") String catName,
 			@RequestParam(value = "catDesc") String catDesc) {
-		PurchaseCategories pc = new PurchaseCategories();
+		PurchaseCategory pc = new PurchaseCategory();
 		pc.setDescription(catDesc);
 		pc.setLabelCat(catName);
 		purchaseService.addPurchageCat(pc);
@@ -36,12 +37,12 @@ public class PurchaseController {
 	}
 
 	@RequestMapping(value = "/updatePurchaseCategories", method = RequestMethod.POST)
-	public void updatePurchaseCategories(@RequestBody PurchaseCategories purCat) {
+	public void updatePurchaseCategories(@RequestBody PurchaseCategory purCat) {
 		purchaseService.updatePurchageCat(purCat);
 	}
 
 	@RequestMapping(value = "/deletePurchaseCategories", method = RequestMethod.POST)
-	public List<PurchaseCategories> deletePurchaseCategories(@RequestBody PurchaseCategories purCat) {
+	public List<PurchaseCategory> deletePurchaseCategories(@RequestBody PurchaseCategory purCat) {
 		purchaseService.deletePurchaseCat(purCat);
 		return purchaseService.getAllPurchaseCat();
 	}
@@ -69,4 +70,8 @@ public class PurchaseController {
 		return purchaseService.getAllPurchase();
 	}
 
+	@RequestMapping(value = "/getPurchaseGroupedByCateg", method = RequestMethod.GET)
+	public List<PurchaseByCateg> getPurchaseByCateg() {
+		return purchaseService.getPurchaseGroupedByCategory();
+	}
 }

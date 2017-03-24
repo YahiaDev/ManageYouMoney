@@ -2,9 +2,10 @@ package com.manageyourmoney.mongodb.repository;
 
 import java.util.List;
 
-import com.manageyourmoney.mongodb.document.Purchase;
+import com.manageyourmoney.mongodb.document.PurchaseByCateg;
 
 
 public interface PurchaseRepoCustom {
-	List<Purchase> getPurchaseGroupedByCategory();
+	
+	List<PurchaseByCateg> getPurchaseGroupedByCategory();
 }

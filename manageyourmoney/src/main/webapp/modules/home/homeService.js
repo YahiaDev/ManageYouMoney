@@ -1,5 +1,8 @@
-angular.module('home').factory('HomeService',['$http',function($http){
-	var service = {};
+angular.module('home').factory('HomeService',['$http', 'SERVER_URL', function($http, SERVER_URL){
+	
+    var url = SERVER_URL.protocol+'://'+SERVER_URL.serverName+':'+SERVER_URL.port+'/'+SERVER_URL.context;
+
+    var service = {};
     service.testHome = function(){
         return true;
     };
@@ -25,7 +28,11 @@ angular.module('home').factory('HomeService',['$http',function($http){
         },function errorCallback(response){
         	 console.log("error saving user");
         });
-    }
+    };
+
+    service.getPurchaseGroupedByCateg = function(){
+        return $http.get(url+'/api/purchase/getPurchaseGroupedByCateg');
+    };
 
 	return service;
 

@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manageyourmoney.mongodb.document.Purchase;
-import com.manageyourmoney.mongodb.document.PurchaseCategories;
+import com.manageyourmoney.mongodb.document.PurchaseByCateg;
+import com.manageyourmoney.mongodb.document.PurchaseCategory;
 import com.manageyourmoney.mongodb.repository.PurchaseCategoriesRepo;
 import com.manageyourmoney.mongodb.repository.PurchaseRepo;
 
@@ -18,19 +19,19 @@ public class PurchaseService {
 	@Autowired
 	PurchaseRepo purchaseRepo;
 
-	public void addPurchageCat(PurchaseCategories purCat) {
+	public void addPurchageCat(PurchaseCategory purCat) {
 		puchaseCatRepo.save(purCat);
 	}
 
-	public void updatePurchageCat(PurchaseCategories purCat) {
+	public void updatePurchageCat(PurchaseCategory purCat) {
 		puchaseCatRepo.save(purCat);
 	}
 
-	public List<PurchaseCategories> getAllPurchaseCat() {
-		return (List<PurchaseCategories>) puchaseCatRepo.findAll();
+	public List<PurchaseCategory> getAllPurchaseCat() {
+		return (List<PurchaseCategory>) puchaseCatRepo.findAll();
 	}
 
-	public void deletePurchaseCat(PurchaseCategories purCat) {
+	public void deletePurchaseCat(PurchaseCategory purCat) {
 		puchaseCatRepo.delete(purCat);
 	}
 
@@ -49,10 +50,9 @@ public class PurchaseService {
 	public void deletePurchase(Purchase purchase) {
 		purchaseRepo.delete(purchase);
 	}
-	
-	
-	public void getPurchaseGroupedByCategory(){
-		purchaseRepo.getPurchaseGroupedByCategory();
+
+	public List<PurchaseByCateg> getPurchaseGroupedByCategory() {
+		return purchaseRepo.getPurchaseGroupedByCategory();
 	}
 
 }

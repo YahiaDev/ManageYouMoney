@@ -17,14 +17,14 @@ public class Purchase {
 	private String comment;
 
 	@DBRef(db = "purchaseCategorie")
-	private PurchaseCategories category;
+	private PurchaseCategory category;
 
 	public Purchase() {
 		super();
 	}
 
 	public Purchase(String idPurchase, Date date, double amount, String label, String comment,
-			PurchaseCategories category) {
+			PurchaseCategory category) {
 		super();
 		this.idPurchase = idPurchase;
 		this.date = date;
@@ -54,11 +54,11 @@ public class Purchase {
 		return amount;
 	}
 
-	public PurchaseCategories getCategory() {
+	public PurchaseCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(PurchaseCategories categorie) {
+	public void setCategory(PurchaseCategory categorie) {
 		this.category = categorie;
 	}
 
