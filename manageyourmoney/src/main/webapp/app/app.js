@@ -1,6 +1,6 @@
 'user strict'
 angular.module('common',['ab-base64']);
-angular.module('home',[]);
+angular.module('home',['nvd3']);
 angular.module('authentication',['ngCookies']);
 angular.module('nav',['ngCookies']);
 angular.module('options',[]);

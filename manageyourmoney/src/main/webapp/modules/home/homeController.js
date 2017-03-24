@@ -1,6 +1,8 @@
 var module = angular.module('home');
 
 module.controller('HomeController', ['$scope','HomeService', function($scope, HomeService){
+    
+    // https://github.com/krispo/angular-nvd3
     $scope.message = "home page";
     var vm = this;
     vm.testHomee = function(){
@@ -24,32 +26,46 @@ module.controller('HomeController', ['$scope','HomeService', function($scope, Ho
         })
     };
 
-     $scope.data = [
-        {
-            name : "Blue",
-            value : 10,
-            color : "#4a87ee",
-            label : "ammar"
+     $scope.options = {
+    chart: {
+        type: 'discreteBarChart',
+        height: 450,
+        margin : {
+            top: 20,
+            right: 20,
+            bottom: 60,
+            left: 55
         },
-        {
-            name : "Green",
-            value : 40,
-            color : "#66cc33",
-            label : "yahia"
+        x: function(d){ return d.label; },
+        y: function(d){ return d.value; },
+        showValues: true,
+        valueFormat: function(d){
+            return d3.format(',.4f')(d);
         },
-        {
-            name : "Orange",
-            value : 70,
-            color : "#f0b840",
-            label : "emna"
+        transitionDuration: 500,
+        xAxis: {
+            axisLabel: 'X Axis'
         },
-        {
-            name : "Red",
-            value : 2,
-            color : "#ef4e3a",
-            label : "eya"
+        yAxis: {
+            axisLabel: 'Y Axis',
+            axisLabelDistance: 30
         }
-    ];
+    }
+};
+
+$scope.data = [{
+    key: "Cumulative Return",
+    values: [
+        { "label" : "A" , "value" : -29.765957771107 },
+        { "label" : "B" , "value" : 0 },
+        { "label" : "C" , "value" : 32.807804682612 },
+        { "label" : "D" , "value" : 196.45946739256 },
+        { "label" : "E" , "value" : 0.19434030906893 },
+        { "label" : "F" , "value" : -98.079782601442 },
+        { "label" : "G" , "value" : -13.925743130903 },
+        { "label" : "H" , "value" : -5.1387322875705 }
+    ]
+}];
     
 
    
@@ -62,62 +78,6 @@ module.controller('HomeController', ['$scope','HomeService', function($scope, Ho
 
 }]);
 
-
-module.directive ("pieChart", function () {
-    return {
-        restrict : "A",
-        scope : {
-            data : "="
-        },
-        link : function (scope, element) {
-            var width,
-                height,
-                radius,
-                pie,
-                arc,
-                svg,
-                path;
- 
-            width = element[0].clientWidth;
-            height = element[0].clientHeight;
-            radius = Math.min (width, height) / 2;
- 
-            pie = d3.layout.pie ()
-                    .value (function (d) {return d.value;})
-                    .sort (null);
- 
-            arc = d3.svg.arc ()
-                    .outerRadius (radius - 20)
-                    .innerRadius (radius - 80);
- 
-            svg = d3.select (element[0])
-                    .append ("svg")
-                    .attr ({width : width, height : height})
-                    .append ("g")
-                    .attr ("transform", "translate(" + width * 0.5 + "," + height * 0.5 + ")");
- 
-            path = svg.datum (scope.data)
-                    .selectAll ("path")
-                    .data (pie)
-                    .enter ()
-                    .append ("path")
-                    .attr ({
-                        fill : function (d, i) {return scope.data [i].color;},
-                        d : arc
-                    });
-                
-            scope.$watch (
-                "data",
-                function () {
-                    pie.value (function (d) {return d.value;});
-                    path = path.data(pie);
-                    path.attr ("d", arc);
-                },
-                true
-            );
-        }
-    };
-});
 
 
 
