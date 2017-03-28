@@ -12,6 +12,7 @@
     "tests"
   ],
   "dependencies": {
-    "moment": "^2.18.0"
+    "moment": "^2.18.0",
+    "highcharts-ng": "^1.0.1"
   }
 }

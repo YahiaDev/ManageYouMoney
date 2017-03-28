@@ -34,6 +34,10 @@ angular.module('home').factory('HomeService',['$http', 'SERVER_URL', function($h
         return $http.get(url+'/api/purchase/getPurchaseGroupedByCateg');
     };
 
+    service.getPurchaseGroupedByDate = function(){
+        return $http.get(url+'/api/purchase/getPurchaseGroupedByDate');
+    };
+
 	return service;
 
 }]);

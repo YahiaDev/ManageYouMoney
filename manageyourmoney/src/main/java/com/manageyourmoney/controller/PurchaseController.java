@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.mongodb.document.Purchase;
-import com.manageyourmoney.mongodb.document.PurchaseByCateg;
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
+import com.manageyourmoney.mongodb.queryresult.PurchaseByCateg;
+import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
 import com.manageyourmoney.service.PurchaseService;
 
 @RestController
@@ -73,5 +74,10 @@ public class PurchaseController {
 	@RequestMapping(value = "/getPurchaseGroupedByCateg", method = RequestMethod.GET)
 	public List<PurchaseByCateg> getPurchaseByCateg() {
 		return purchaseService.getPurchaseGroupedByCategory();
+	}
+
+	@RequestMapping(value = "/getPurchaseGroupedByDate", method = RequestMethod.GET)
+	public List<PurchaseByDate> getPurchaseByDate() {
+		return purchaseService.getPurchaseGroupedByDate();
 	}
 }

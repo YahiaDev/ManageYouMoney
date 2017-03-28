@@ -1,6 +1,6 @@
 'user strict'
 angular.module('common',['ab-base64']);
-angular.module('home',['nvd3']);
+angular.module('home',["highcharts-ng"]);
 angular.module('authentication',['ngCookies']);
 angular.module('nav',['ngCookies']);
 angular.module('options',[]);
@@ -195,7 +195,7 @@ app.run(function ($rootScope,LoginFactory,$location,$state) {
 function router($stateProvider, $urlRouterProvider, USER_ROLES){
     var homeState = {
       url: '/home',
-      controller: 'HomeController',
+      controller: 'HomeController as hc',
       templateUrl: 'modules/home/homeTemplate.html',
       data: {
         authorizedRoles: [USER_ROLES.admin]

@@ -1,6 +1,6 @@
 'use strict';
 angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', 
-	'$state', 'purchaseService', 'PurchaseCatSchema', function($scope, $state, purchaseService, PurchaseCatSchema){
+	'$state', 'purchaseService', function($scope, $state, purchaseService){
 	
   	$scope.purchaseCat = {catName:'', description:''};
 	$scope.purchaseCatAdded = false;
@@ -29,7 +29,7 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope',
 
 	$scope.getAllPurchaseCat = function(){
 		purchaseService.getAllPurchaseCat().then(function(response){
-		$scope.gridOptions.data = response.data;
+		//$scope.gridOptions.data = response.data;
 		$scope.gridData = response.data;
 		$scope.dataLoaded = true;
 		});
@@ -63,13 +63,3 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope',
 
 	$scope.getAllPurchaseCat();
 }]);
-
-
-angular.module('PurchaseCat').constant('PurchaseCatSchema', {
-  type: 'object',
-  properties: {
-    labelCat: { type: 'string', title: 'Category Label' },
-    description: { type: 'string', title: 'Description' }
-  },
-  required:['labelCat']
-});
