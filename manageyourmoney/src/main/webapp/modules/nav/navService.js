@@ -10,7 +10,7 @@ angular.module('nav').factory('NavService',['$http','$cookieStore', 'hmacInterce
 
 	service.logOut = function(){
 		var self = this;
-        return $http.get('http://localhost:8060/manageyourmoney/api/logout').success(function(){
+        return $http.get('http://localhost:8060/manageyourmoney/api/logout').then(function(response){
             self.removeAccount();
             return true; 
 		});
