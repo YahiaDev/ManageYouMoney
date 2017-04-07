@@ -2,7 +2,6 @@ package com.manageyourmoney.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +18,11 @@ import com.manageyourmoney.service.PurchaseService;
 @RequestMapping(value = "/api/purchase")
 public class PurchaseController {
 
-	@Autowired
 	PurchaseService purchaseService;
+
+	public PurchaseController(PurchaseService purchaseService) {
+		this.purchaseService = purchaseService;
+	}
 
 	@RequestMapping(value = "/getAllPurchaseCategories", method = RequestMethod.GET)
 	public List<PurchaseCategory> getAllPurchaseCategories() {
@@ -50,6 +52,9 @@ public class PurchaseController {
 
 	@RequestMapping(value = "/getAllPurchase", method = RequestMethod.GET)
 	public List<Purchase> getAllPurchase() {
+		// purchaseService.getAllPurchase().stream()
+		// .filter(p -> p.getCategory().getLabelCat().equals(new
+		// String("Cinema"))).collect(Collectors.toList());
 		return purchaseService.getAllPurchase();
 	}
 

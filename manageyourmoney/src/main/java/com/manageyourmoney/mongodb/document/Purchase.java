@@ -6,7 +6,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 @Document(collection = "purchase")
+@EqualsAndHashCode
+@ToString
 public class Purchase {
 
 	@Id
@@ -81,65 +86,4 @@ public class Purchase {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((idPurchase == null) ? 0 : idPurchase.hashCode());
-		result = prime * result + ((label == null) ? 0 : label.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(amount);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Purchase other = (Purchase) obj;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		if (comment == null) {
-			if (other.comment != null)
-				return false;
-		} else if (!comment.equals(other.comment))
-			return false;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (idPurchase == null) {
-			if (other.idPurchase != null)
-				return false;
-		} else if (!idPurchase.equals(other.idPurchase))
-			return false;
-		if (label == null) {
-			if (other.label != null)
-				return false;
-		} else if (!label.equals(other.label))
-			return false;
-		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Purchase [idPurchase=" + idPurchase + ", date=" + date + ", price=" + amount + ", label=" + label
-				+ ", comment=" + comment + "]";
-	}
-
 }
