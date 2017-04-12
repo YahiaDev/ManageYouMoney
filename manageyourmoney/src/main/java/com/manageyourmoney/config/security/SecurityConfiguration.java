@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.passwordEncoder(passwordEncoder());
 
 		for (UserDocument userDTO : MockUsers.getUsers()) {
-			configurer.withUser(userDTO.getLogin()).password(passwordEncoder().encode(userDTO.getPassword()))
+			configurer.withUser(userDTO.getEmail()).password(passwordEncoder().encode(userDTO.getPassword()))
 					.roles(userDTO.getProfile().name());
 		}
 	}

@@ -26,24 +26,24 @@ public class MockUsers {
 
 	public static void mock() {
 		UserDocument admin = new UserDocument();
-		admin.setId(1);
-		admin.setLogin("test@test.com");
+		admin.setId("1");
+		admin.setEmail("test@test.com");
 		admin.setProfile(Profile.ADMIN);
 		admin.setPassword("yahia");
 		admin.setAuthorities(authorities.get(admin.getProfile()));
 		users.add(admin);
 
 		UserDocument user = new UserDocument();
-		user.setId(2);
-		user.setLogin("user");
+		user.setId("2");
+		user.setEmail("user");
 		user.setProfile(Profile.USER);
 		user.setPassword("frog");
 		user.setAuthorities(authorities.get(user.getProfile()));
 		users.add(user);
 
 		UserDocument manager = new UserDocument();
-		manager.setId(3);
-		manager.setLogin("manager");
+		manager.setId("3");
+		manager.setEmail("manager");
 		manager.setProfile(Profile.MANAGER);
 		manager.setPassword("frog");
 		manager.setAuthorities(authorities.get(manager.getProfile()));
@@ -67,7 +67,7 @@ public class MockUsers {
 	 */
 	public static UserDocument findByUsername(String username) {
 		for (UserDocument userDTO : users) {
-			if (userDTO.getLogin().equals(username)) {
+			if (userDTO.getEmail().equals(username)) {
 				return userDTO;
 			}
 		}
@@ -81,7 +81,7 @@ public class MockUsers {
 	 *            user id
 	 * @return a UserDTO if found, null otherwise
 	 */
-	public static UserDocument findById(Integer id) {
+	public static UserDocument findById(String id) {
 		for (UserDocument userDTO : users) {
 			if (userDTO.getId().equals(id)) {
 				return userDTO;
@@ -92,7 +92,7 @@ public class MockUsers {
 
 	public static UserDocument findByLogin(String login) {
 		for (UserDocument userDTO : users) {
-			if (userDTO.getLogin().equals(login)) {
+			if (userDTO.getEmail().equals(login)) {
 				return userDTO;
 			}
 		}

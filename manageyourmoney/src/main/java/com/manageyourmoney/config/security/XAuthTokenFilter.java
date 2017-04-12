@@ -43,9 +43,9 @@ public class XAuthTokenFilter extends GenericFilterBean {
 				String userId = HmacSigner.getJwtIss(jwtHeader);
 
 				// Retrieve user in cache
-				UserDocument userDTO = MockUsers.findById(Integer.valueOf(userId));
+				UserDocument userDTO = MockUsers.findById(userId);
 				Assert.notNull(userDTO, "No user found with id: " + userId);
-				this.authenticationService.tokenAuthentication(userDTO.getLogin());
+				this.authenticationService.tokenAuthentication(userDTO.getEmail());
 				filterChain.doFilter(request, response);
 			} catch (HmacException e) {
 				e.printStackTrace();

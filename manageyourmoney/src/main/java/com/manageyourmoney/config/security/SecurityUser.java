@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import com.manageyourmoney.dto.Profile;
 
 public class SecurityUser extends User {
-	private Integer id;
+	private String id;
 
 	private Profile profile;
 
@@ -16,14 +16,14 @@ public class SecurityUser extends User {
 		super(username, password, authorities);
 	}
 
-	public SecurityUser(Integer id, String username, String password, Profile profile,
+	public SecurityUser(String id, String username, String password, Profile profile,
 			Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 		this.id = id;
 		this.profile = profile;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 

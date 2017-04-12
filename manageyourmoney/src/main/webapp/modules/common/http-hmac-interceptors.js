@@ -20,7 +20,7 @@ angular.module('common').provider('hmacInterceptor',function () {
                 });
 
                 //Process hmac encode
-                if (canEncode) {
+                if (canEncode && request.url.indexOf('subscribe') < 0) {
                     var security = JSON.parse($cookieStore.get(self.config.securityToken));
 
                     //Get secret from session storage and decode from base64

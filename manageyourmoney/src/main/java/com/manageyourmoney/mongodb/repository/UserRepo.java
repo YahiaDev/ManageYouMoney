@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.manageyourmoney.mongodb.document.UserDocument;
 
 @Repository
-public interface UserRepo extends CrudRepository<UserDocument, Long>{
+public interface UserRepo extends CrudRepository<UserDocument, String>{
 
 }

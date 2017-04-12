@@ -1,0 +1,42 @@
+<div class="loginBox md-whiteframe-z1" layout="column" layout-align="center center" layout-fill>
+    <md-toolbar class="md-toolbar-tools">
+        <span>Login</span>
+    </md-toolbar>
+    <md-content layout-padding class="md-padding"  layout="column">
+        <form name="subscriptionForm" ng-submit="subsCtrl.subcribe()">
+            <div layout="row">
+                <md-input-container>
+                    <label>First Name</label>
+                    <input required name="firstName" ng-model="subsCtrl.user.firstName">
+                    <div ng-messages="subscriptionForm.firstName.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container>
+                    <label>Last Name</label>
+                    <input required name="lastName" ng-model="subsCtrl.user.lastName">
+                    <div ng-messages="subscriptionForm.lastName.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container class="md-block">
+                    <label>Client Email</label>
+                    <input required type="email" name="userEmail" ng-model="subsCtrl.user.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
+                    />
+                    <div ng-messages="subscriptionForm.userEmail.$error" role="alert">
+                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                            Your email must be between 10 and 100 characters long and look like an e-mail address.
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Subscribe</button>
+            </div>
+        </form>
+    </md-content>
+</div>

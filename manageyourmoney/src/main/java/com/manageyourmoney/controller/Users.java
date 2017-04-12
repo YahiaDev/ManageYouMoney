@@ -25,7 +25,7 @@ public class Users {
 	}
 
 	@RequestMapping("/users/{id}")
-	public UserDocument query(@PathVariable Integer id) {
+	public UserDocument query(@PathVariable String id) {
 		return MockUsers.findById(id);
 	}
 

@@ -15,10 +15,10 @@ import com.manageyourmoney.dto.Profile;
 @Document(collection = "user")
 public class UserDocument {
 	@Id
-	private Integer id;
+	private String id;
 
 	// @NotEmpty
-	private String login;
+	private String email;
 
 	@JsonIgnore
 	private String password;
@@ -38,11 +38,11 @@ public class UserDocument {
 	private Profile profile;
 
 	@PersistenceConstructor
-	public UserDocument(Integer id, String login, String password, List<String> authorities, String secretKey,
+	public UserDocument(String id, String email, String password, List<String> authorities, String secretKey,
 			Profile profile) {
 		super();
 		this.id = id;
-		this.login = login;
+		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
 		this.secretKey = secretKey;
@@ -53,11 +53,11 @@ public class UserDocument {
 		super();
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -77,12 +77,12 @@ public class UserDocument {
 		this.authorities = authorities;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {

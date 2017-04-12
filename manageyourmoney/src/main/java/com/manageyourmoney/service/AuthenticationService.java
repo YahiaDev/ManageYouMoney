@@ -95,7 +95,7 @@ public class AuthenticationService {
 
 		UserDocument userDTO = new UserDocument();
 		userDTO.setId(securityUser.getId());
-		userDTO.setLogin(securityUser.getUsername());
+		userDTO.setEmail(securityUser.getUsername());
 		userDTO.setAuthorities(authorities);
 		userDTO.setProfile(securityUser.getProfile());
 		return userDTO;

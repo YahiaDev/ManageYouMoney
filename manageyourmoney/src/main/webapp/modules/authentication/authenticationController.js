@@ -41,6 +41,4 @@ module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 
     $scope.$on(AUTH_EVENTS.notAuthenticated,function(){
         $state.go('authentication');
     });
-        
-
 }]);
