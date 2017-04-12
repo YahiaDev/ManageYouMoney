@@ -3,3 +3,13 @@
     padding-right: 400px;
     padding-top: 50px;
 }
+
+.subscriptionBox {
+  max-width:  90%;
+  width: 500px;
+  margin-left: 600px;
+}
+
+.stretch input  {
+  width: 100%
+}
