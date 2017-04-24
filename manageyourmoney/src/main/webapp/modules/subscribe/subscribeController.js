@@ -1,7 +1,7 @@
 'use strict';
 angular.module('Subscribe').controller('SubscribeController', ['SubscribeService', function (SubscribeService) {
     var sc = this;
-    sc.user = { firstName: '', lastName: '', email:''};
+    sc.user = { firstName: '', lastName: '', email:'', password:'', confirmPAssword:''};
     sc.message = 'subscribe now';
     sc.subcribe = function () {
         SubscribeService.subscribe(sc.user).then(function (reponse) {

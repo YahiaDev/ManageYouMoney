@@ -1,6 +1,8 @@
-<div class="subscriptionBox md-whiteframe-z1" layout="column" layout-align="center center" layout-fill>
+<!--div class="subscriptionBox md-whiteframe-z1 form-signin center" layout="column" layout-align="center center" layout-fill-->
+<div class="container"> 
+<div class="form-signin center">
     <md-toolbar class="md-toolbar-tools">
-        <span>Login</span>
+        <span>Subscribe</span>
     </md-toolbar>
     <md-content layout-padding class="md-padding"  layout="column">
         <form name="subscriptionForm" ng-submit="subsCtrl.subcribe()">
@@ -23,6 +25,25 @@
                 </md-input-container>
             </div>
             <div layout="row">
+                <md-input-container>
+                    <label>Password</label>
+                    <input type="password" required name="password" ng-model="subsCtrl.user.password">
+                    <div ng-messages="subscriptionForm.password.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container>
+                    <label>Confirm Password</label>
+                    <input type="password" required name="confirmPassword" ng-model="subsCtrl.user.confirmPassword" ng-compare='subsCtrl.user.password'>
+                    <!--div ng-messages="subsCtrl.user.confirmPassword !== subsCtrl.user.password">
+                        <div ng-message>Must mutch password</div>
+                    </div-->
+                    <span ng-show="subsCtrl.user.confirmPassword !== subsCtrl.user.password && subsCtrl.user.password !== undefined && subsCtrl.user.password !== null && subsCtrl.user.confirmPassword !== undefined && subsCtrl.user.confirmPassword !== null">Password mismatch</span>
+                </md-input-container>
+            </div>
+            <div layout="row">
                 <md-input-container class="md-block">
                     <label>Client Email</label>
                     <input required type="email" name="userEmail" ng-model="subsCtrl.user.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
@@ -39,4 +60,5 @@
             </div>
         </form>
     </md-content>
+</div>
 </div>
