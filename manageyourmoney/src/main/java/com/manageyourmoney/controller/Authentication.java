@@ -38,12 +38,12 @@ public class Authentication {
 	private AdressService adressService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.PUT)
-	public UserDocument authenticate(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
+	public UserDocument authenticate(@RequestBody UserDocument userDocument, HttpServletResponse response) throws Exception {
 		// LoginDTO loginDTO = new LoginDTO();
 		// loginDTO.setLogin("test@test.com");
 		// loginDTO.setPassword("yahia");
 		try {
-			UserDocument userDto = authenticationService.authenticate(loginDTO, response);
+			UserDocument userDto = authenticationService.authenticate(userDocument, response);
 
 			// Person person = new Person();
 			// person.setPersonneId(1l);

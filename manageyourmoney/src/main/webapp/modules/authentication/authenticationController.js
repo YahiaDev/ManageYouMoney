@@ -3,7 +3,7 @@ var module = angular.module("authentication");
 
 module.controller('AuthenticationController',['$scope', '$state', '$rootScope', 'AuthService', 'AUTH_EVENTS', 'LoginFactory',function($scope, $state, $rootScope, AuthService, AUTH_EVENTS, LoginFactory) {
     
-    $scope.testMessage = 'yahia';
+    
     $scope.testFunction = function(){
         return 'yahia'; 
     };

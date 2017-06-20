@@ -49,21 +49,21 @@ public class AuthenticationService {
 	 * generated secret is stored in a static list for every user
 	 * 
 	 * @see MockUsers
-	 * @param loginDTO
+	 * @param userDocument
 	 *            credentials
 	 * @param response
 	 *            http response
 	 * @return UserDTO instance
 	 * @throws HmacException
 	 */
-	public UserDocument authenticate(LoginDTO loginDTO, HttpServletResponse response) throws HmacException {
+	public UserDocument authenticate(UserDocument userDocument, HttpServletResponse response) throws HmacException {
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-				loginDTO.getLogin(), loginDTO.getPassword());
+				userDocument.getLogin(), userDocument.getPassword());
 		Authentication authentication = authenticationManager.authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		// Retrieve security user after authentication
-		SecurityUser securityUser = (SecurityUser) userDetailsService.loadUserByUsername(loginDTO.getLogin());
+		SecurityUser securityUser = (SecurityUser) userDetailsService.loadUserByUsername(userDocument.getLogin());
 
 		// Parse Granted authorities to a list of string authorities
 		List<String> authorities = new ArrayList<>();
@@ -95,7 +95,7 @@ public class AuthenticationService {
 
 		UserDocument userDTO = new UserDocument();
 		userDTO.setId(securityUser.getId());
-		userDTO.setEmail(securityUser.getUsername());
+		userDTO.setLogin(securityUser.getUsername());
 		userDTO.setAuthorities(authorities);
 		userDTO.setProfile(securityUser.getProfile());
 		return userDTO;
@@ -112,7 +112,8 @@ public class AuthenticationService {
 			// SecurityContextHolder.getContext().getAuthentication()
 			// .getPrincipal();
 
-			UserDocument userDTO = MockUsers.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+			UserDocument userDTO = MockUsers
+					.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 			if (userDTO != null) {
 				userDTO.setSecretKey(null);
 			}

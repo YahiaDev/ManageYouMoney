@@ -45,7 +45,7 @@ public class XAuthTokenFilter extends GenericFilterBean {
 				// Retrieve user in cache
 				UserDocument userDTO = MockUsers.findById(userId);
 				Assert.notNull(userDTO, "No user found with id: " + userId);
-				this.authenticationService.tokenAuthentication(userDTO.getEmail());
+				this.authenticationService.tokenAuthentication(userDTO.getLogin());
 				filterChain.doFilter(request, response);
 			} catch (HmacException e) {
 				e.printStackTrace();

@@ -46,7 +46,7 @@
             <div layout="row">
                 <md-input-container class="md-block">
                     <label>Client Email</label>
-                    <input required type="email" name="userEmail" ng-model="subsCtrl.user.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
+                    <input required type="email" name="userEmail" ng-model="subsCtrl.user.login" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
                     />
                     <div ng-messages="subscriptionForm.userEmail.$error" role="alert">
                         <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">

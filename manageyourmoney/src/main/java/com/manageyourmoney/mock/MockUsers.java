@@ -27,7 +27,7 @@ public class MockUsers {
 	public static void mock() {
 		UserDocument admin = new UserDocument();
 		admin.setId("1");
-		admin.setEmail("test@test.com");
+		admin.setLogin("test@test.com");
 		admin.setProfile(Profile.ADMIN);
 		admin.setPassword("yahia");
 		admin.setAuthorities(authorities.get(admin.getProfile()));
@@ -35,7 +35,7 @@ public class MockUsers {
 
 		UserDocument user = new UserDocument();
 		user.setId("2");
-		user.setEmail("user");
+		user.setLogin("user");
 		user.setProfile(Profile.USER);
 		user.setPassword("frog");
 		user.setAuthorities(authorities.get(user.getProfile()));
@@ -43,7 +43,7 @@ public class MockUsers {
 
 		UserDocument manager = new UserDocument();
 		manager.setId("3");
-		manager.setEmail("manager");
+		manager.setLogin("manager");
 		manager.setProfile(Profile.MANAGER);
 		manager.setPassword("frog");
 		manager.setAuthorities(authorities.get(manager.getProfile()));
@@ -67,7 +67,7 @@ public class MockUsers {
 	 */
 	public static UserDocument findByUsername(String username) {
 		for (UserDocument userDTO : users) {
-			if (userDTO.getEmail().equals(username)) {
+			if (userDTO.getLogin().equals(username)) {
 				return userDTO;
 			}
 		}
@@ -92,7 +92,7 @@ public class MockUsers {
 
 	public static UserDocument findByLogin(String login) {
 		for (UserDocument userDTO : users) {
-			if (userDTO.getEmail().equals(login)) {
+			if (userDTO.getLogin().equals(login)) {
 				return userDTO;
 			}
 		}

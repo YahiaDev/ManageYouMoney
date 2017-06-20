@@ -32,7 +32,7 @@ public class HmacUserDetailsService implements UserDetailsService {
 			}
 		}
 
-		return new SecurityUser(userDTO.getId(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getProfile(),
+		return new SecurityUser(userDTO.getId(), userDTO.getLogin(), userDTO.getPassword(), userDTO.getProfile(),
 				authorities);
 	}
 }

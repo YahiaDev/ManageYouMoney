@@ -1,5 +1,7 @@
 package com.manageyourmoney.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.manageyourmoney.mongodb.document.UserDocument;
@@ -16,6 +18,10 @@ public class UserService {
 
 	public void addNewUser(UserDocument newUser) {
 		userRepo.save(newUser);
+	}
+	
+	public List<UserDocument> getAllUser(){
+		return (List<UserDocument>) userRepo.findAll();
 	}
 
 }

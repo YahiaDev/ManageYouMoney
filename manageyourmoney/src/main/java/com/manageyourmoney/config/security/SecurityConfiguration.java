@@ -1,5 +1,7 @@
 package com.manageyourmoney.config.security;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,7 @@ import com.manageyourmoney.config.security.hmac.HmacSecurityConfigurer;
 import com.manageyourmoney.mock.MockUsers;
 import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.service.AuthenticationService;
+import com.manageyourmoney.service.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -31,6 +34,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private AuthenticationService authenticationService;
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private HmacRequester hmacRequester;
@@ -53,10 +59,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		InMemoryUserDetailsManagerConfigurer configurer = auth.inMemoryAuthentication()
 				.passwordEncoder(passwordEncoder());
-
-		for (UserDocument userDTO : MockUsers.getUsers()) {
-			configurer.withUser(userDTO.getEmail()).password(passwordEncoder().encode(userDTO.getPassword()))
-					.roles(userDTO.getProfile().name());
+		// il faut modifier ca
+		// get users from data base
+		//List<UserDocument> userList = userService.getAllUser();
+		
+		//compare les valeur de mockuser et les valeur retournée de la base ..
+		List<UserDocument> userList = MockUsers.getUsers();
+		for (UserDocument userDTO : userList) {
+			//userDTO.getProfile().name()
+			 configurer.withUser(userDTO.getLogin()).password(passwordEncoder().encode(userDTO.getPassword()))
+			 .roles("ADMIN");
+			//configurer.withUser(userDTO.getLogin()).password(userDTO.getPassword()).roles("ADMIN");
 		}
 	}
 

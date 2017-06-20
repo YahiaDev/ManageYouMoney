@@ -18,9 +18,9 @@ public class UserDocument {
 	private String id;
 
 	// @NotEmpty
-	private String email;
+	private String login;
 
-	@JsonIgnore
+	//@JsonIgnore
 	private String password;
 
 	private String firstName;
@@ -38,11 +38,11 @@ public class UserDocument {
 	private Profile profile;
 
 	@PersistenceConstructor
-	public UserDocument(String id, String email, String password, List<String> authorities, String secretKey,
+	public UserDocument(String id, String login, String password, List<String> authorities, String secretKey,
 			Profile profile) {
 		super();
 		this.id = id;
-		this.email = email;
+		this.login = login;
 		this.password = password;
 		this.authorities = authorities;
 		this.secretKey = secretKey;
@@ -77,12 +77,12 @@ public class UserDocument {
 		this.authorities = authorities;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLogin(String email) {
+		this.login = email;
 	}
 
 	public String getPassword() {
