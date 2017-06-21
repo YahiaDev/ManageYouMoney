@@ -1,6 +1,7 @@
 package com.manageyourmoney.controller;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,8 @@ public class SubscribeController {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
+	private static final Logger LOG = (Logger) LogManager.getLogger(SubscribeController.class.getName());
 
 	UserService userService;
 	org.apache.logging.log4j.Logger logger = LogManager.getLogger(SubscribeController.class);
