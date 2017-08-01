@@ -10,18 +10,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.mongodb.document.Purchase;
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
+import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByCateg;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
 import com.manageyourmoney.service.PurchaseService;
+import com.manageyourmoney.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api/purchase")
 public class PurchaseController {
 
 	PurchaseService purchaseService;
+	
+	UserService userService;
 
-	public PurchaseController(PurchaseService purchaseService) {
+	public PurchaseController(PurchaseService purchaseService, UserService userService) {
 		this.purchaseService = purchaseService;
+		this.userService = userService;
 	}
 
 	@RequestMapping(value = "/getAllPurchaseCategories", method = RequestMethod.GET)
@@ -31,11 +36,14 @@ public class PurchaseController {
 
 	@RequestMapping(value = "/addPurchaseCategories", method = RequestMethod.PUT)
 	public List<PurchaseCategory> addNewPurchaseCategories(@RequestParam(value = "catName") String catName,
-			@RequestParam(value = "catDesc") String catDesc) {
+			@RequestParam(value = "catDesc") String catDesc, @RequestParam(value="userLogin") String userLogin) {
 		PurchaseCategory pc = new PurchaseCategory();
 		pc.setDescription(catDesc);
 		pc.setLabelCat(catName);
 		purchaseService.addPurchageCat(pc);
+		UserDocument userDoc = userService.getUserByLogin(userLogin);
+		userDoc.getPurchaseCategoryList().add(pc);
+		userService.addNewUser(userDoc);
 		return purchaseService.getAllPurchaseCat();
 	}
 

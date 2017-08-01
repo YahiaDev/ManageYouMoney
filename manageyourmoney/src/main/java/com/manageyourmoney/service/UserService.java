@@ -19,9 +19,17 @@ public class UserService {
 	public void addNewUser(UserDocument newUser) {
 		userRepo.save(newUser);
 	}
-	
-	public List<UserDocument> getAllUser(){
+
+	public List<UserDocument> getAllUser() {
 		return (List<UserDocument>) userRepo.findAll();
 	}
+
+	public UserDocument getUserByLogin(String userLogin){
+		return userRepo.getUserByLogin(userLogin);
+	}
+	
+//	public void updateUser(UserDocument userDoc){
+//		userRepo.save
+//	}
 
 }

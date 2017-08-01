@@ -61,15 +61,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.passwordEncoder(passwordEncoder());
 		// il faut modifier ca
 		// get users from data base
-		//List<UserDocument> userList = userService.getAllUser();
-		
-		//compare les valeur de mockuser et les valeur retournée de la base ..
-		List<UserDocument> userList = MockUsers.getUsers();
+		List<UserDocument> userList = userService.getAllUser();
+
+		// compare les valeur de mockuser et les valeur retournée de la base ..
+		// List<UserDocument> userList = MockUsers.getUsers();
 		for (UserDocument userDTO : userList) {
-			//userDTO.getProfile().name()
-			 configurer.withUser(userDTO.getLogin()).password(passwordEncoder().encode(userDTO.getPassword()))
-			 .roles("ADMIN");
-			//configurer.withUser(userDTO.getLogin()).password(userDTO.getPassword()).roles("ADMIN");
+			// userDTO.getProfile().name()
+			configurer.withUser(userDTO.getLogin()).password(userDTO.getPassword()).roles("ADMIN");
+			// configurer.withUser(userDTO.getLogin()).password(userDTO.getPassword()).roles("ADMIN");
 		}
 	}
 

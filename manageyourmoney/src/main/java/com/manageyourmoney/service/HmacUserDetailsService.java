@@ -3,6 +3,7 @@ package com.manageyourmoney.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,13 +17,18 @@ import com.manageyourmoney.mongodb.document.UserDocument;
 
 @Component
 public class HmacUserDetailsService implements UserDetailsService {
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		UserDocument userDTO = MockUsers.findByUsername(username);
+	@Autowired
+	UserService userService;
+
+	@Override
+	public UserDetails loadUserByUsername(String userLogin) throws UsernameNotFoundException {
+
+		// UserDocument userDTO = MockUsers.findByUsername(username);
+		
+		UserDocument userDTO = userService.getUserByLogin(userLogin);
 		if (userDTO == null) {
-			throw new UsernameNotFoundException("User " + username + " not found");
+			throw new UsernameNotFoundException("User " + userLogin + " not found");
 		}
 
 		List<GrantedAuthority> authorities = new ArrayList<>();

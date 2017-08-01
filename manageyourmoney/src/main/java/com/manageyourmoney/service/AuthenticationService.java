@@ -81,11 +81,11 @@ public class AuthenticationService {
 		HmacToken hmacToken = HmacSigner.getSignedToken(secret, String.valueOf(securityUser.getId()),
 				HmacSecurityFilter.JWT_TTL, customClaims);
 
-		for (UserDocument userDTO : MockUsers.getUsers()) {
-			if (userDTO.getId().equals(securityUser.getId())) {
-				userDTO.setSecretKey(secret);
-			}
-		}
+		// for (UserDocument userDTO : MockUsers.getUsers()) {
+		// if (userDTO.getId().equals(securityUser.getId())) {
+		// userDTO.setSecretKey(secret);
+		// }
+		// }
 
 		// Set all tokens in http response headers
 
@@ -98,6 +98,7 @@ public class AuthenticationService {
 		userDTO.setLogin(securityUser.getUsername());
 		userDTO.setAuthorities(authorities);
 		userDTO.setProfile(securityUser.getProfile());
+		userDTO.setSecretKey(secret);
 		return userDTO;
 	}
 

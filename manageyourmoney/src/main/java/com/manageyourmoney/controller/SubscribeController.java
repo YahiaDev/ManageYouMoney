@@ -1,5 +1,8 @@
 package com.manageyourmoney.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.springframework.context.annotation.Bean;
@@ -32,18 +35,12 @@ public class SubscribeController {
 
 	@RequestMapping(value = "/addNewUser", method = RequestMethod.PUT)
 	public void subscription(@RequestBody UserDocument user) {
-		logger.info("add new user");
-		logger.error("error to get user");
-		/*
-		 * MessageDigest md = MessageDigest.getInstance("SHA-512"); byte[] bytes
-		 * = md.digest(user.getPassword().getBytes("UTF-8")); StringBuilder sb =
-		 * new StringBuilder(); for (int i = 0; i < bytes.length; i++) {
-		 * sb.append(Integer.toString((bytes[i] & 0xff) + 0x100,
-		 * 16).substring(1)); }
-		 */
-		
+		//logger.error("error to get user");
+		List<String> authoritiesList = Arrays.asList("ROLE_USER");
+		user.setAuthorities(authoritiesList);
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
 		userService.addNewUser(user);
+		logger.info("add user aded successfully");
 
 	}
 
