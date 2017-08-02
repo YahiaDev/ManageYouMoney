@@ -62,8 +62,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// il faut modifier ca
 		// get users from data base
 		List<UserDocument> userList = userService.getAllUser();
-
 		// compare les valeur de mockuser et les valeur retournée de la base ..
+
 		// List<UserDocument> userList = MockUsers.getUsers();
 		for (UserDocument userDTO : userList) {
 			// userDTO.getProfile().name()

@@ -15,11 +15,7 @@ public class UserRepoImpl implements UserRepoCustom {
 
 	@Override
 	public UserDocument getUserByLogin(String userLogin) {
-		// TODO Auto-generated method stub
-		Query query = new Query();
-		query.addCriteria(Criteria.where("login").is(userLogin));
-		UserDocument  userDoc = (UserDocument) mongoTemplate.findOne(query, UserDocument.class);
-		return userDoc;
+
 		// String criteria = "login="+userLogin;
 
 		// UserDocument userDoc = new UserDocument();
@@ -32,6 +28,12 @@ public class UserRepoImpl implements UserRepoCustom {
 		// query.addCriteria(Criteria.where(criteria).);
 		// mongoTemplate.executeQuery(query, "", DocumentCallbackHandler);;
 		// return userDoc;
+		Query query = new Query();
+		query.addCriteria(Criteria.where("user.login").is(userLogin));
+		UserDocument userDocument = new UserDocument();
+		userDocument = (UserDocument) mongoTemplate.findOne(query, UserDocument.class);
+		return userDocument;
+
 	}
 
 }
