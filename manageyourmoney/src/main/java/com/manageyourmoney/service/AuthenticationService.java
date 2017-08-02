@@ -24,7 +24,6 @@ import com.manageyourmoney.config.security.hmac.HmacSecurityFilter;
 import com.manageyourmoney.config.security.hmac.HmacSigner;
 import com.manageyourmoney.config.security.hmac.HmacToken;
 import com.manageyourmoney.config.security.hmac.HmacUtils;
-import com.manageyourmoney.dto.LoginDTO;
 import com.manageyourmoney.mock.MockUsers;
 import com.manageyourmoney.mongodb.document.UserDocument;
 
@@ -96,6 +95,8 @@ public class AuthenticationService {
 		UserDocument userDTO = new UserDocument();
 		userDTO.setId(securityUser.getId());
 		userDTO.setLogin(securityUser.getUsername());
+		userDTO.setFirstName(securityUser.getFirstName());
+		userDTO.setLastName(securityUser.getLastName());
 		userDTO.setAuthorities(authorities);
 		userDTO.setProfile(securityUser.getProfile());
 		userDTO.setSecretKey(secret);

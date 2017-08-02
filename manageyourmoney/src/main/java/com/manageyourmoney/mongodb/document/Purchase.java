@@ -24,12 +24,15 @@ public class Purchase {
 	@DBRef(db = "purchaseCategorie")
 	private PurchaseCategory category;
 
+	@DBRef(db = "user")
+	private UserDocument user;
+
 	public Purchase() {
 		super();
 	}
 
 	public Purchase(String idPurchase, Date date, double amount, String label, String comment,
-			PurchaseCategory category) {
+			PurchaseCategory category, UserDocument user) {
 		super();
 		this.idPurchase = idPurchase;
 		this.date = date;
@@ -37,6 +40,7 @@ public class Purchase {
 		this.label = label;
 		this.comment = comment;
 		this.category = category;
+		this.user = user;
 	}
 
 	public String getIdPurchase() {
@@ -86,4 +90,13 @@ public class Purchase {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public UserDocument getUser() {
+		return user;
+	}
+
+	public void setUser(UserDocument user) {
+		this.user = user;
+	}
+
 }
