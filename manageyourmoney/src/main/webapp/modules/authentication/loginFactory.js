@@ -1,37 +1,28 @@
-angular.module("authentication").factory('LoginFactory',function($http, $cookieStore,$rootScope,hmacInterceptor){
-    return {
-       /* authenticate: function(login,password){
-            return $http.post('http://localhost:8060/manageyourmoney/api/authenticate',{login:login,password:password}).success(function(user, status, headers){
-                $cookieStore.put('hmacApp-account', JSON.stringify(user));
+angular.module("authentication").factory('LoginFactory', function ($http, $cookieStore, $rootScope, hmacInterceptor) {
+    var loginService = {};
 
-                hmacInterceptor.readHmacRequest(headers);
+    loginService.authenticate = function (login, password) {
+        return $http.put('http://localhost:8060/manageyourmoney/api/authenticate', { login: login, password: password }).success(function (data, status, headers) {
+            $cookieStore.put('hmacApp-account', JSON.stringify(data));
 
-                $rootScope.authenticated = true;
-                return user;
-            });
-        },*/
-        authenticate: function(login,password){
-            return $http.put('http://localhost:8060/manageyourmoney/api/authenticate',{login:login,password:password}).success(function(data, status, headers){
-                $cookieStore.put('hmacApp-account', JSON.stringify(data));
+            hmacInterceptor.readHmacRequest(headers());
 
-                hmacInterceptor.readHmacRequest(headers());
-
-                $rootScope.authenticated = true;
-                return data;
-            }).error(function(data, status, headers) {
-                // called asynchronously if an error occurs
+            $rootScope.authenticated = true;
+            return data;
+        }).error(function (data, status, headers) {
+            // called asynchronously if an error occurs
             // or server returns response with an error status.
-          })
-        },
-        isAuthenticated:function(){
+        })
+    },
+        loginService.isAuthenticated = function () {
             return !!$cookieStore.get('hmacApp-account') && hmacInterceptor.isSecured();
         },
-        isAuthorized:function(roles){
-            if(!!$cookieStore.get('hmacApp-account')){
+        loginService.isAuthorized = function (roles) {
+            if (!!$cookieStore.get('hmacApp-account')) {
                 var account = JSON.parse($cookieStore.get('hmacApp-account'));
                 var authorized = false;
-                angular.forEach(roles,function(role){
-                    if(account && account.authorities && account.authorities.indexOf(role) !== -1){
+                angular.forEach(roles, function (role) {
+                    if (account && account.authorities && account.authorities.indexOf(role) !== -1) {
                         authorized = true;
                     }
                 });
@@ -39,22 +30,22 @@ angular.module("authentication").factory('LoginFactory',function($http, $cookieS
             }
             return false;
         },
-        getAccount:function(){
-            if(!!$cookieStore.get('hmacApp-account')){
+        loginService.getAccount = function () {
+            if (!!$cookieStore.get('hmacApp-account')) {
                 return JSON.parse($cookieStore.get('hmacApp-account'));
             }
         },
-        removeAccount:function(){
+        loginService.removeAccount = function () {
             $cookieStore.remove('hmacApp-account');
             hmacInterceptor.removeSecurity();
             $rootScope.authenticated = false;
         },
-        logout: function(){
+        loginService.logout = function () {
             var self = this;
-            return $http.get('http://localhost:8080/api/logout').success(function(){
+            return $http.get('http://localhost:8080/api/logout').success(function () {
                 self.removeAccount();
                 return true;
             });
         }
-    }
+    return loginService;
 });

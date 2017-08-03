@@ -229,7 +229,7 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES) {
 
   var puchaseCatState = {
     url: '/purcat',
-    controller: 'PurchaseCategoriesCtrl',
+    controller: 'PurchaseCategoriesCtrl as purCatC',
     templateUrl: 'modules/purchase/purchaseCategoriesTemplate.html'
     /* data: {
        authorizedRoles: [USER_ROLES.all]
@@ -238,7 +238,7 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES) {
 
   var puchaseState = {
     url: '/purchase',
-    controller: 'PurchaseCtrl',
+    controller: 'PurchaseCtrl as purchaseC',
     templateUrl: 'modules/purchase/purchaseTemplate.html'
   };
 

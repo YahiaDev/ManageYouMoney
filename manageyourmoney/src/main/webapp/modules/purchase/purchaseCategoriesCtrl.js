@@ -1,65 +1,67 @@
 'use strict';
-angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl',['$scope', 
-	'$state', 'purchaseService', function($scope, $state, purchaseService){
-	
-  	$scope.purchaseCat = {catName:'', description:''};
-	$scope.purchaseCatAdded = false;
-	//$scope.modalEditSchema = PurchaseCatSchema;
-	$scope.modalEditSchema = {labelCat: { type: 'string', id:'labelCat', title: 'Category Label', required:'true' },
-    						  description: { type: 'string', id:'description', title: 'Description', required:'false' }};
-  
-	$scope.modalEditForm = [
-    'labelCat',
-    'description'
-  	];
-	
-	$scope.dataLoaded =  false;
-	$scope.addPurchaseCat = function(){
-		if ($scope.purchaseCat.catName !== ''){
-			purchaseService.addPurCat($scope.purchaseCat).then(function(response){
-				$scope.purchaseCatAdded = true;
-				$scope.purchaseCat.catName = '';
-				$scope.purchaseCat.description = '';
-				//$scope.gridOptions.data = response.data;
-				$scope.gridData = response.data;
-				$state.reload();
-			});
-		}
-	};
+angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl', ['$scope',
+	'$state', 'purchaseService', '$cookieStore', function ($scope, $state, purchaseService, $cookieStore) {
+		var purCatC = this;
+		purCatC.purchaseCat = { catName: '', description: '', user: '' };
+		purCatC.purchaseCatAdded = false;
+		purCatC.modalEditSchema = {
+			labelCat: { type: 'string', id: 'labelCat', title: 'Category Label', required: 'true' },
+			description: { type: 'string', id: 'description', title: 'Description', required: 'false' }
+		};
 
-	$scope.getAllPurchaseCat = function(){
-		purchaseService.getAllPurchaseCat().then(function(response){
-		//$scope.gridOptions.data = response.data;
-		$scope.gridData = response.data;
-		$scope.dataLoaded = true;
+		purCatC.modalEditForm = [
+			'labelCat',
+			'description'
+		];
+
+		purCatC.dataLoaded = false;
+		purCatC.addPurchaseCat = function () {
+			if (purCatC.purchaseCat.catName !== '') {
+				purchaseService.addPurCat(purCatC.purchaseCat).then(function (response) {
+					purCatC.purchaseCatAdded = true;
+					purCatC.purchaseCat.catName = '';
+					purCatC.purchaseCat.description = '';
+					purCatC.purchaseCat.user = $cookieStore.get('logedUser');
+					//purCatC.gridOptions.data = response.data;
+					purCatC.gridData = response.data;
+					$state.reload();
+				});
+			}
+		};
+
+		purCatC.getAllPurchaseCat = function () {
+			purchaseService.getAllPurchaseCat($cookieStore.get('logedUser').id).then(function (response) {
+				//purCatC.gridOptions.data = response.data;
+				purCatC.gridData = response.data;
+				purCatC.dataLoaded = true;
+			});
+		};
+
+		purCatC.columnDefs = [
+			{ field: 'labelCat', displayName: 'Category Label' },
+			{ field: 'description', displayName: 'Description' }
+		];
+
+
+		$scope.$on('gridDataEdited', function (event, args) {
+			purchaseService.updatePurchaseCat(args.data).then(function (response) {
+				console.info(response.data);
+				//purCatC.purchaseCatAdded = true;
+				//purCatC.purchaseCat.catName = '';
+				//purCatC.purchaseCat.description = '';
+				//purCatC.gridOptions.data = response.data;
+				//purCatC.gridData = response.data;
+			});
 		});
-	};
 
-	$scope.columnDefs = [
-		{field: 'labelCat', displayName : 'Category Label'},
-		{field: 'description', displayName : 'Description'}
-	];
-
-    
-	$scope.$on('gridDataEdited',function(event, args){
-    	purchaseService.updatePurchaseCat(args.data).then(function(response){
-    		console.info(response.data);
-				//$scope.purchaseCatAdded = true;
-				//$scope.purchaseCat.catName = '';
-				//$scope.purchaseCat.description = '';
-				//$scope.gridOptions.data = response.data;
-				//$scope.gridData = response.data;
+		$scope.$on('gridDataRowDeleted', function (event, args) {
+			purchaseService.deletePurchaseCat(args.data).then(function (response) {
+				purCatC.gridData = response.data;
+				$state.reload();
+				//data.splice(data.indexOf(row.entity),1);
+				//$uibModalInstance.close(row.entity);
 			});
-    });
+		});
 
-    $scope.$on('gridDataRowDeleted',function(event, args){
-    	purchaseService.deletePurchaseCat(args.data).then(function(response){
-    		$scope.gridData = response.data;
-    		$state.reload();
-	      	//data.splice(data.indexOf(row.entity),1);
-	      	//$uibModalInstance.close(row.entity);
-    	});
-    });
-
-	$scope.getAllPurchaseCat();
-}]);
+		purCatC.getAllPurchaseCat();
+	}]);

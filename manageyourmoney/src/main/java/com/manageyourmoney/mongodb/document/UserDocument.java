@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,11 +32,11 @@ public class UserDocument {
 	// @NotEmpty
 	private List<String> authorities;
 
-	@DBRef(db = "purchaseCategorie")
-	private List<PurchaseCategory> purchaseCategoryList;
-
-	@DBRef(db = "purchase")
-	private List<Purchase> purchaseList;
+	// @DBRef(db = "purchaseCategorie")
+	// private List<PurchaseCategory> purchaseCategoryList;
+	//
+	// @DBRef(db = "purchase")
+	// private List<Purchase> purchaseList;
 
 	@JsonIgnore
 	private String secretKey;
@@ -46,7 +45,7 @@ public class UserDocument {
 
 	@PersistenceConstructor
 	public UserDocument(String id, String login, String password, List<String> authorities, String secretKey,
-			Profile profile, List<Purchase> purchaseList, List<PurchaseCategory> purchaseCategoryList) {
+			Profile profile) {
 		super();
 		this.id = id;
 		this.login = login;
@@ -54,8 +53,6 @@ public class UserDocument {
 		this.authorities = authorities;
 		this.secretKey = secretKey;
 		this.profile = profile;
-		this.purchaseList = purchaseList;
-		this.purchaseCategoryList = purchaseCategoryList;
 	}
 
 	public UserDocument() {
@@ -133,21 +130,4 @@ public class UserDocument {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-
-	public List<PurchaseCategory> getPurchaseCategoryList() {
-		return purchaseCategoryList;
-	}
-
-	public void setPurchaseCategoryList(List<PurchaseCategory> purchaseCategoryList) {
-		this.purchaseCategoryList = purchaseCategoryList;
-	}
-
-	public List<Purchase> getPurchaseList() {
-		return purchaseList;
-	}
-
-	public void setPurchaseList(List<Purchase> purchaseList) {
-		this.purchaseList = purchaseList;
-	}
-
 }

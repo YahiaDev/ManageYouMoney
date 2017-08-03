@@ -1,18 +1,19 @@
 'uses strict';
-angular.module('nav').factory('NavService',['$http','$cookieStore', 'hmacInterceptor', '$rootScope', function($http, $cookieStore, hmacInterceptor, $rootScope){
+angular.module('nav').factory('NavService', ['$http', '$cookieStore', 'hmacInterceptor', '$rootScope', function ($http, $cookieStore, hmacInterceptor, $rootScope) {
 	var service = {};
 
-	service.removeAccount = function(){
+	service.removeAccount = function () {
 		$cookieStore.remove('hmacApp-account');
-        hmacInterceptor.removeSecurity();
-        $rootScope.authenticated = false;
+		$cookieStore.remove('logedUser');
+		hmacInterceptor.removeSecurity();
+		$rootScope.authenticated = false;
 	};
 
-	service.logOut = function(){
+	service.logOut = function () {
 		var self = this;
-        return $http.get('http://localhost:8060/manageyourmoney/api/logout').then(function(response){
-            self.removeAccount();
-            return true; 
+		return $http.get('http://localhost:8060/manageyourmoney/api/logout').then(function (response) {
+			self.removeAccount();
+			return true;
 		});
 	};
 

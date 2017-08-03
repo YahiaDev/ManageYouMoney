@@ -4,18 +4,25 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.grou
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import com.manageyourmoney.mongodb.document.Purchase;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByCateg;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
 import com.manageyourmoney.mongodb.repository.PurchaseRepoCustom;
 
+/**
+ * @author Yahia
+ *
+ */
 public class PurchaseRepoImpl implements PurchaseRepoCustom {
 	@Autowired
 	MongoTemplate mongoTemplate;
@@ -39,5 +46,16 @@ public class PurchaseRepoImpl implements PurchaseRepoCustom {
 		List<PurchaseByDate> purchaseByCategResult = groupResultByCategory.getMappedResults();
 		return purchaseByCategResult;
 	}
+
+	@Override
+	public List<Purchase> getPurchaseListByIdUser(final String idUser) {
+		List<Purchase> purchaseResultList = null;
+		Query query = new Query();
+		query.addCriteria(Criteria.where("user.id").is(idUser));
+		purchaseResultList = mongoTemplate.find(query, Purchase.class);
+		return purchaseResultList == null ? new ArrayList<Purchase>() : purchaseResultList;
+	}
+
+
 
 }

@@ -2,7 +2,6 @@ package com.manageyourmoney.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manageyourmoney.mongodb.document.Purchase;
@@ -12,13 +11,21 @@ import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
 import com.manageyourmoney.mongodb.repository.PurchaseCategoriesRepo;
 import com.manageyourmoney.mongodb.repository.PurchaseRepo;
 
+/**
+ * @author Yahia
+ *
+ */
 @Service
 public class PurchaseService {
-	@Autowired
-	PurchaseCategoriesRepo puchaseCatRepo;
 
-	@Autowired
+	PurchaseCategoriesRepo puchaseCatRepo;
 	PurchaseRepo purchaseRepo;
+
+	public PurchaseService(PurchaseCategoriesRepo puchaseCatRepo, PurchaseRepo purchaseRepo) {
+		super();
+		this.puchaseCatRepo = puchaseCatRepo;
+		this.purchaseRepo = purchaseRepo;
+	}
 
 	public void addPurchageCat(PurchaseCategory purCat) {
 		puchaseCatRepo.save(purCat);
@@ -26,6 +33,10 @@ public class PurchaseService {
 
 	public void updatePurchageCat(PurchaseCategory purCat) {
 		puchaseCatRepo.save(purCat);
+	}
+
+	public List<PurchaseCategory> getPurchaseCatByUser(String idUser) {
+		return puchaseCatRepo.getPurchaseCatListByUser(idUser);
 	}
 
 	public List<PurchaseCategory> getAllPurchaseCat() {
@@ -55,9 +66,13 @@ public class PurchaseService {
 	public List<PurchaseByCateg> getPurchaseGroupedByCategory() {
 		return purchaseRepo.getPurchaseGroupedByCategory();
 	}
-	
+
 	public List<PurchaseByDate> getPurchaseGroupedByDate() {
 		return purchaseRepo.getPurchaseGroupedByDate();
+	}
+
+	public List<Purchase> getPurchaseListByUserId(String idUser) {
+		return purchaseRepo.getPurchaseListByIdUser(idUser);
 	}
 
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.mongodb.document.Purchase;
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
-import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByCateg;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
 import com.manageyourmoney.service.PurchaseService;
@@ -21,7 +20,7 @@ import com.manageyourmoney.service.UserService;
 public class PurchaseController {
 
 	PurchaseService purchaseService;
-	
+
 	UserService userService;
 
 	public PurchaseController(PurchaseService purchaseService, UserService userService) {
@@ -30,21 +29,14 @@ public class PurchaseController {
 	}
 
 	@RequestMapping(value = "/getAllPurchaseCategories", method = RequestMethod.GET)
-	public List<PurchaseCategory> getAllPurchaseCategories() {
-		return purchaseService.getAllPurchaseCat();
+	public List<PurchaseCategory> getAllPurchaseCategories(@RequestParam(name = "userId") String userId) {
+		return purchaseService.getPurchaseCatByUser(userId);
 	}
 
 	@RequestMapping(value = "/addPurchaseCategories", method = RequestMethod.PUT)
-	public List<PurchaseCategory> addNewPurchaseCategories(@RequestParam(value = "catName") String catName,
-			@RequestParam(value = "catDesc") String catDesc, @RequestParam(value="userLogin") String userLogin) {
-		PurchaseCategory pc = new PurchaseCategory();
-		pc.setDescription(catDesc);
-		pc.setLabelCat(catName);
-		purchaseService.addPurchageCat(pc);
-		UserDocument userDoc = userService.getUserByLogin(userLogin);
-		userDoc.getPurchaseCategoryList().add(pc);
-		userService.addNewUser(userDoc);
-		return purchaseService.getAllPurchaseCat();
+	public List<PurchaseCategory> addNewPurchaseCategories(@RequestBody PurchaseCategory purchaseCat) {
+		purchaseService.addPurchageCat(purchaseCat);
+		return purchaseService.getPurchaseCatByUser(purchaseCat.getUser().getId());
 	}
 
 	@RequestMapping(value = "/updatePurchaseCategories", method = RequestMethod.POST)
@@ -59,23 +51,20 @@ public class PurchaseController {
 	}
 
 	@RequestMapping(value = "/getAllPurchase", method = RequestMethod.GET)
-	public List<Purchase> getAllPurchase() {
-		// purchaseService.getAllPurchase().stream()
-		// .filter(p -> p.getCategory().getLabelCat().equals(new
-		// String("Cinema"))).collect(Collectors.toList());
-		return purchaseService.getAllPurchase();
+	public List<Purchase> getAllPurchase(@RequestParam(name = "userId") String userId) {
+		return purchaseService.getPurchaseListByUserId(userId);
 	}
 
 	@RequestMapping(value = "/addPurchase", method = RequestMethod.PUT)
-	public List<Purchase> addNewPurchaseCategories(@RequestBody Purchase purchase) {
+	public List<Purchase> addNewPurchase(@RequestBody Purchase purchase) {
 		purchaseService.addPurchase(purchase);
-		return purchaseService.getAllPurchase();
+		return purchaseService.getPurchaseListByUserId(purchase.getUser().getId());
 	}
 
 	@RequestMapping(value = "/updatePurchase", method = RequestMethod.POST)
 	public List<Purchase> updatePurchases(@RequestBody Purchase purchase) {
 		purchaseService.updatePurchase(purchase);
-		return purchaseService.getAllPurchase();
+		return purchaseService.getPurchaseListByUserId(purchase.getUser().getId());
 	}
 
 	@RequestMapping(value = "/deletePurchase", method = RequestMethod.POST)
