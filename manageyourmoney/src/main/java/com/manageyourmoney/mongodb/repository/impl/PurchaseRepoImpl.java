@@ -1,6 +1,7 @@
 package com.manageyourmoney.mongodb.repository.impl;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 
@@ -28,9 +29,9 @@ public class PurchaseRepoImpl implements PurchaseRepoCustom {
 	MongoTemplate mongoTemplate;
 
 	@Override
-	public List<PurchaseByCateg> getPurchaseGroupedByCategory() {
-		Aggregation agg = newAggregation(group("category").sum("amount").as("count"),
-				project("count").and("_id").as("category"));
+	public List<PurchaseByCateg> getPurchaseGroupedByCategory(final String idUser) {
+		Aggregation agg = newAggregation(match(Criteria.where("user.id").is(idUser)),
+				group("category").sum("amount").as("count"), project("count").and("_id").as("category"));
 		AggregationResults<PurchaseByCateg> groupResultByCategory = mongoTemplate.aggregate(agg, Purchase.class,
 				PurchaseByCateg.class);
 		List<PurchaseByCateg> purchaseByCategResult = groupResultByCategory.getMappedResults();
@@ -38,9 +39,11 @@ public class PurchaseRepoImpl implements PurchaseRepoCustom {
 	}
 
 	@Override
-	public List<PurchaseByDate> getPurchaseGroupedByDate() {
-		Aggregation agg = newAggregation(project().and("amount").as("amount").and("date").extractYear().as("year")
-				.and("date").extractMonth().as("month"), group("year", "month").sum("amount").as("amount"));
+	public List<PurchaseByDate> getPurchaseGroupedByDate(final String idUser) {
+		Aggregation agg = newAggregation(
+				match(Criteria.where("user.id").is(idUser)), project().and("amount").as("amount").and("date")
+						.extractYear().as("year").and("date").extractMonth().as("month"),
+				group("year", "month").sum("amount").as("amount"));
 		AggregationResults<PurchaseByDate> groupResultByCategory = mongoTemplate.aggregate(agg, Purchase.class,
 				PurchaseByDate.class);
 		List<PurchaseByDate> purchaseByCategResult = groupResultByCategory.getMappedResults();
@@ -55,7 +58,5 @@ public class PurchaseRepoImpl implements PurchaseRepoCustom {
 		purchaseResultList = mongoTemplate.find(query, Purchase.class);
 		return purchaseResultList == null ? new ArrayList<Purchase>() : purchaseResultList;
 	}
-
-
 
 }

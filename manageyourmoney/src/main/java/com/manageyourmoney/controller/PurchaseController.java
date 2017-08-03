@@ -74,12 +74,12 @@ public class PurchaseController {
 	}
 
 	@RequestMapping(value = "/getPurchaseGroupedByCateg", method = RequestMethod.GET)
-	public List<PurchaseByCateg> getPurchaseByCateg() {
-		return purchaseService.getPurchaseGroupedByCategory();
+	public List<PurchaseByCateg> getPurchaseByCateg(@RequestParam(name = "userId") String userId) {
+		return purchaseService.getPurchaseGroupedByCategory(userId);
 	}
 
 	@RequestMapping(value = "/getPurchaseGroupedByDate", method = RequestMethod.GET)
-	public List<PurchaseByDate> getPurchaseByDate() {
-		return purchaseService.getPurchaseGroupedByDate();
+	public List<PurchaseByDate> getPurchaseByDate(@RequestParam(name = "userId") String userId) {
+		return purchaseService.getPurchaseGroupedByDate(userId);
 	}
 }

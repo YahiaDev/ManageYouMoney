@@ -1,22 +1,22 @@
-angular.module('home').factory('HomeService',['$http', 'SERVER_URL', function($http, SERVER_URL){
-	
-    var url = SERVER_URL.protocol+'://'+SERVER_URL.serverName+':'+SERVER_URL.port+'/'+SERVER_URL.context;
+angular.module('home').factory('HomeService', ['$http', 'SERVER_URL', function ($http, SERVER_URL) {
+
+    var url = SERVER_URL.protocol + '://' + SERVER_URL.serverName + ':' + SERVER_URL.port + '/' + SERVER_URL.context;
 
     var service = {};
-    service.testHome = function(){
+    service.testHome = function () {
         return true;
     };
-	service.getUsers = function(){
-     return   $http.get('http://localhost:8060/manageyourmoney/api/users').success(function(users, status, headers){
+    service.getUsers = function () {
+        return $http.get('http://localhost:8060/manageyourmoney/api/users').success(function (users, status, headers) {
             return users;
-        },function errorCallback(response){
-        	console.log('error during getting users')
+        }, function errorCallback(response) {
+            console.log('error during getting users')
         });
     };
 
-    service.saveUser = function(){
-    	var user = {login:"yahia.ammar@talan.tn",passwod:"yahia"};
-    	return $http.put('http://localhost:8060/manageyourmoney/api/users/2',user).success(function(user){
+    service.saveUser = function () {
+        var user = { login: "yahia.ammar@talan.tn", passwod: "yahia" };
+        return $http.put('http://localhost:8060/manageyourmoney/api/users/2', user).success(function (user) {
             /*var account = LoginFactory.getAccount();
             if(account && account.login === user.login){
                 LoginFactory.logout();
@@ -25,19 +25,19 @@ angular.module('home').factory('HomeService',['$http', 'SERVER_URL', function($h
             }*/
             return user;
             console.log(user);
-        },function errorCallback(response){
-        	 console.log("error saving user");
+        }, function errorCallback(response) {
+            console.log("error saving user");
         });
     };
 
-    service.getPurchaseGroupedByCateg = function(){
-        return $http.get(url+'/api/purchase/getPurchaseGroupedByCateg');
+    service.getPurchaseGroupedByCateg = function (userId) {
+        return $http.get(url + '/api/purchase/getPurchaseGroupedByCateg?userId=' + userId);
     };
 
-    service.getPurchaseGroupedByDate = function(){
-        return $http.get(url+'/api/purchase/getPurchaseGroupedByDate');
+    service.getPurchaseGroupedByDate = function (userId) {
+        return $http.get(url + '/api/purchase/getPurchaseGroupedByDate?userId' + userId);
     };
 
-	return service;
+    return service;
 
 }]);

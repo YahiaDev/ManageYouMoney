@@ -2,7 +2,7 @@
 angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl', ['$scope',
 	'$state', 'purchaseService', '$cookieStore', function ($scope, $state, purchaseService, $cookieStore) {
 		var purCatC = this;
-		purCatC.purchaseCat = { catName: '', description: '', user: '' };
+		purCatC.purchaseCat = { labelCat: '', description: '', user: '' };
 		purCatC.purchaseCatAdded = false;
 		purCatC.modalEditSchema = {
 			labelCat: { type: 'string', id: 'labelCat', title: 'Category Label', required: 'true' },
@@ -16,13 +16,12 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl', ['$scope',
 
 		purCatC.dataLoaded = false;
 		purCatC.addPurchaseCat = function () {
-			if (purCatC.purchaseCat.catName !== '') {
+			if (purCatC.purchaseCat.labelCat !== '') {
+				purCatC.purchaseCat.user = $cookieStore.get('logedUser');
 				purchaseService.addPurCat(purCatC.purchaseCat).then(function (response) {
 					purCatC.purchaseCatAdded = true;
-					purCatC.purchaseCat.catName = '';
+					purCatC.purchaseCat.labelCat = '';
 					purCatC.purchaseCat.description = '';
-					purCatC.purchaseCat.user = $cookieStore.get('logedUser');
-					//purCatC.gridOptions.data = response.data;
 					purCatC.gridData = response.data;
 					$state.reload();
 				});
@@ -47,7 +46,7 @@ angular.module('PurchaseCat').controller('PurchaseCategoriesCtrl', ['$scope',
 			purchaseService.updatePurchaseCat(args.data).then(function (response) {
 				console.info(response.data);
 				//purCatC.purchaseCatAdded = true;
-				//purCatC.purchaseCat.catName = '';
+				//purCatC.purchaseCat.labelCat = '';
 				//purCatC.purchaseCat.description = '';
 				//purCatC.gridOptions.data = response.data;
 				//purCatC.gridData = response.data;

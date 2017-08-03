@@ -63,12 +63,12 @@ public class PurchaseService {
 		purchaseRepo.delete(purchase);
 	}
 
-	public List<PurchaseByCateg> getPurchaseGroupedByCategory() {
-		return purchaseRepo.getPurchaseGroupedByCategory();
+	public List<PurchaseByCateg> getPurchaseGroupedByCategory(final String idUser) {
+		return purchaseRepo.getPurchaseGroupedByCategory(idUser);
 	}
 
-	public List<PurchaseByDate> getPurchaseGroupedByDate() {
-		return purchaseRepo.getPurchaseGroupedByDate();
+	public List<PurchaseByDate> getPurchaseGroupedByDate(final String idUser) {
+		return purchaseRepo.getPurchaseGroupedByDate(idUser);
 	}
 
 	public List<Purchase> getPurchaseListByUserId(String idUser) {

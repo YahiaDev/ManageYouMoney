@@ -26,7 +26,7 @@ angular.module('Purchase').controller('PurchaseCtrl', ['$scope', 'purchaseServic
 
 	purchaseC.purchaseCatDataLoaded = false;
 	purchaseC.getAllPurchaseCat = function () {
-		purchaseService.getAllPurchaseCat().then(function (response) {
+		purchaseService.getAllPurchaseCat($cookieStore.get('logedUser').id).then(function (response) {
 			purchaseC.modalEditSchema['category']['data'] = response.data;
 			purchaseC.purchaseCatDataLoaded = true;
 		})
