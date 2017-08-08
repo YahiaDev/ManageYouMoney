@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,20 +25,16 @@ import com.manageyourmoney.config.security.hmac.HmacSecurityFilter;
 import com.manageyourmoney.config.security.hmac.HmacSigner;
 import com.manageyourmoney.config.security.hmac.HmacToken;
 import com.manageyourmoney.config.security.hmac.HmacUtils;
-import com.manageyourmoney.mock.MockUsers;
 import com.manageyourmoney.mongodb.document.UserDocument;
 
 @Service
 public class AuthenticationService {
 
 	@Autowired
-	private AuthenticationManager authenticationManager;// pe etre solution
-														// ajoute une classe qui
-														// iplemente
-														// authentication
-														// manager ...
+	private AuthenticationManager authenticationManager;
 
 	@Autowired
+	@Qualifier("hmacUserDetailsService")
 	private UserDetailsService userDetailsService;
 
 	/**
@@ -80,12 +77,6 @@ public class AuthenticationService {
 		HmacToken hmacToken = HmacSigner.getSignedToken(secret, String.valueOf(securityUser.getId()),
 				HmacSecurityFilter.JWT_TTL, customClaims);
 
-		// for (UserDocument userDTO : MockUsers.getUsers()) {
-		// if (userDTO.getId().equals(securityUser.getId())) {
-		// userDTO.setSecretKey(secret);
-		// }
-		// }
-
 		// Set all tokens in http response headers
 
 		response.setHeader(HmacUtils.X_TOKEN_ACCESS, hmacToken.getJwt());
@@ -114,8 +105,9 @@ public class AuthenticationService {
 			// SecurityContextHolder.getContext().getAuthentication()
 			// .getPrincipal();
 
-			UserDocument userDTO = MockUsers
-					.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+//			UserDocument userDTO = MockUsers
+//					.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+			UserDocument userDTO = null;
 			if (userDTO != null) {
 				userDTO.setSecretKey(null);
 			}

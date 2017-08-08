@@ -13,3 +13,8 @@
 .stretch input  {
   width: 100%
 }
+
+.subscribe-form {
+  margin-top: 0px;
+  padding-top: 15%;
+}

@@ -1,13 +1,13 @@
 package com.manageyourmoney.config.security;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,10 +15,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.manageyourmoney.config.security.hmac.HmacRequester;
 import com.manageyourmoney.config.security.hmac.HmacSecurityConfigurer;
-import com.manageyourmoney.mock.MockUsers;
 import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.service.AuthenticationService;
 import com.manageyourmoney.service.UserService;
@@ -57,25 +57,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		InMemoryUserDetailsManagerConfigurer configurer = auth.inMemoryAuthentication()
-				.passwordEncoder(passwordEncoder());
-		// il faut modifier ca
-		// get users from data base
-		List<UserDocument> userList = userService.getAllUser();
-		// compare les valeur de mockuser et les valeur retournée de la base ..
-
-		// List<UserDocument> userList = MockUsers.getUsers();
-		for (UserDocument userDTO : userList) {
-			// userDTO.getProfile().name()
-			configurer.withUser(userDTO.getLogin()).password(userDTO.getPassword()).roles("ADMIN");
-			// configurer.withUser(userDTO.getLogin()).password(userDTO.getPassword()).roles("ADMIN");
-		}
+		auth.userDetailsService(inMemoryUserDetailsManager(userService)).passwordEncoder(passwordEncoder());
 	}
 
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
+	}
+
+	@Bean
+	public InMemoryUserDetailsManager inMemoryUserDetailsManager(UserService userService) {
+		final Properties users = new Properties();
+		List<UserDocument> userList = userService.getAllUser();
+		for (UserDocument userDTO : userList) {
+			users.put(userDTO.getLogin().toLowerCase(), userDTO.getPassword() + ",ADMIN,enabled");
+		}
+		return new InMemoryUserDetailsManager(users);
 	}
 
 	private HmacSecurityConfigurer hmacSecurityConfigurer() {

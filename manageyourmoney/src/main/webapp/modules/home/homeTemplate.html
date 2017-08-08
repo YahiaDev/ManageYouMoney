@@ -2,17 +2,17 @@
 <div class="container-fluid">
 	<br/>
 	<div class="row">
-	   	<md-input-container class="md-block col-4 offset-4 text-center" flex-gt-sm>
-	        <label>Search criteria</label>
-	        <md-select ng-model="hc.selectedSearchCriteria" ng-change="hc.statCriteriaChanged()">
-	          <md-option ng-repeat="option in hc.searchOptions" value="{{option}}">
-	            {{option}}
-	          </md-option>
-	        </md-select>
-	    </md-input-container>
-    </div>
-    <br/>
-	<div class ="row">
+		<md-input-container class="md-block col-4 offset-4 text-center" flex-gt-sm>
+			<label>Search criteria</label>
+			<md-select ng-model="hc.selectedSearchCriteria" ng-change="hc.statCriteriaChanged()">
+				<md-option ng-repeat="option in hc.searchOptions" value="{{option}}">
+					{{option}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+	</div>
+	<br/>
+	<div class="row">
 		<div>
 			<highchart id="chart1" config="hc.chartConfig" style="width: 100%" ng-if="hc.loadedData"></highchart>
 		</div>
