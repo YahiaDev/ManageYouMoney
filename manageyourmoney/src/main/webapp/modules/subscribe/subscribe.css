@@ -16,5 +16,9 @@
 
 .subscribe-form {
   margin-top: 0px;
-  padding-top: 15%;
+  padding-top: 5%;
+}
+
+.width-md-input-container{
+  width:100%;
 }

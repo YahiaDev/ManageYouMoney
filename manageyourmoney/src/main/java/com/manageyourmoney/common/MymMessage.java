@@ -1,0 +1,8 @@
+package com.manageyourmoney.common;
+
+public class MymMessage {
+	
+	public final static String CREATE_USER_ERROR = "email is already used by another user account";
+	public final static String CREATE_USER_MSG_ERROR = "user is already exists";
+
+}

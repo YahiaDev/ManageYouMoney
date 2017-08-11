@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import com.manageyourmoney.exeption.UserExitsException;
 import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.mongodb.repository.UserRepo;
 
@@ -27,13 +28,15 @@ public class UserService {
 	// this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
 	// }
 
-	public void addNewUser(UserDocument newUser) {
+	public void addNewUser(UserDocument newUser) throws UserExitsException {
 		boolean userExists = inMemoryUserDetailsManager.userExists(newUser.getLogin());
 		if (!userExists) {
 			inMemoryUserDetailsManager
 					.createUser(new User(newUser.getLogin(), newUser.getPassword(), new ArrayList<GrantedAuthority>()));
 			userRepo.save(newUser);
+
 		}
+		throw new UserExitsException("user is already exists");
 	}
 
 	public List<UserDocument> getAllUser() {

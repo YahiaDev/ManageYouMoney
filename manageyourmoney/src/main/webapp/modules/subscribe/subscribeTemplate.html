@@ -7,7 +7,7 @@
         <md-content layout-padding class="md-padding" layout="column">
             <form name="subscriptionForm" ng-submit="subsCtrl.subcribe()">
                 <div layout="row">
-                    <md-input-container>
+                    <md-input-container class="width-md-input-container">
                         <label>First Name</label>
                         <input required name="firstName" ng-model="subsCtrl.user.firstName">
                         <div ng-messages="subscriptionForm.firstName.$error">
@@ -16,7 +16,7 @@
                     </md-input-container>
                 </div>
                 <div layout="row">
-                    <md-input-container>
+                    <md-input-container class="width-md-input-container">
                         <label>Last Name</label>
                         <input required name="lastName" ng-model="subsCtrl.user.lastName">
                         <div ng-messages="subscriptionForm.lastName.$error">
@@ -25,7 +25,7 @@
                     </md-input-container>
                 </div>
                 <div layout="row">
-                    <md-input-container>
+                    <md-input-container class="width-md-input-container">
                         <label>Password</label>
                         <input type="password" required name="password" ng-model="subsCtrl.user.password">
                         <div ng-messages="subscriptionForm.password.$error">
@@ -34,17 +34,18 @@
                     </md-input-container>
                 </div>
                 <div layout="row">
-                    <md-input-container>
+                    <md-input-container class="width-md-input-container">
                         <label>Confirm Password</label>
-                        <input type="password" required name="confirmPassword" ng-model="subsCtrl.user.confirmPassword" ng-compare='subsCtrl.user.password'>
-                        <!--div ng-messages="subsCtrl.user.confirmPassword !== subsCtrl.user.password">
-                        <div ng-message>Must mutch password</div>
-                    </div-->
-                        <span ng-show="subsCtrl.user.confirmPassword !== subsCtrl.user.password && subsCtrl.user.password !== undefined && subsCtrl.user.password !== null && subsCtrl.user.confirmPassword !== undefined && subsCtrl.user.confirmPassword !== null">Password mismatch</span>
+                        <!--input type="password" required name="confirmPassword" compare-to="subsCtrl.user.password" ng-model="subsCtrl.user.confirmPassword">
+                        <div ng-messages="subscriptionForm.confirmPassword.$error">
+                            <div ng-if="subsCtrl.showMessage">yahia ammar</div>
+                        </div-->
+                        <input type="password" required name="confirmPassword" ng-model="subsCtrl.user.confirmPassword">
+                        <span style="font-size: 11px !important; color:rgb(239,51,51);" ng-show="subsCtrl.user.confirmPassword !== subsCtrl.user.password && subsCtrl.user.password && subsCtrl.user.confirmPassword">Password mismatch</span>
                     </md-input-container>
                 </div>
                 <div layout="row">
-                    <md-input-container class="md-block">
+                    <md-input-container class="md-block width-md-input-container">
                         <label>Client Email</label>
                         <input required type="email" name="userEmail" ng-model="subsCtrl.user.login" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"
                         />
@@ -53,6 +54,7 @@
                                 Your email must be between 10 and 100 characters long and look like an e-mail address.
                             </div>
                         </div>
+                        <span style="font-size: 11px !important; color:rgb(239,51,51);" ng-show="subsCtrl.userConflict">Email is already used by another user account!</span>
                     </md-input-container>
                 </div>
                 <div layout="row">
