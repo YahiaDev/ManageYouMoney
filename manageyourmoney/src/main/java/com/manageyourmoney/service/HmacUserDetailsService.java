@@ -29,7 +29,7 @@ public class HmacUserDetailsService implements UserDetailsService {
 		}
 
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		if (!userDTO.getAuthorities().isEmpty()) {
+		if (userDTO.getAuthorities() != null && !userDTO.getAuthorities().isEmpty()) {
 			for (String authority : userDTO.getAuthorities()) {
 				authorities.add(new SimpleGrantedAuthority(authority));
 			}

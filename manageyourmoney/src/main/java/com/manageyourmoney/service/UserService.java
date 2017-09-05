@@ -35,8 +35,9 @@ public class UserService {
 					.createUser(new User(newUser.getLogin(), newUser.getPassword(), new ArrayList<GrantedAuthority>()));
 			userRepo.save(newUser);
 
+		} else {
+			throw new UserExitsException("user is already exists");
 		}
-		throw new UserExitsException("user is already exists");
 	}
 
 	public List<UserDocument> getAllUser() {

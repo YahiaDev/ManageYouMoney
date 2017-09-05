@@ -5,14 +5,20 @@ angular.module('Subscribe').controller('SubscribeController', ['SubscribeService
     sc.message = 'subscribe now';
     sc.showMessage = false;
     sc.userConflict = false;
+    sc.showAddNewUserAlert = false;
     sc.subcribe = function () {
         SubscribeService.subscribe(sc.user).then(function (reponse) {
-            console.info(response);
+            //console.info(response);
+            sc.showAddNewUserAlert = true;
         }, function (error) {
             sc.userConflict = true;
             console.info(error);
         });
     };
+
+    sc.closeAlert = function () {
+        sc.showAddNewUserAlert = false;
+    }
 
 }]);
 

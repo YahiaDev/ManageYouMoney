@@ -1,6 +1,5 @@
 package com.manageyourmoney.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,10 +41,12 @@ public class SubscribeController {
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		try {
 			userService.addNewUser(user);
+			logger.info(MymMessage.CREATE_USER_MSG_SUCCESS);
 			return new ResponseEntity<Object>(user, HttpStatus.ACCEPTED);
 		} catch (UserExitsException e) {
 			List<String> errors = Arrays.asList(MymMessage.CREATE_USER_ERROR);
 			ApiError apiError = new ApiError(HttpStatus.CONFLICT, MymMessage.CREATE_USER_MSG_ERROR, errors);
+			logger.error(MymMessage.CREATE_USER_MSG_ERROR);
 			return new ResponseEntity<Object>(apiError, apiError.getStatus());
 		}
 

@@ -1,6 +1,8 @@
 <!--div class="subscriptionBox md-whiteframe-z1 form-signin center" layout="column" layout-align="center center" layout-fill-->
 <div class="container">
+    
     <div class="form-signin center subscribe-form">
+        <div uib-alert ng-class="'alert-success'" close="subsCtrl.closeAlert()" ng-if="subsCtrl.showAddNewUserAlert">user successfully added</div>
         <md-toolbar class="md-toolbar-tools">
             <span>Subscribe</span>
         </md-toolbar>
@@ -59,7 +61,9 @@
                 </div>
                 <div layout="row">
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Subscribe</button>
+                    
                 </div>
+                <a ui-sref="login">Return to login page</a>
             </form>
         </md-content>
     </div>

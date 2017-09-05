@@ -1,94 +1,100 @@
 <!DOCTYPE html>
 
 <html ng-app="myApp">
-    <head>
-        <title>Manage Your Money</title>
-        <link rel ="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel ="stylesheet" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css" />
-        <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"/>
-        <link rel="stylesheet" type="text/css" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css"/>
-        <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
-        <link rel="stylesheet" href="modules/directives/myGrid/css/my-grid.css">
-        <link rel="stylesheet" href="modules/authentication/authentication.css">
-        <link rel="stylesheet" href="modules/subscribe/subscribe.css">
-    </head>
-    <body>
-        <!--bower-->
-        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="bower_components/highcharts/highstock.src.js"></script>
-        <script type="text/javascript" src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
-        <script type="text/javascript" src="bower_components/angular-messages/angular-messages.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-aria/angular-aria.js"></script>
-        <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
-        <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-        <script type="text/javascript" src="bower_components/tether/dist/js/tether.min.js"></script>
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="bower_components/crypto-js/crypto-js.js"></script>
-        <script type="text/javascript" src="bower_components/crypto-js/hmac-sha256.js"></script>
-        <script type="text/javascript" src="bower_components/crypto-js/hmac-sha1.js"></script>
-        <script type="text/javascript" src="bower_components/crypto-js/hmac-md5.js"></script>
-        <script type="text/javascript" src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
-        <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-        <script type="text/javascript" src="bower_components/tv4/tv4.js"></script>
-        <script type="text/javascript" src="bower_components/objectpath/lib/ObjectPath.js"></script>
-        <script type="text/javascript" src="bower_components/angular-schema-form/dist/schema-form.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-schema-form/dist/bootstrap-decorator.min.js"></script>
-        <script type="text/javascript" src="bower_components/moment/min/moment-with-locales.min.js"></script>
-        <!--end bower-->
-        <script src = "app/app.js"></script>
-        <script src = "modules/common/numberOnlyDirective.js"></script>
-        <script src = "modules/directives/myGrid/myGridController.js"></script>
-        <script src = "modules/directives/myGrid/myGridDirective.js"></script>
-        <script src = "modules/directives/myGrid/rowEditorService.js"></script>
-        <script src = "modules/directives/myGrid/rowEditCtrl.js"></script>
-        <script src = "modules/directives/myGrid/removeRowCtrl.js"></script>
-        <script src = "modules/directives/myGrid/removeRowService.js"></script>
-        <script src = "modules/options/optionsController.js"></script>
-        <script src = "modules/nav/navService.js"></script>
-        <script src = "modules/nav/navController.js"></script>
-        <script src = "modules/nav/navDirective.js"></script>
-        <script src = "modules/common/commonService.js"></script>
-        <script src = "modules/common/http-hmac-interceptors.js"></script>
-        <script src = "modules/common/httpSecurityInterceptor.js"></script>
-        <script src = "modules/common/is-authorized.directive.js"></script>
-        <script src = "modules/home/homeController.js"></script>
-        <script src = "modules/home/homeService.js"></script>
-        <script src = "modules/authentication/authenticationController.js"></script>
-        <script src = "modules/authentication/authenticationService.js"></script>
-        <script src = "modules/authentication/sessionService.js"></script>
-        <script src = "modules/authentication/loginFactory.js"></script>
-        <script src = "modules/options/optionsController.js"></script>
-        <script src = "modules/signUp/signUpController.js"></script>
-        <script src = "modules/signUp/signUpService.js"></script>
-        <script src = "modules/purchase/purchaseCategoriesCtrl.js"></script>
-        <script src = "modules/purchase/purchaseService.js"></script>
-        <script src = "modules/purchase/purchaseCtrl.js"></script>
-        <script src = "modules/subscribe/subscribeService.js"></script>
-        <script src = "modules/subscribe/subscribeController.js"></script>
-        <script>
-            // Initialize tooltip component
-            $(function () {
-              $('[data-toggle="tooltip"]').tooltip()
-            })
 
-            // Initialize popover component
-            $(function () {
-              $('[data-toggle="popover"]').popover()
-            })
-         </script>  
-        <!--<script src = "modules/purchase/purchaseCategoriesCtrl.js"></script>-->
-        <div ui-view> </div>
+<head>
+    <title>Manage Your Money</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="modules/directives/myGrid/css/my-grid.css">
+    <link rel="stylesheet" href="modules/authentication/authentication.css">
+    <link rel="stylesheet" href="modules/subscribe/subscribe.css">
+</head>
+
+<body>
+    <!--bower-->
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="bower_components/highcharts/highstock.src.js"></script>
+    <script type="text/javascript" src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+    <script type="text/javascript" src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="bower_components/tether/dist/js/tether.min.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/crypto-js/crypto-js.js"></script>
+    <script type="text/javascript" src="bower_components/crypto-js/hmac-sha256.js"></script>
+    <script type="text/javascript" src="bower_components/crypto-js/hmac-sha1.js"></script>
+    <script type="text/javascript" src="bower_components/crypto-js/hmac-md5.js"></script>
+    <script type="text/javascript" src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
+    <script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="bower_components/tv4/tv4.js"></script>
+    <script type="text/javascript" src="bower_components/objectpath/lib/ObjectPath.js"></script>
+    <script type="text/javascript" src="bower_components/angular-schema-form/dist/schema-form.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-schema-form/dist/bootstrap-decorator.min.js"></script>
+    <script type="text/javascript" src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <!--end bower-->
+    <script src="app/app.js"></script>
+    <script src="modules/common/numberOnlyDirective.js"></script>
+    <script src="modules/directives/myGrid/myGridController.js"></script>
+    <script src="modules/directives/myGrid/myGridDirective.js"></script>
+    <script src="modules/directives/myGrid/rowEditorService.js"></script>
+    <script src="modules/directives/myGrid/rowEditCtrl.js"></script>
+    <script src="modules/directives/myGrid/removeRowCtrl.js"></script>
+    <script src="modules/directives/myGrid/removeRowService.js"></script>
+    <script src="modules/options/optionsController.js"></script>
+    <script src="modules/nav/navService.js"></script>
+    <script src="modules/nav/navController.js"></script>
+    <script src="modules/nav/navDirective.js"></script>
+    <script src="modules/common/commonService.js"></script>
+    <script src="modules/common/http-hmac-interceptors.js"></script>
+    <script src="modules/common/httpSecurityInterceptor.js"></script>
+    <script src="modules/common/is-authorized.directive.js"></script>
+    <script src="modules/home/homeController.js"></script>
+    <script src="modules/home/homeService.js"></script>
+    <script src="modules/authentication/authenticationController.js"></script>
+    <script src="modules/authentication/authenticationService.js"></script>
+    <script src="modules/authentication/sessionService.js"></script>
+    <script src="modules/authentication/loginFactory.js"></script>
+    <script src="modules/options/optionsController.js"></script>
+    <script src="modules/signUp/signUpController.js"></script>
+    <script src="modules/signUp/signUpService.js"></script>
+    <script src="modules/purchase/purchaseCategoriesCtrl.js"></script>
+    <script src="modules/purchase/purchaseService.js"></script>
+    <script src="modules/purchase/purchaseCtrl.js"></script>
+    <script src="modules/subscribe/subscribeService.js"></script>
+    <script src="modules/subscribe/subscribeController.js"></script>
+    <script>
+        // Initialize tooltip component
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        // Initialize popover component
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+    <!--<script src = "modules/purchase/purchaseCategoriesCtrl.js"></script>-->
+    <div ui-view> </div>
+    <div my-footer class='text-center'>
+        <small>Copyright Yahia AMMAR</small>
+    </div>
 
 
-          
 
-    </body>
+
+</body>
+
 </html>
