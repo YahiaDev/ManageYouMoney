@@ -12,6 +12,7 @@ import com.manageyourmoney.mongodb.document.Purchase;
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByCateg;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
+import com.manageyourmoney.service.PurchaseService;
 import com.manageyourmoney.service.impl.PurchaseServiceImpl;
 import com.manageyourmoney.service.impl.UserServiceImpl;
 
@@ -19,7 +20,7 @@ import com.manageyourmoney.service.impl.UserServiceImpl;
 @RequestMapping(value = "/api/purchase")
 public class PurchaseController {
 
-	PurchaseServiceImpl purchaseService;
+	PurchaseService purchaseService;
 
 	UserServiceImpl userService;
 

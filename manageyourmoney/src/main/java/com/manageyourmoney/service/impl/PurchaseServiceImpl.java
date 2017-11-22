@@ -2,21 +2,20 @@ package com.manageyourmoney.service.impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.manageyourmoney.mongodb.document.Purchase;
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByCateg;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
 import com.manageyourmoney.mongodb.repository.PurchaseCategoriesRepo;
 import com.manageyourmoney.mongodb.repository.PurchaseRepo;
+import com.manageyourmoney.service.PurchaseService;
 
 /**
  * @author Yahia
  *
  */
-@Service
-public class PurchaseServiceImpl {
+
+public class PurchaseServiceImpl implements PurchaseService {
 
 	PurchaseCategoriesRepo puchaseCatRepo;
 	PurchaseRepo purchaseRepo;

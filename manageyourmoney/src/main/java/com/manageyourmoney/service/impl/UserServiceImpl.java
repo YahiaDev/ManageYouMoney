@@ -13,8 +13,7 @@ import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.mongodb.repository.UserRepo;
 import com.manageyourmoney.service.UserService;
 
-
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepo userRepo;
@@ -34,7 +33,6 @@ public class UserServiceImpl implements UserService{
 			inMemoryUserDetailsManager
 					.createUser(new User(newUser.getLogin(), newUser.getPassword(), new ArrayList<GrantedAuthority>()));
 			userRepo.save(newUser);
-
 		} else {
 			throw new UserExitsException("user is already exists");
 		}
