@@ -1,4 +1,4 @@
-package com.manageyourmoney.service;
+package com.manageyourmoney.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ import com.manageyourmoney.config.security.hmac.HmacUtils;
 import com.manageyourmoney.mongodb.document.UserDocument;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationServiceImpl {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;

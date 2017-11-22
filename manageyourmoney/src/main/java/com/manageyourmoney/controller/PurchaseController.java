@@ -12,18 +12,18 @@ import com.manageyourmoney.mongodb.document.Purchase;
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByCateg;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
-import com.manageyourmoney.service.PurchaseService;
-import com.manageyourmoney.service.UserService;
+import com.manageyourmoney.service.impl.PurchaseServiceImpl;
+import com.manageyourmoney.service.impl.UserServiceImpl;
 
 @RestController
 @RequestMapping(value = "/api/purchase")
 public class PurchaseController {
 
-	PurchaseService purchaseService;
+	PurchaseServiceImpl purchaseService;
 
-	UserService userService;
+	UserServiceImpl userService;
 
-	public PurchaseController(PurchaseService purchaseService, UserService userService) {
+	public PurchaseController(PurchaseServiceImpl purchaseService, UserServiceImpl userService) {
 		this.purchaseService = purchaseService;
 		this.userService = userService;
 	}

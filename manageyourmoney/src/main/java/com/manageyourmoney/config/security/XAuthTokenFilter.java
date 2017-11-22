@@ -14,13 +14,13 @@ import org.springframework.web.filter.GenericFilterBean;
 import com.manageyourmoney.config.security.hmac.HmacException;
 import com.manageyourmoney.config.security.hmac.HmacSigner;
 import com.manageyourmoney.config.security.hmac.HmacUtils;
-import com.manageyourmoney.service.AuthenticationService;
+import com.manageyourmoney.service.impl.AuthenticationServiceImpl;
 
 public class XAuthTokenFilter extends GenericFilterBean {
 
-	private AuthenticationService authenticationService;
+	private AuthenticationServiceImpl authenticationService;
 
-	public XAuthTokenFilter(AuthenticationService authenticationService) {
+	public XAuthTokenFilter(AuthenticationServiceImpl authenticationService) {
 		this.authenticationService = authenticationService;
 	}
 

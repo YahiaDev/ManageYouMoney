@@ -1,4 +1,4 @@
-package com.manageyourmoney.service;
+package com.manageyourmoney.service.impl;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;

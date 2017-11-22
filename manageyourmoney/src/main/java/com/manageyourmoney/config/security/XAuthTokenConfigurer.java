@@ -5,12 +5,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.manageyourmoney.service.AuthenticationService;
+import com.manageyourmoney.service.impl.AuthenticationServiceImpl;
+
+
 
 public class XAuthTokenConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-	private AuthenticationService authenticationService;
+	private AuthenticationServiceImpl authenticationService;
 
-	public XAuthTokenConfigurer(AuthenticationService authenticationService) {
+	public XAuthTokenConfigurer(AuthenticationServiceImpl authenticationService) {
 		this.authenticationService = authenticationService;
 	}
 

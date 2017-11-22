@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.apache.logging.log4j.Logger;
 
 import com.manageyourmoney.common.MymMessage;
 import com.manageyourmoney.exeption.UserExitsException;
 import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.restcustomerror.ApiError;
-import com.manageyourmoney.service.UserService;
+import com.manageyourmoney.service.impl.UserServiceImpl;
 
 /**
  * @author Yahia
@@ -27,10 +27,10 @@ import com.manageyourmoney.service.UserService;
 @RequestMapping("/api/subscribe")
 public class SubscribeController {
 
-	UserService userService;
+	UserServiceImpl userService;
 	Logger logger = LogManager.getLogger(SubscribeController.class);
 
-	SubscribeController(UserService userService) {
+	SubscribeController(UserServiceImpl userService) {
 		this.userService = userService;
 	}
 

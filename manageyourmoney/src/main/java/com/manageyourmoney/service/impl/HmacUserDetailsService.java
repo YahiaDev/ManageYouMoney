@@ -1,4 +1,4 @@
-package com.manageyourmoney.service;
+package com.manageyourmoney.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,12 @@ import org.springframework.stereotype.Component;
 import com.manageyourmoney.config.security.SecurityUser;
 import com.manageyourmoney.mongodb.document.UserDocument;
 
+
 @Component
 public class HmacUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	UserService userService;
+	UserServiceImpl userService;
 
 	@Override
 	public UserDetails loadUserByUsername(String userLogin) throws UsernameNotFoundException {

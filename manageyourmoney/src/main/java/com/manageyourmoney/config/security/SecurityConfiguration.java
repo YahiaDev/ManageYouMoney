@@ -20,8 +20,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import com.manageyourmoney.config.security.hmac.HmacRequester;
 import com.manageyourmoney.config.security.hmac.HmacSecurityConfigurer;
 import com.manageyourmoney.mongodb.document.UserDocument;
-import com.manageyourmoney.service.AuthenticationService;
-import com.manageyourmoney.service.UserService;
+
+import com.manageyourmoney.service.impl.AuthenticationServiceImpl;
+import com.manageyourmoney.service.impl.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -33,10 +34,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Autowired
-	private AuthenticationService authenticationService;
+	private AuthenticationServiceImpl authenticationService;
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@Autowired
 	private HmacRequester hmacRequester;
@@ -67,7 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public InMemoryUserDetailsManager inMemoryUserDetailsManager(UserService userService) {
+	public InMemoryUserDetailsManager inMemoryUserDetailsManager(UserServiceImpl userService) {
 		final Properties users = new Properties();
 		List<UserDocument> userList = userService.getAllUser();
 		for (UserDocument userDTO : userList) {

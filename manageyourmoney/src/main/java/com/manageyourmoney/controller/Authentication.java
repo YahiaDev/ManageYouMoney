@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.manageyourmoney.mongodb.document.UserDocument;
-import com.manageyourmoney.service.AuthenticationService;
+import com.manageyourmoney.service.impl.AuthenticationServiceImpl;
 
 @RestController
 @RequestMapping(value = "/api")
 public class Authentication {
 
 	@Autowired
-	private AuthenticationService authenticationService;
+	private AuthenticationServiceImpl authenticationService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.PUT)
 	public UserDocument authenticate(@RequestBody UserDocument userDocument, HttpServletResponse response) throws Exception {
