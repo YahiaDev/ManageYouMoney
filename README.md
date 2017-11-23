@@ -4,3 +4,6 @@
 ManageYourMoney is a web application based on AngularJs 1.6 for the 
 presentation layer and JavaEE (spring 4, spring rest, spring security and spring mongodb template) for
 the backend layer.
+The App cryptify the exchanged data between front and backend.
+Once the user is authentificated, he can manage his purchages and he have
+a dashboard that grouped the purchages by date or by purchase categories.
