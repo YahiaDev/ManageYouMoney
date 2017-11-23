@@ -2,6 +2,10 @@ package com.manageyourmoney.config.security.hmac;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public interface HmacRequester {
 	/**
 	 * Check if its possible to verify the request

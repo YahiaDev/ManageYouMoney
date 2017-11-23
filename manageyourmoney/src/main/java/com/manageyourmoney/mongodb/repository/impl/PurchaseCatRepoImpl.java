@@ -10,6 +10,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
 import com.manageyourmoney.mongodb.repository.PurchaseCatRepoCustom;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class PurchaseCatRepoImpl implements PurchaseCatRepoCustom {
 
 	MongoTemplate mongoTemplate;

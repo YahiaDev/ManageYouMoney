@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manageyourmoney.dto.Profile;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @RestController
 @RequestMapping(value = "/api")
 public class Users {

@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 
 import com.manageyourmoney.config.security.hmac.HmacUtils;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Component
 public class CorsFilter implements Filter {
 

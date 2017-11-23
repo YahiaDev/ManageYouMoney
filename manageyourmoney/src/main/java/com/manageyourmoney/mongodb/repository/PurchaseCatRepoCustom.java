@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public interface PurchaseCatRepoCustom {
 	
 	/**

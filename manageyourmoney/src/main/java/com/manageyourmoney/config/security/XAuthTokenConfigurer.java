@@ -5,20 +5,24 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.manageyourmoney.service.impl.AuthenticationServiceImpl;
 
 
-
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class XAuthTokenConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-	private AuthenticationServiceImpl authenticationService;
+	//private AuthenticationService authenticationService;
 
-	public XAuthTokenConfigurer(AuthenticationServiceImpl authenticationService) {
-		this.authenticationService = authenticationService;
+	public XAuthTokenConfigurer() {
+		//this.authenticationService = authenticationService;
 	}
 
 	@Override
 	public void configure(HttpSecurity builder) throws Exception {
-		XAuthTokenFilter xAuthTokenFilter = new XAuthTokenFilter(authenticationService);
+		//XAuthTokenFilter xAuthTokenFilter = new XAuthTokenFilter(authenticationService);
+		
+		XAuthTokenFilter xAuthTokenFilter = new XAuthTokenFilter();
 
 		// Trigger this filter before SpringSecurity authentication validator
 		builder.addFilterBefore(xAuthTokenFilter, UsernamePasswordAuthenticationFilter.class);

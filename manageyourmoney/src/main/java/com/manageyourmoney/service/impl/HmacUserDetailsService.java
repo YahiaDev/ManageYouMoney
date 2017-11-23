@@ -15,6 +15,10 @@ import com.manageyourmoney.config.security.SecurityUser;
 import com.manageyourmoney.mongodb.document.UserDocument;
 
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Component
 public class HmacUserDetailsService implements UserDetailsService {
 

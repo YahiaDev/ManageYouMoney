@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.User;
 
 import com.manageyourmoney.dto.Profile;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class SecurityUser extends User {
 	/**
 	 * 

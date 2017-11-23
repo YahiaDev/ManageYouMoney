@@ -8,6 +8,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Configuration
 @EnableMongoRepositories(basePackages = "com.manageyourmoney.mongodb.repository")
 public class SpringMongoConfig extends AbstractMongoConfiguration {

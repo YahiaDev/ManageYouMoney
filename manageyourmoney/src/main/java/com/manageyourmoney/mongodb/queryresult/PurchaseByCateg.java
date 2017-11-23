@@ -2,6 +2,10 @@ package com.manageyourmoney.mongodb.queryresult;
 
 import com.manageyourmoney.mongodb.document.PurchaseCategory;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class PurchaseByCateg {
 
 	private PurchaseCategory category;

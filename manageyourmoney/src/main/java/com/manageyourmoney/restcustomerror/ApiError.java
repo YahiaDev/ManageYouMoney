@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class ApiError {
 
 	private HttpStatus status;

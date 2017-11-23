@@ -10,6 +10,10 @@ import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
  * @author Yahia
  *
  */
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public interface PurchaseRepoCustom {
 
 	/**

@@ -17,17 +17,22 @@ import com.manageyourmoney.common.MymMessage;
 import com.manageyourmoney.exeption.UserExitsException;
 import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.restcustomerror.ApiError;
+import com.manageyourmoney.service.UserService;
 import com.manageyourmoney.service.impl.UserServiceImpl;
 
 /**
  * @author Yahia
  *
  */
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @RestController
 @RequestMapping("/api/subscribe")
 public class SubscribeController {
 
-	UserServiceImpl userService;
+	UserService userService;
 	Logger logger = LogManager.getLogger(SubscribeController.class);
 
 	SubscribeController(UserServiceImpl userService) {

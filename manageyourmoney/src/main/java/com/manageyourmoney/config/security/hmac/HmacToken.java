@@ -1,5 +1,9 @@
 package com.manageyourmoney.config.security.hmac;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class HmacToken {
 	private String jwtID;
 

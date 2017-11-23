@@ -16,14 +16,17 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.manageyourmoney.config.security.hmac.HmacRequester;
 import com.manageyourmoney.config.security.hmac.HmacSecurityConfigurer;
 import com.manageyourmoney.mongodb.document.UserDocument;
+import com.manageyourmoney.service.UserService;
 
-import com.manageyourmoney.service.impl.AuthenticationServiceImpl;
-import com.manageyourmoney.service.impl.UserServiceImpl;
-
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Configuration
 @EnableWebSecurity
 // @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -33,11 +36,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Autowired
-	private AuthenticationServiceImpl authenticationService;
+//	@Autowired
+//	private AuthenticationService authenticationService;
 
 	@Autowired
-	private UserServiceImpl userService;
+	private UserService userService;
 
 	@Autowired
 	private HmacRequester hmacRequester;
@@ -50,10 +53,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/api/authenticate").anonymous().antMatchers("/").anonymous()
-				.antMatchers("/api/**").authenticated().and().csrf().disable().headers().frameOptions().disable().and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().logout().permitAll()
-				.and().apply(authTokenConfigurer()).and().apply(hmacSecurityConfigurer());
+		http.addFilterBefore(new XAuthTokenFilter(), UsernamePasswordAuthenticationFilter.class).authorizeRequests()
+				.antMatchers("/api/authenticate").anonymous().antMatchers("/").anonymous().antMatchers("/api/**")
+				.authenticated().and().csrf().disable().headers().frameOptions().disable().and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().logout().permitAll().and()
+				.apply(authTokenConfigurer()).and().apply(hmacSecurityConfigurer());
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public InMemoryUserDetailsManager inMemoryUserDetailsManager(UserServiceImpl userService) {
+	public InMemoryUserDetailsManager inMemoryUserDetailsManager(UserService userService) {
 		final Properties users = new Properties();
 		List<UserDocument> userList = userService.getAllUser();
 		for (UserDocument userDTO : userList) {
@@ -82,7 +86,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	private XAuthTokenConfigurer authTokenConfigurer() {
-		return new XAuthTokenConfigurer(authenticationService);
+		return new XAuthTokenConfigurer();
 	}
 
 }

@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service;
 import com.manageyourmoney.config.security.hmac.HmacRequester;
 import com.manageyourmoney.mongodb.document.UserDocument;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Service
 public class DefaultHmacRequester implements HmacRequester {
 	@Override

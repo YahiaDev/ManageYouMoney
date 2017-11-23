@@ -23,6 +23,10 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.JWTParser;
 import com.nimbusds.jwt.SignedJWT;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class HmacSigner {
 	public static final String ENCODING_CLAIM_PROPERTY = "l-lev";
 

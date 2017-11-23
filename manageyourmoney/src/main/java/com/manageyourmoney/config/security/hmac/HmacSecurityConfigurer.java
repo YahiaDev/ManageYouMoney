@@ -6,6 +6,10 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 
 import com.manageyourmoney.config.security.XAuthTokenFilter;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class HmacSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 	private HmacRequester hmacRequester;
 

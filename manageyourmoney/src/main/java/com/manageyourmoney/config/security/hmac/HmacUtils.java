@@ -1,5 +1,9 @@
 package com.manageyourmoney.config.security.hmac;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class HmacUtils {
 	public static final String HMAC_SHA_256 = "HmacSHA256";
 	public static final String HMAC_SHA_1 = "HmacSHA1";

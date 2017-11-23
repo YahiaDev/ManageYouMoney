@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,9 +28,14 @@ import com.manageyourmoney.config.security.hmac.HmacSigner;
 import com.manageyourmoney.config.security.hmac.HmacToken;
 import com.manageyourmoney.config.security.hmac.HmacUtils;
 import com.manageyourmoney.mongodb.document.UserDocument;
+import com.manageyourmoney.service.AuthenticationService;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Service
-public class AuthenticationServiceImpl {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -52,6 +59,7 @@ public class AuthenticationServiceImpl {
 	 * @return UserDTO instance
 	 * @throws HmacException
 	 */
+	@Override
 	public UserDocument authenticate(UserDocument userDocument, HttpServletResponse response) throws HmacException {
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 				userDocument.getLogin(), userDocument.getPassword());
@@ -98,20 +106,16 @@ public class AuthenticationServiceImpl {
 	 * Logout a user - Clear the Spring Security context - Remove the stored
 	 * UserDTO secret
 	 */
-	public void logout() {
+	@Override
+	public void logout(HttpServletRequest request) {
 		if (SecurityContextHolder.getContext().getAuthentication() != null
 				&& SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-			// SecurityUser securityUser = (SecurityUser)
-			// SecurityContextHolder.getContext().getAuthentication()
-			// .getPrincipal();
 
-//			UserDocument userDTO = MockUsers
-//					.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-			UserDocument userDTO = null;
-			if (userDTO != null) {
-				userDTO.setSecretKey(null);
+			SecurityContextHolder.clearContext();
+			HttpSession session = request.getSession();
+			if (session != null) {
+				session.invalidate();
 			}
-
 		}
 	}
 
@@ -130,4 +134,5 @@ public class AuthenticationServiceImpl {
 				details.getPassword(), details.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authToken);
 	}
+
 }

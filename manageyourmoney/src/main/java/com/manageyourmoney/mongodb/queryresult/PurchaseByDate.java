@@ -1,5 +1,9 @@
 package com.manageyourmoney.mongodb.queryresult;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class PurchaseByDate {
 
 	private double amount;

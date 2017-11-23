@@ -7,12 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.stereotype.Service;
 
 import com.manageyourmoney.exeption.UserExitsException;
 import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.mongodb.repository.UserRepo;
 import com.manageyourmoney.service.UserService;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -20,12 +26,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private InMemoryUserDetailsManager inMemoryUserDetailsManager;
-
-	// public UserService(UserRepo userRepo, InMemoryUserDetailsManager
-	// inMemoryUserDetailsManager) {
-	// this.userRepo = userRepo;
-	// this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
-	// }
 
 	public void addNewUser(UserDocument newUser) throws UserExitsException {
 		boolean userExists = inMemoryUserDetailsManager.userExists(newUser.getLogin());

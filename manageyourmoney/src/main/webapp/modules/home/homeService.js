@@ -35,7 +35,7 @@ angular.module('home').factory('HomeService', ['$http', 'SERVER_URL', function (
     };
 
     service.getPurchaseGroupedByDate = function (userId) {
-        return $http.get(url + '/api/purchase/getPurchaseGroupedByDate?userId' + userId);
+        return $http.get(url + '/api/purchase/getPurchaseGroupedByDate?userId=' + userId);
     };
 
     return service;

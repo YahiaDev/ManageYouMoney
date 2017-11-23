@@ -11,6 +11,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.manageyourmoney.dto.Profile;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = "user")
 public class UserDocument {

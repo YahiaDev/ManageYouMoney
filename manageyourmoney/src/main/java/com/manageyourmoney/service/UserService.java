@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import com.manageyourmoney.exeption.UserExitsException;
 import com.manageyourmoney.mongodb.document.UserDocument;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Service
 public interface UserService {
 	

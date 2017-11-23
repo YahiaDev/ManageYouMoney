@@ -17,6 +17,10 @@ import org.apache.commons.io.Charsets;
 import org.springframework.util.Assert;
 import org.springframework.web.filter.GenericFilterBean;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class HmacSecurityFilter extends GenericFilterBean {
 
 	public static final Integer JWT_TTL = 20;
@@ -66,8 +70,9 @@ public class HmacSecurityFilter extends GenericFilterBean {
 
 				String encoding = HmacSigner.getJwtClaim(jwt, HmacSigner.ENCODING_CLAIM_PROPERTY);
 				String iss = HmacSigner.getJwtIss(jwt);
-
+				
 				String secret = hmacRequester.getSecret(iss);
+				
 				Assert.notNull(secret, "Secret key cannot be null");
 
 				Assert.isTrue(HmacSigner.verifyJWT(jwt, secret), "The Json Web Token is invalid");

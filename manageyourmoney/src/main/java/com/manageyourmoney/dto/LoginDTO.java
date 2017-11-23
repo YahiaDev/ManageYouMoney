@@ -1,6 +1,10 @@
 package com.manageyourmoney.dto;
 //import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class LoginDTO {
 
 	// @NotEmpty

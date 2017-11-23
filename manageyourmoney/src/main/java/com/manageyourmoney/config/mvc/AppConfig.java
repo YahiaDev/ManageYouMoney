@@ -10,6 +10,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import com.manageyourmoney.config.security.hmac.HmacUtils;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Configuration
 @EnableWebMvc
 // @ComponentScan(basePackages = "com.manageyourmoney.*")
@@ -33,11 +37,20 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		// String allowedHeaders = HmacUtils.X_TOKEN_ACCESS + "," +
 		// HmacUtils.X_SECRET + ","
 		// + HttpHeaders.WWW_AUTHENTICATE;
-		//registry.addMapping("/api/**").allowedOrigins("http://localhost:8070");
+		// registry.addMapping("/api/**").allowedOrigins("http://localhost:8070");
 		// .allowedMethods("PUT", "DELETE", "GET",
 		// "POST").allowedHeaders(allowedHeaders)
 		// .exposedHeaders(allowedHeaders);
 		// .allowCredentials(false).maxAge(3600);
+
+		/*String allowedHeaders = HmacUtils.X_TOKEN_ACCESS + " ," + HmacUtils.X_SECRET + " ,"
+				+ HttpHeaders.WWW_AUTHENTICATE + " ," + HmacUtils.X_DIGEST + ", " + HmacUtils.X_ONCE + ", "
+				+ HmacUtils.AUTHENTICATION;
+
+		String allowedMethods = "POST, GET, OPTIONS, DELETE, PUT, HEAD";
+
+		registry.addMapping("/api/**").allowedHeaders(allowedHeaders).allowedMethods(allowedMethods)
+				.allowCredentials(true).allowedOrigins("*");*/
 	}
 
 }

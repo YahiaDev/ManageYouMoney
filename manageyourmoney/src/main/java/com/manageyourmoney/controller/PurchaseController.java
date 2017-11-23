@@ -16,6 +16,10 @@ import com.manageyourmoney.service.PurchaseService;
 import com.manageyourmoney.service.impl.PurchaseServiceImpl;
 import com.manageyourmoney.service.impl.UserServiceImpl;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @RestController
 @RequestMapping(value = "/api/purchase")
 public class PurchaseController {

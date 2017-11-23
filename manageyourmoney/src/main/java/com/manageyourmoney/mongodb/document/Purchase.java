@@ -9,6 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Document(collection = "purchase")
 @EqualsAndHashCode
 @ToString

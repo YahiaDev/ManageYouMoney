@@ -9,6 +9,10 @@ import com.manageyourmoney.mongodb.document.PurchaseCategory;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByCateg;
 import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 @Service
 public interface PurchaseService {
 
@@ -33,5 +37,7 @@ public interface PurchaseService {
 	List<PurchaseByDate> getPurchaseGroupedByDate(final String idUser);
 
 	List<Purchase> getPurchaseListByUserId(String idUser);
+
+	void addPurchageCat(PurchaseCategory purCat);
 
 }

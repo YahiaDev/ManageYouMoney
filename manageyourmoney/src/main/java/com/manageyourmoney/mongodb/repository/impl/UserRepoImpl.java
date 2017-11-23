@@ -8,6 +8,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.manageyourmoney.mongodb.document.UserDocument;
 import com.manageyourmoney.mongodb.repository.UserRepoCustom;
 
+/**
+ * @author Yahia AMMAR
+ *
+ */
 public class UserRepoImpl implements UserRepoCustom {
 
 	@Autowired
