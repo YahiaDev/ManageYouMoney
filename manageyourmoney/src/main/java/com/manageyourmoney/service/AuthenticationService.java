@@ -12,7 +12,7 @@ import com.manageyourmoney.mongodb.document.UserDocument;
  * @author Yahia AMMAR
  *
  */
-@Service
+
 public interface AuthenticationService {
 
 	UserDocument authenticate(UserDocument userDocument, HttpServletResponse response) throws HmacException;

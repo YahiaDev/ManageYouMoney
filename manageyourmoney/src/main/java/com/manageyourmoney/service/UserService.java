@@ -11,13 +11,13 @@ import com.manageyourmoney.mongodb.document.UserDocument;
  * @author Yahia AMMAR
  *
  */
-@Service
+
 public interface UserService {
-	
+
 	void addNewUser(UserDocument newUser) throws UserExitsException;
-	
+
 	List<UserDocument> getAllUser();
-	
+
 	UserDocument getUserByLogin(String userLogin);
 
 }

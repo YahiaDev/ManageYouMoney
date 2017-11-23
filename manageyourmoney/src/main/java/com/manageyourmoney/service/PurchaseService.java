@@ -13,7 +13,7 @@ import com.manageyourmoney.mongodb.queryresult.PurchaseByDate;
  * @author Yahia AMMAR
  *
  */
-@Service
+
 public interface PurchaseService {
 
 	void updatePurchageCat(PurchaseCategory purCat);
