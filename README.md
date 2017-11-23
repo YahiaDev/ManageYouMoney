@@ -1,4 +1,6 @@
 # ManageYouMoney
 
 
-http://websystique.com/spring-security/angularjs-basic-authentication-using-spring-security/
+ManageYourMoney is a web application based on AngularJs 1.6 for the 
+presentation layer and JavaEE (spring 4, spring rest, spring security and spring mongodb template) for
+the backend layer.
