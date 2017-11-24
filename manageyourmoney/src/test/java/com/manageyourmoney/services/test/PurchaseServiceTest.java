@@ -1,4 +1,4 @@
-package manageyourmoney;
+package com.manageyourmoney.services.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -48,10 +48,12 @@ public class PurchaseServiceTest {
 	PurchaseRepo purchaseRepo;
 
 	@Before
-	public void setup() {
+	public void setupGetAllPurchase() {
 		List<Purchase> purchaseList = new ArrayList<Purchase>();
 		Mockito.when(purchaseRepo.findAll()).thenReturn(purchaseList);
 	}
+	
+	
 
 	@Test
 	public void contextLoader() {
