@@ -1,5 +1,6 @@
 package com.manageyourmoney.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -38,11 +39,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	public List<PurchaseCategory> getPurchaseCatByUser(String idUser) {
-		return puchaseCatRepo.getPurchaseCatListByUser(idUser);
+		List<PurchaseCategory> resultList = puchaseCatRepo.getPurchaseCatListByUser(idUser);
+		return resultList != null ? resultList : new ArrayList<PurchaseCategory>();
 	}
 
 	public List<PurchaseCategory> getAllPurchaseCat() {
-		return (List<PurchaseCategory>) puchaseCatRepo.findAll();
+		List<PurchaseCategory> resultList = (List<PurchaseCategory>) puchaseCatRepo.findAll();
+		return resultList != null ? resultList : new ArrayList<PurchaseCategory>();
 	}
 
 	public void deletePurchaseCat(PurchaseCategory purCat) {
@@ -54,7 +57,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	public List<Purchase> getAllPurchase() {
-		return (List<Purchase>) purchaseRepo.findAll();
+		List<Purchase> resultList = (List<Purchase>) purchaseRepo.findAll();
+		return resultList != null ? resultList : new ArrayList<Purchase>();
 	}
 
 	public void updatePurchase(Purchase purchase) {

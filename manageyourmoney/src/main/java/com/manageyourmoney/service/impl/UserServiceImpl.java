@@ -39,11 +39,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public List<UserDocument> getAllUser() {
-		return (List<UserDocument>) userRepo.findAll();
+		List<UserDocument> listResult = (List<UserDocument>) userRepo.findAll();
+		return listResult != null ? listResult : new ArrayList<UserDocument>();
 	}
 
 	public UserDocument getUserByLogin(String userLogin) {
-		return userRepo.getUserByLogin(userLogin);
+		UserDocument user = userRepo.getUserByLogin(userLogin);
+		return user != null ? user : new UserDocument();
 	}
 
 }
