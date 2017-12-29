@@ -211,7 +211,7 @@ function router($stateProvider, $urlRouterProvider, USER_ROLES) {
 
   var loginState = {
     url: '/login',
-    controller: 'AuthenticationController',
+    controller: 'AuthenticationController as auC',
     templateUrl: 'modules/authentication/authenticationTemplate.html'
     /* data: {
        authorizedRoles: [USER_ROLES.all]

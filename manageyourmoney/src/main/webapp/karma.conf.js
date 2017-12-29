@@ -15,22 +15,33 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/jquery/dist/jquery.min.js',
-      'bower_components/tether/dist/js/tether.min.js',
-      'bower_components/bootstrap/dist/js/bootstrap.min.js',
-      'bower_components/angular-material/angular-material.js',
-      'bower_components/angular-ui-grid/ui-grid.min.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-      'bower_components/angular-cookies/angular-cookies.min.js',
-      'bower_components/jquery/jquery.min.js',
-      'bower_components/jquery-ui/jquery-ui.min.js',
-      'bower_components/bootstrap/dist/js/bootstrap.min.js',
-      'bower_components/crypto-js/crypto-js.js',
-      'bower_components/crypto-js/hmac-sha256.js',
-      'bower_components/crypto-js/hmac-sha1.js',
-      'bower_components/crypto-js/hmac-md5.js',
-      'bower_components/angular-utf8-base64/angular-utf8-base64.js',
+        'bower_components/angular/angular.js',
+        'bower_components/jquery/dist/jquery.min.js',
+        'bower_components/jquery-ui/jquery-ui.min.js',
+        'bower_components/highcharts/highstock.src.js',
+        'bower_components/highcharts-ng/dist/highcharts-ng.js',
+        'bower_components/angular-messages/angular-messages.min.js',
+        'bower_components/angular-aria/angular-aria.js',
+        'bower_components/angular-animate/angular-animate.js',
+        'bower_components/angular-material/angular-material.js',
+        'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+        'bower_components/angular-cookies/angular-cookies.min.js',
+        'bower_components/tether/dist/js/tether.min.js',
+        'bower_components/bootstrap/dist/js/bootstrap.min.js',
+        'bower_components/crypto-js/crypto-js.js',
+        'bower_components/crypto-js/hmac-sha256.js',
+        'bower_components/crypto-js/hmac-sha1.js',
+        'bower_components/crypto-js/hmac-md5.js',
+        'bower_components/angular-utf8-base64/angular-utf8-base64.js',
+        'bower_components/angular-gettext/dist/angular-gettext.min.js',
+        'bower_components/angular-ui-grid/ui-grid.min.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+        'bower_components/angular-sanitize/angular-sanitize.min.js',
+        'bower_components/tv4/tv4.js',
+        'bower_components/objectpath/lib/ObjectPath.js',
+        'bower_components/angular-schema-form/dist/schema-form.min.js',
+        'bower_components/angular-schema-form/dist/bootstrap-decorator.min.js',
+        'bower_components/moment/min/moment-with-locales.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'app/app.js',
       'modules/options/optionsController.js',
@@ -66,7 +77,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['spec'],
 
 
     // web server port

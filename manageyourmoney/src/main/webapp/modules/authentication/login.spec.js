@@ -1,32 +1,55 @@
-describe('login factory',function(){
+describe('authentification controller',function(){
 
 	//beforeEach(angular.mock.module('home')); //load module<br />
 	beforeEach(angular.mock.module('ui.grid'));
+	beforeEach(angular.mock.module('ui.bootstrap'));
+	beforeEach(angular.mock.module('ngMessages'));
+	beforeEach(angular.mock.module('ngAnimate'));
 	beforeEach(angular.mock.module('ngMaterial'));
 	beforeEach(angular.mock.module('myApp'));
-	//beforeEach(angular.mock.module('ui.router'));
+	beforeEach(angular.mock.module('schemaForm'));
+	beforeEach(angular.mock.module('ui.router'));
 	beforeEach(angular.mock.module('authentication')); //load module<br />
 	var $controller;
 	var $httpBackend;
 	var authService;
 	var scope;
 	var controller;
+	var $state
 
-	beforeEach(inject(function(_$controller_, $rootScope, _AuthService_, _$httpBackend_){
+	beforeEach(inject(function(_$controller_, $rootScope, _$httpBackend_){
 		$controller = _$controller_;
-		$httpBackend = _$httpBackend_;
+		//$httpBackend = _$httpBackend_;
 		//authService = _AuthService_;
+		//$state = _$state_;
 		scope = $rootScope.$new();
-		controller = $controller('AuthenticationController', { $scope: scope });
-		console.info("yahiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "+controller);
+		controller = $controller('AuthenticationController', { $scope: scope});
+		
 		//factory =  $AuthService('AuthService', { $scope: scope });
 	}));
-
+	
 	describe('AuthenticationController', function() {
 	    it('it should be defined', function() {
 	      expect(controller).toBeDefined();
 	   	});
   	});
+	
+	describe('authenticationOk', function(){
+		it('should be exist', function(){
+			expect(controller.authenticationOk).toBeDefined();
+		});
+		it('should be init to false', function(){
+			expect(controller.authenticationOk).toBeFalsy();
+		});
+	})
+	
+	describe('login method', function() {
+		it('should be defined', function(){
+			expect(controller.login).toBeDefined();
+		});
+	});
+	
+	
 
   /*	describe('authification service', function(){
   		it('authService should be defined', function(){
