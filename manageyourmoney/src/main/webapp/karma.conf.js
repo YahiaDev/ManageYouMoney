@@ -59,7 +59,9 @@ module.exports = function (config) {
       'modules/authentication/sessionService.js',
       'modules/authentication/loginFactory.js',
       'modules/options/optionsController.js',
-      'modules/authentication/login.spec.js'
+      'modules/authentication/login.spec.js',
+      'modules/common/filters.js',
+      'modules/common/filters.spec.js'
     ],
 
 

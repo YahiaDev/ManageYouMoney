@@ -26,6 +26,8 @@ module.controller('AuthenticationController', ['$scope', '$state', '$rootScope',
             }
         });
     };
+    
+    //regarde comment thrower une exeption et comment la tester
 
 
 

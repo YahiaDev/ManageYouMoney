@@ -47,6 +47,9 @@ describe('authentification controller',function(){
 		it('should be defined', function(){
 			expect(controller.login).toBeDefined();
 		});
+		/*it('should throw', function(){
+			
+		})*/
 	});
 	
 	
