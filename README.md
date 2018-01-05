@@ -7,3 +7,5 @@ the backend layer.
 The App cryptify the exchanged Jason data between front and backend.
 Once the user is authentificated, he can manage his purchages and have
 a dashboard that grouped his purchages by date or by purchase categories.
+
+https://scotch.io/tutorials/testing-angularjs-with-jasmine-and-karma-part-1
